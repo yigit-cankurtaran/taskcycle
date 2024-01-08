@@ -3,6 +3,7 @@ import TaskLogic from "./TaskLogic";
 import "./index.css";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, StyleSheet } from "react-native";
 
 interface Task {
   id: string;
@@ -71,18 +72,7 @@ export default function App() {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "16px",
-        textAlign: "center",
-        minHeight: "100vh",
-        minWidth: "100vw",
-        margin: "auto",
-      }}
-    >
+    <View style={styles.container}>
       <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
       <TaskLogic
         tasks={tasks}
@@ -94,6 +84,15 @@ export default function App() {
         }
         currentTaskId={currentTaskId}
       />
-    </div>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+  },
+});
