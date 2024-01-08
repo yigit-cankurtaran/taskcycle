@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
+import { View, Text, Button, StyleSheet } from "react-native";
+
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
 // import useSound from "use-sound";
@@ -66,13 +68,8 @@ export default function TimerView({
   }, [workSessionCompleted, restRunning]);
 
   return (
-    <div className="flex flex-col justify-center items-center text-xl text-center">
-      <button
-        onClick={startTimer}
-        className="text-blue-300 rounded-2xl p-2 bg-gray-800 m-2"
-      >
-        Start
-      </button>
+    <View style={styles.container}>
+      <Button title="Start" onPress={startTimer} color="#0077AA" />
       {workRunning && (
         <CountdownCircleTimer
           isPlaying
@@ -111,12 +108,15 @@ export default function TimerView({
           {RenderTime}
         </CountdownCircleTimer>
       )}
-      <button
-        onClick={stopTimer}
-        className="m-2 bg-gray-800 rounded-2xl p-2 text-blue-300"
-      >
-        Stop
-      </button>
-    </div>
+      <Button title="Stop" onPress={stopTimer} color="#0077AA" />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

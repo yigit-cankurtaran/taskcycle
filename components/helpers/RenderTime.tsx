@@ -1,4 +1,5 @@
 import formatTime from "./formatTime";
+import { View, Text } from "react-native";
 
 export default function RenderTime({
   remainingTime,
@@ -6,14 +7,14 @@ export default function RenderTime({
   remainingTime: number;
 }) {
   if (remainingTime === 0) {
-    return <div className="message">You're done!</div>;
+    return <Text>You're done!</Text>;
   }
   return (
-    <div className="timer">
-      <div className="text">Remaining</div>
-      <div className="value">{formatTime(remainingTime)}</div>
-      <div className="text">seconds</div>
-    </div>
+    <View>
+      <Text>Remaining</Text>
+      <Text>{formatTime(remainingTime)}</Text>
+      <Text>seconds</Text>
+    </View>
   );
 }
 // rendertime is a render prop
