@@ -12,7 +12,7 @@ interface Task {
   completed: boolean;
 }
 
-export default function App() {
+export default function MainScreen() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);
 
