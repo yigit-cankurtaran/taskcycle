@@ -1,12 +1,16 @@
+// if this for some reason has APKs that crash
+// just import react from "react" here
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, SafeAreaView } from "react-native";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text>probably will be moving the other app here</Text>
       <StatusBar style="auto" />
-    </View>
+      <Footer />
+    </SafeAreaView>
   );
 }
 
