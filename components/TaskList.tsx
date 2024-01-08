@@ -1,3 +1,6 @@
+import { View, Text, FlatList, Button } from "react-native";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+
 interface Task {
   id: string;
   title: string;
@@ -37,10 +40,10 @@ export default function TaskList({
   );
 
   return (
-    <div>
+    <View>
       {startedTask && (
-        <div className="current-task">
-          <h1 className="text-lg font-bold text-center">Started Task:</h1>
+        <View id="started-task">
+          <Text id="header">Started Task:</Text>
           <Task
             task={startedTask}
             onTaskDelete={onTaskDelete}
@@ -48,39 +51,41 @@ export default function TaskList({
             onTaskEdit={onTaskEdit}
             onTaskStart={onTaskStart}
           />
-        </div>
+        </View>
       )}
-      <h1 className="text-lg font-bold text-center">
+      <Text id="header">
         {futureTasks.length === 1 ? "Future Task:" : "Future Tasks:"}
-      </h1>
-      <ul>
-        {futureTasks.map((task) => (
+      </Text>
+      <FlatList
+        data={futureTasks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
           <Task
-            key={task.id}
-            task={task}
+            task={item}
             onTaskDelete={onTaskDelete}
             onTaskComplete={onTaskComplete}
             onTaskEdit={onTaskEdit}
             onTaskStart={onTaskStart}
           />
-        ))}
-      </ul>
-      <h1 className="text-lg font-bold text-center">
+        )}
+      />
+      <Text id="header">
         {finishedTasks.length === 1 ? "Finished Task:" : "Finished Tasks:"}
-      </h1>
-      <ul>
-        {finishedTasks.map((task) => (
+      </Text>
+      <FlatList
+        data={finishedTasks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
           <Task
-            key={task.id}
-            task={task}
+            task={item}
             onTaskDelete={onTaskDelete}
             onTaskComplete={onTaskComplete}
             onTaskEdit={onTaskEdit}
             onTaskStart={onTaskStart}
           />
-        ))}
-      </ul>
-    </div>
+        )}
+      />
+    </View>
   );
 }
 
@@ -94,39 +99,34 @@ function Task({
   const pomodoroText = task.pomodoros === 1 ? "pomodoro" : "pomodoros";
 
   return (
-    <li className="list-none flex items-center justify-between text-center">
-      <label className="flex items-center">
-        <input
-          type="checkbox"
-          name="completion"
-          checked={task.completed}
-          onChange={() => onTaskComplete(task.id)}
-          className="mr-1 focus:outline-none appearance-none w-4 h-4 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:ring-blue-500 focus:ring-offset-0 focus:ring-opacity-50 hover:bg-gray-300"
+    <View>
+      <View>
+        <BouncyCheckbox
+          isChecked={task.completed}
+          onPress={() => onTaskComplete(task.id)}
+          // might be problematic, test and see later
         />
-        <span className={`ml-2 ${task.completed ? "line-through" : ""}`}>
+        <Text>
           {task.title} - {task.pomodoros} {pomodoroText}
-        </span>
-      </label>
-      <div>
-        <button
-          className="text-blue-300 rounded-2xl ml-1 mr-1 p-1.5 bg-gray-800 hover:bg-gray-900 focus:outline-none"
-          onClick={() => onTaskEdit(task.id)}
-        >
-          Edit
-        </button>
-        <button
-          className="text-blue-300 rounded-2xl mr-1 ml-1 p-1.5 bg-gray-800 hover:bg-gray-900 focus:outline-none"
-          onClick={() => onTaskStart(task.id)}
-        >
-          Start
-        </button>
-        <button
-          className="text-blue-300 rounded-2xl mr-1 ml-1 p-1.5 bg-gray-800 hover:bg-gray-900 focus:outline-none"
-          onClick={() => onTaskDelete(task.id)}
-        >
-          Delete
-        </button>
-      </div>
-    </li>
+        </Text>
+      </View>
+      <View>
+        <Button
+          title="Edit"
+          onPress={() => onTaskEdit(task.id)}
+          color="#0077AA"
+        />
+        <Button
+          title="Start"
+          onPress={() => onTaskStart(task.id)}
+          color="#0077AA"
+        />
+        <Button
+          title="Delete"
+          onPress={() => onTaskDelete(task.id)}
+          color="#0077AA"
+        />
+      </View>
+    </View>
   );
 }

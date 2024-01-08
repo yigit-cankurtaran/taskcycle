@@ -83,8 +83,6 @@ export default function App() {
         margin: "auto",
       }}
     >
-      {/* TODO: too much space between components */}
-      {/* probably need to create a new div here then make the width smaller */}
       <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
       <TaskLogic
         tasks={tasks}
