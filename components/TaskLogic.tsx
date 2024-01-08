@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 import { v4 as uuidv4 } from "uuid";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View } from "react-native";
 
 interface Task {
   id: string;
@@ -95,14 +97,36 @@ export default function TaskLogic({
   }
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    const saveTasks = async () => {
+      try {
+        await AsyncStorage.setItem("tasks", JSON.stringify(tasks));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    saveTasks();
   }, [tasks]);
+
   useEffect(() => {
-    localStorage.setItem("currentTaskId", JSON.stringify(currentTaskId));
+    const saveCurrentTaskId = async () => {
+      try {
+        await AsyncStorage.setItem(
+          "currentTaskId",
+          JSON.stringify(currentTaskId)
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    saveCurrentTaskId();
   }, [currentTaskId]);
+  // converted from localStorage to AsyncStorage
+  // test after finishing the other components
 
   return (
-    <div id="tasks">
+    <View>
       <TaskInput
         onTaskAdd={handleTaskAdd}
         onTaskUpdate={handleTaskUpdate}
@@ -118,6 +142,6 @@ export default function TaskLogic({
         currentTaskId={currentTaskId || ""}
         // this might be problematic
       />
-    </div>
+    </View>
   );
 }
