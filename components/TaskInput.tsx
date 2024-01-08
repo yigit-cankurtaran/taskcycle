@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { View, TextInput, Button } from "react-native";
 
 interface Task {
   id: string;
@@ -31,8 +32,8 @@ export default function TaskInput({
     }
   }, [editingTask]);
 
-  function handleTaskChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setTask(e.target.value);
+  function handleTaskChange(text: string) {
+    setTask(text);
   }
 
   function handleTaskAdd() {
@@ -51,40 +52,32 @@ export default function TaskInput({
     } else alert("Please enter a task");
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter") {
-      handleTaskAdd();
-    }
-  }
+  // function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+  //   if (e.key === "Enter") {
+  //     handleTaskAdd();
+  //   }
+  // }
+  // this may be unnecessary in native, let's see
 
-  function handlePomoChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setPomodoros(Number(e.target.value));
+  function handlePomoChange(text: string) {
+    setPomodoros(parseInt(text, 10));
   }
-
+  // pomodoros being string might be problematic, we'll see
   return (
-    <div className="flex justify-center gap-2 m-6">
-      <input
-        type="text"
-        name="task"
+    <View>
+      <TextInput
         value={task}
-        onChange={handleTaskChange}
-        onKeyDown={handleKeyDown}
+        onChangeText={handleTaskChange}
         placeholder="Enter a task"
-        className="rounded-md text-black shadow p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-gray-100"
       />
-      <input
-        type="number"
-        name="pomodoros"
-        value={pomodoros}
-        onChange={handlePomoChange}
-        className="rounded-md shadow p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-gray-100 text-gray-400"
+      <TextInput
+        keyboardType="numeric"
+        value={String(pomodoros)}
+        onChange={(e) => handlePomoChange(e.nativeEvent.text)}
+        // pomodoros being string might be problematic, we'll see
+        placeholder="Enter pomodoros"
       />
-      <button
-        onClick={handleTaskAdd}
-        className="rounded-md p-2 bg-blue-500 text-blue-300 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        Add
-      </button>
-    </div>
+      <Button title="Add" onPress={handleTaskAdd} color="#0077AA" />
+    </View>
   );
 }
