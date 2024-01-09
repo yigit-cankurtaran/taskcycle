@@ -4,6 +4,7 @@ import TaskList from "./TaskList";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+// might change this to MMKV later, that's apparently synchronous and faster
 import { View, StyleSheet } from "react-native";
 
 // BUG: tasks are only added to the bottom, might be cutting off footer.
@@ -57,7 +58,6 @@ export default function TaskLogic({
       setCurrentTaskId(id);
     }
     console.log("Task started: " + currentTaskId);
-    // BUG: started status doesn't save
   }
 
   function handleTaskDelete(id: string) {

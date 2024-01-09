@@ -9,6 +9,8 @@ import { View, Pressable, StyleSheet, Text } from "react-native";
 // import useSound from "use-sound";
 // gonna have to use expo-av for this
 
+// TODO: make 1 button, start/stop depending on timer state
+
 export default function TimerView({
   pomodoroDecrease,
 }: {
