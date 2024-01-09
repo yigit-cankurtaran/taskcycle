@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
-import { View, Button, StyleSheet } from "react-native";
+import { View, Pressable, StyleSheet, Text } from "react-native";
 
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
@@ -69,7 +69,9 @@ export default function TimerView({
 
   return (
     <View style={styles.container}>
-      <Button title="Start" onPress={startTimer} color="#0077AA" />
+      <Pressable onPress={startTimer} style={styles.button}>
+        <Text style={styles.buttonText}>Start</Text>
+      </Pressable>
       {workRunning && (
         <CountdownCircleTimer
           isPlaying
@@ -109,7 +111,9 @@ export default function TimerView({
           {RenderTime}
         </CountdownCircleTimer>
       )}
-      <Button title="Stop" onPress={stopTimer} color="#0077AA" />
+      <Pressable onPress={stopTimer} style={styles.button}>
+        <Text style={styles.buttonText}>Stop</Text>
+      </Pressable>
     </View>
   );
 }
@@ -119,5 +123,29 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 10,
+  },
+  listContainer: {
+    width: "100%",
+    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+  },
+  button: {
+    backgroundColor: "#0077AA",
+    padding: 10,
+    margin: 5,
+    borderRadius: 10,
+    // they're different sizes, fix later
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
   },
 });

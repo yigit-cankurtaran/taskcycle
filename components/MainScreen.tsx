@@ -23,6 +23,7 @@ export default function MainScreen() {
       }
     };
     // tasks are fetched here
+    // BUG: tasks are NOT fetched here! what!
 
     const fetchCurrentTaskId = async () => {
       const storedCurrentTaskId = await AsyncStorage.getItem("currentTaskId");
@@ -73,18 +74,20 @@ export default function MainScreen() {
 
   return (
     <View style={styles.container}>
-      {/* <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} /> */}
-      <TaskLogic
-        tasks={tasks}
-        setTasks={setTasks}
-        setCurrentTaskId={
-          setCurrentTaskId as React.Dispatch<
-            React.SetStateAction<string | null>
-          >
-        }
-        currentTaskId={currentTaskId}
-        // the issue is this component is way too big.
-      />
+      <View style={styles.centeredView}>
+        <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
+        <TaskLogic
+          tasks={tasks}
+          setTasks={setTasks}
+          setCurrentTaskId={
+            setCurrentTaskId as React.Dispatch<
+              React.SetStateAction<string | null>
+            >
+          }
+          currentTaskId={currentTaskId}
+          // the issue is this component is way too big.
+        />
+      </View>
     </View>
   );
 }
@@ -98,5 +101,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     // even after these changes it looks unusable
+  },
+  centeredView: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
