@@ -14,20 +14,27 @@ interface Task {
 export default function MainScreen() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);
+  const [tasksFetched, setTasksFetched] = useState(false);
 
   useEffect(() => {
+    console.log("MainScreen rendered.");
     const fetchTasks = async () => {
-      const storedTasks = await AsyncStorage.getItem("tasks");
-      if (storedTasks) {
-        setTasks(JSON.parse(storedTasks));
+      try {
+        const storedTasks = await AsyncStorage.getItem("tasks");
+        if (storedTasks !== null) {
+          setTasks(JSON.parse(storedTasks));
+          console.log("Tasks fetched.", tasks);
+        }
+        setTasksFetched(true);
+      } catch (e) {
+        console.log(e);
       }
     };
     // tasks are fetched here
-    // BUG: tasks are NOT fetched here! what!
 
     const fetchCurrentTaskId = async () => {
       const storedCurrentTaskId = await AsyncStorage.getItem("currentTaskId");
-      if (storedCurrentTaskId) {
+      if (storedCurrentTaskId !== null) {
         setCurrentTaskId(JSON.parse(storedCurrentTaskId));
       }
     };
@@ -51,6 +58,8 @@ export default function MainScreen() {
         if (task.id === currentTaskId) {
           const updatedPomodoros = Math.max(task.pomodoros - 1, 0);
           const updatedTask = { ...task, pomodoros: updatedPomodoros };
+          // BUG: if there's only 1 task, it keeps it started at 0 pomodoros
+          // gets fixed on refresh, might just re-fetch tasks on every decrease
 
           if (updatedPomodoros === 0) {
             updatedTask.completed = true;
@@ -85,7 +94,7 @@ export default function MainScreen() {
             >
           }
           currentTaskId={currentTaskId}
-          // the issue is this component is way too big.
+          TasksFetched={tasksFetched}
         />
       </View>
     </View>
@@ -100,7 +109,6 @@ const styles = StyleSheet.create({
     padding: 16,
     width: "100%",
     height: "100%",
-    // even after these changes it looks unusable
   },
   centeredView: {
     justifyContent: "center",
