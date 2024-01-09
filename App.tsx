@@ -11,7 +11,6 @@ export default function App() {
       <StatusBar style="auto" />
       {/* the pomodoro decrease function might be an issue for the timerview call, check and fix */}
       <MainScreen />
-      <Text>probably will be moving the other app here</Text>
       <Footer />
     </SafeAreaView>
   );

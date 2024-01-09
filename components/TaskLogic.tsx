@@ -6,6 +6,9 @@ import { v4 as uuidv4 } from "uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet } from "react-native";
 
+// BUG: tasks are only added to the bottom, might be cutting off footer.
+// see if you can change this.
+
 interface Task {
   id: string;
   title: string;
@@ -48,7 +51,11 @@ export default function TaskLogic({
     if (task && task.completed) {
       return;
     }
-    setCurrentTaskId(id);
+    if (currentTaskId === id) {
+      setCurrentTaskId(null);
+    } else {
+      setCurrentTaskId(id);
+    }
     console.log("Task started: " + currentTaskId);
     // BUG: started status doesn't save
   }

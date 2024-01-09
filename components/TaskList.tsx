@@ -17,6 +17,7 @@ interface TaskProps {
   onTaskComplete: (id: string) => void;
   onTaskEdit: (id: string) => void;
   onTaskStart: (id: string) => void;
+  currentTaskId: string;
 }
 
 interface TaskListProps {
@@ -53,6 +54,7 @@ export default function TaskList({
             onTaskComplete={onTaskComplete}
             onTaskEdit={onTaskEdit}
             onTaskStart={onTaskStart}
+            currentTaskId={currentTaskId}
           />
         </View>
       )}
@@ -70,6 +72,7 @@ export default function TaskList({
               onTaskComplete={onTaskComplete}
               onTaskEdit={onTaskEdit}
               onTaskStart={onTaskStart}
+              currentTaskId={currentTaskId}
             />
           )}
         />
@@ -88,6 +91,7 @@ export default function TaskList({
               onTaskComplete={onTaskComplete}
               onTaskEdit={onTaskEdit}
               onTaskStart={onTaskStart}
+              currentTaskId={currentTaskId}
             />
           )}
         />
@@ -102,8 +106,10 @@ function Task({
   onTaskComplete,
   onTaskEdit,
   onTaskStart,
+  currentTaskId,
 }: TaskProps) {
   const pomodoroText = task.pomodoros === 1 ? "pomodoro" : "pomodoros";
+  const isStarted = task.id === currentTaskId;
 
   return (
     <View style={styles.container}>
@@ -115,6 +121,7 @@ function Task({
         />
         <Text>
           {task.title} - {task.pomodoros} {pomodoroText}
+          {/* TODO: display finished task name strike through */}
         </Text>
       </View>
       <View style={styles.buttonContainer}>
@@ -122,11 +129,12 @@ function Task({
           <Text style={styles.buttonText}>Edit</Text>
         </Pressable>
         <Pressable style={styles.button} onPress={() => onTaskStart(task.id)}>
-          <Text style={styles.buttonText}>Start</Text>
+          <Text style={styles.buttonText}>{isStarted ? "Stop" : "Start"}</Text>
         </Pressable>
         <Pressable style={styles.button} onPress={() => onTaskDelete(task.id)}>
           <Text style={styles.buttonText}>Delete</Text>
         </Pressable>
+        {/* TODO: display only delete button on finished tasks */}
       </View>
     </View>
   );
@@ -135,7 +143,8 @@ function Task({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-between",
+    // the buttons change their position according to the longest task, look into this
     alignItems: "center",
     padding: 10,
   },
