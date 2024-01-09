@@ -3,13 +3,14 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, SafeAreaView } from "react-native";
 import MainScreen from "./components/MainScreen";
+import TimerView from "./components/TimerView";
 import Footer from "./components/Footer";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      <MainScreen />
+      <TimerView pomodoroDecrease={() => console.log("Hello World")} />
       {/* the pomodoro decrease function might be an issue for the timerview call, check and fix */}
       <Text>probably will be moving the other app here</Text>
       <Footer />
