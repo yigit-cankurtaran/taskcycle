@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, TextInput, Button } from "react-native";
 
-// BUG: if i press backspace on pomodoro input it becomes NaN
-
 interface Task {
   id: string;
   title: string;
@@ -24,7 +22,7 @@ export default function TaskInput({
   setEditingTask,
 }: TaskInputProps) {
   const [task, setTask] = useState("");
-  const [pomodoros, setPomodoros] = useState(1);
+  const [pomodoros, setPomodoros] = useState<number | "">(1);
 
   // populating inputs with editingTask values
   useEffect(() => {
@@ -62,7 +60,10 @@ export default function TaskInput({
   // this may be unnecessary in native, let's see
 
   function handlePomoChange(text: string) {
-    setPomodoros(parseInt(text, 10));
+    if (text === "") {
+      setPomodoros("");
+      // this might be an issue later on, keep an eye on it
+    } else setPomodoros(parseInt(text, 10));
   }
   // pomodoros being string might be problematic, we'll see
   return (
