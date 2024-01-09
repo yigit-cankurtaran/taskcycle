@@ -1,6 +1,10 @@
 import { View, Text, FlatList, Button, StyleSheet } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
+// TODO: make buttons next to the task instead of below it
+// TODO: make buttons smaller
+// TODO: make button size consistent
+
 interface Task {
   id: string;
   title: string;

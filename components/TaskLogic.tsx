@@ -74,6 +74,7 @@ export default function TaskLogic({
   function handleTaskEdit(id: string) {
     const currentTask = tasks.find((task) => task.id === id);
     setEditingTask((currentTask: Task | null) => currentTask || null);
+    // TODO: trigger this with a long press instead of a button
   }
 
   function handleTaskUpdate(
