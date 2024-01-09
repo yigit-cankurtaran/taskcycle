@@ -9,8 +9,6 @@ import { View, Pressable, StyleSheet, Text } from "react-native";
 // import useSound from "use-sound";
 // gonna have to use expo-av for this
 
-// TODO: make 1 button, start/stop depending on timer state
-
 export default function TimerView({
   pomodoroDecrease,
 }: {
@@ -71,9 +69,6 @@ export default function TimerView({
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={startTimer} style={styles.button}>
-        <Text style={styles.buttonText}>Start</Text>
-      </Pressable>
       {workRunning && (
         <CountdownCircleTimer
           isPlaying
@@ -113,8 +108,13 @@ export default function TimerView({
           {RenderTime}
         </CountdownCircleTimer>
       )}
-      <Pressable onPress={stopTimer} style={styles.button}>
-        <Text style={styles.buttonText}>Stop</Text>
+      <Pressable
+        onPress={workRunning || restRunning ? stopTimer : startTimer}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>
+          {workRunning || restRunning ? "Stop" : "Start"}
+        </Text>
       </Pressable>
     </View>
   );
