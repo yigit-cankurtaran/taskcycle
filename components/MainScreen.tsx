@@ -72,7 +72,7 @@ export default function MainScreen() {
 
   return (
     <View style={styles.container}>
-      <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
+      {/* <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} /> */}
       <TaskLogic
         tasks={tasks}
         setTasks={setTasks}
@@ -82,6 +82,7 @@ export default function MainScreen() {
           >
         }
         currentTaskId={currentTaskId}
+        // the issue is this component is way too big.
       />
     </View>
   );

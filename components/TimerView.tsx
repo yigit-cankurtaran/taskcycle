@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Button, StyleSheet } from "react-native";
 
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
@@ -82,6 +82,7 @@ export default function TimerView({
             minutesToSeconds(workMins) * (2 / 5),
             minutesToSeconds(workMins) / 5,
           ]}
+          // weirdly pauses sometimes, look into it
           onComplete={handleWorkTimerComplete}
           size={240}
           strokeWidth={20}
