@@ -119,7 +119,7 @@ function Task({
           onPress={() => onTaskComplete(task.id)}
           // might be problematic, test and see later
         />
-        <Text>
+        <Text style={task.completed ? styles.completedTask : styles.normalTask}>
           {task.title} - {task.pomodoros} {pomodoroText}
           {/* TODO: display finished task name strike through */}
         </Text>
@@ -170,4 +170,8 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
+  completedTask: {
+    textDecorationLine: "line-through",
+  },
+  normalTask: {},
 });
