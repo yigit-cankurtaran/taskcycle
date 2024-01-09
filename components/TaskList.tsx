@@ -2,8 +2,7 @@ import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 // TODO: make buttons next to the task instead of below it
-// TODO: make buttons smaller
-// TODO: make button size consistent
+// conflicted on this, look into it after testing on phone.
 
 interface Task {
   id: string;
@@ -107,8 +106,8 @@ function Task({
   const pomodoroText = task.pomodoros === 1 ? "pomodoro" : "pomodoros";
 
   return (
-    <View>
-      <View>
+    <View style={styles.container}>
+      <View style={styles.listContainer}>
         <BouncyCheckbox
           isChecked={task.completed}
           onPress={() => onTaskComplete(task.id)}
@@ -118,7 +117,7 @@ function Task({
           {task.title} - {task.pomodoros} {pomodoroText}
         </Text>
       </View>
-      <View>
+      <View style={styles.buttonContainer}>
         <Pressable style={styles.button} onPress={() => onTaskEdit(task.id)}>
           <Text style={styles.buttonText}>Edit</Text>
         </Pressable>
@@ -138,11 +137,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 10,
   },
   listContainer: {
     width: "100%",
-    // flatlist takes as much space as it can
-    // this limits it to the width of the screen
+    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
   },
   button: {
     backgroundColor: "#0077AA",
