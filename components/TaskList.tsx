@@ -45,7 +45,7 @@ export default function TaskList({
   return (
     <View style={styles.container}>
       {startedTask && (
-        <View id="started-task">
+        <View id="started-task" style={styles.container}>
           <Text id="header">Started Task:</Text>
           <Task
             task={startedTask}

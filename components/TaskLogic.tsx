@@ -130,24 +130,26 @@ export default function TaskLogic({
 
   return (
     <View style={styles.container}>
-      {/* this view needs to be fixed */}
-      {/* takes up too much of the screen */}
-      <TaskInput
-        onTaskAdd={handleTaskAdd}
-        onTaskUpdate={handleTaskUpdate}
-        editingTask={editingTask}
-        setEditingTask={setEditingTask}
-      />
-      <TaskList
-        tasks={tasks}
-        onTaskDelete={handleTaskDelete}
-        onTaskComplete={handleTaskComplete}
-        onTaskEdit={handleTaskEdit}
-        onTaskStart={handleTaskStart}
-        currentTaskId={currentTaskId || ""}
-        // this might be problematic
-        // it was, fixed with its own styles
-      />
+      <View style={styles.centeredView}>
+        {/* this view needs to be fixed */}
+        {/* takes up too much of the screen */}
+        <TaskInput
+          onTaskAdd={handleTaskAdd}
+          onTaskUpdate={handleTaskUpdate}
+          editingTask={editingTask}
+          setEditingTask={setEditingTask}
+        />
+        <TaskList
+          tasks={tasks}
+          onTaskDelete={handleTaskDelete}
+          onTaskComplete={handleTaskComplete}
+          onTaskEdit={handleTaskEdit}
+          onTaskStart={handleTaskStart}
+          currentTaskId={currentTaskId || ""}
+          // this might be problematic
+          // it was, fixed with its own styles
+        />
+      </View>
     </View>
   );
 }
@@ -159,5 +161,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     width: "100%",
+  },
+  centeredView: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
