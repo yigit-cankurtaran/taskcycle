@@ -3,7 +3,7 @@ import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 import { v4 as uuidv4 } from "uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 interface Task {
   id: string;
@@ -126,7 +126,9 @@ export default function TaskLogic({
   // test after finishing the other components
 
   return (
-    <View>
+    <View style={styles.container}>
+      {/* this view needs to be fixed */}
+      {/* takes up too much of the screen */}
       <TaskInput
         onTaskAdd={handleTaskAdd}
         onTaskUpdate={handleTaskUpdate}
@@ -141,7 +143,18 @@ export default function TaskLogic({
         onTaskStart={handleTaskStart}
         currentTaskId={currentTaskId || ""}
         // this might be problematic
+        // it was, fixed with its own styles
       />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+    width: "100%",
+  },
+});

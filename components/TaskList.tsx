@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Button } from "react-native";
+import { View, Text, FlatList, Button, StyleSheet } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 interface Task {
@@ -40,7 +40,7 @@ export default function TaskList({
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       {startedTask && (
         <View id="started-task">
           <Text id="header">Started Task:</Text>
@@ -56,35 +56,39 @@ export default function TaskList({
       <Text id="header">
         {futureTasks.length === 1 ? "Future Task:" : "Future Tasks:"}
       </Text>
-      <FlatList
-        data={futureTasks}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Task
-            task={item}
-            onTaskDelete={onTaskDelete}
-            onTaskComplete={onTaskComplete}
-            onTaskEdit={onTaskEdit}
-            onTaskStart={onTaskStart}
-          />
-        )}
-      />
+      <View style={styles.listContainer}>
+        <FlatList
+          data={futureTasks}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <Task
+              task={item}
+              onTaskDelete={onTaskDelete}
+              onTaskComplete={onTaskComplete}
+              onTaskEdit={onTaskEdit}
+              onTaskStart={onTaskStart}
+            />
+          )}
+        />
+      </View>
       <Text id="header">
         {finishedTasks.length === 1 ? "Finished Task:" : "Finished Tasks:"}
       </Text>
-      <FlatList
-        data={finishedTasks}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Task
-            task={item}
-            onTaskDelete={onTaskDelete}
-            onTaskComplete={onTaskComplete}
-            onTaskEdit={onTaskEdit}
-            onTaskStart={onTaskStart}
-          />
-        )}
-      />
+      <View style={styles.listContainer}>
+        <FlatList
+          data={finishedTasks}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <Task
+              task={item}
+              onTaskDelete={onTaskDelete}
+              onTaskComplete={onTaskComplete}
+              onTaskEdit={onTaskEdit}
+              onTaskStart={onTaskStart}
+            />
+          )}
+        />
+      </View>
     </View>
   );
 }
@@ -130,3 +134,16 @@ function Task({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  listContainer: {
+    width: "100%",
+    // flatlist takes as much space as it can
+    // this limits it to the width of the screen
+  },
+});

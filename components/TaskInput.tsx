@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { View, TextInput, Button } from "react-native";
 
+// ERROR: crypto.getRandomValues() not supported. See
+// will fix, i saw a package that fixes this
+
 interface Task {
   id: string;
   title: string;
