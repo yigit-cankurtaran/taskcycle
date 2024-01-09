@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, TextInput, Button } from "react-native";
+import { Text, View, TextInput, Pressable, StyleSheet } from "react-native";
 
 interface Task {
   id: string;
@@ -72,15 +72,42 @@ export default function TaskInput({
         value={task}
         onChangeText={handleTaskChange}
         placeholder="Enter a task"
+        style={styles.input}
       />
       <TextInput
-        keyboardType="numeric"
+        inputMode="numeric"
         value={String(pomodoros)}
         onChange={(e) => handlePomoChange(e.nativeEvent.text)}
         // pomodoros being string might be problematic, we'll see
         placeholder="Enter pomodoros"
+        style={styles.input}
       />
-      <Button title="Add" onPress={handleTaskAdd} color="#0077AA" />
+      <Pressable
+        onPress={handleTaskAdd}
+        // style={({ pressed }) => [
+        //   { backgroundColor: pressed ? "#005580" : "#0077AA" },
+        // ]}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>Add</Text>
+      </Pressable>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    padding: 10,
+    margin: 5,
+    backgroundColor: "#FFFFFF",
+  },
+  button: {
+    backgroundColor: "#0077AA",
+    padding: 10,
+    margin: 5,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+  },
+});

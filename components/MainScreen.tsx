@@ -22,6 +22,7 @@ export default function MainScreen() {
         setTasks(JSON.parse(storedTasks));
       }
     };
+    // tasks are fetched here
 
     const fetchCurrentTaskId = async () => {
       const storedCurrentTaskId = await AsyncStorage.getItem("currentTaskId");

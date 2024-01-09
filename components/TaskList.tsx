@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Button, StyleSheet } from "react-native";
+import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 // TODO: make buttons next to the task instead of below it
@@ -119,21 +119,15 @@ function Task({
         </Text>
       </View>
       <View>
-        <Button
-          title="Edit"
-          onPress={() => onTaskEdit(task.id)}
-          color="#0077AA"
-        />
-        <Button
-          title="Start"
-          onPress={() => onTaskStart(task.id)}
-          color="#0077AA"
-        />
-        <Button
-          title="Delete"
-          onPress={() => onTaskDelete(task.id)}
-          color="#0077AA"
-        />
+        <Pressable style={styles.button} onPress={() => onTaskEdit(task.id)}>
+          <Text style={styles.buttonText}>Edit</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => onTaskStart(task.id)}>
+          <Text style={styles.buttonText}>Start</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => onTaskDelete(task.id)}>
+          <Text style={styles.buttonText}>Delete</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -149,5 +143,15 @@ const styles = StyleSheet.create({
     width: "100%",
     // flatlist takes as much space as it can
     // this limits it to the width of the screen
+  },
+  button: {
+    backgroundColor: "#0077AA",
+    padding: 10,
+    margin: 5,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
   },
 });
