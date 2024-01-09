@@ -99,13 +99,14 @@ const styles = StyleSheet.create({
   input: {
     padding: 10,
     margin: 5,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#F3F3F3",
+    borderRadius: 10,
   },
   button: {
     backgroundColor: "#0077AA",
     padding: 10,
     margin: 5,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   buttonText: {
     color: "white",
