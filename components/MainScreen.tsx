@@ -59,17 +59,18 @@ export default function MainScreen() {
         if (task.id === currentTaskId) {
           const updatedPomodoros = Math.max(task.pomodoros - 1, 0);
           const updatedTask = { ...task, pomodoros: updatedPomodoros };
-          // BUG: if there's only 1 task, it keeps it started at 0 pomodoros
-          // gets fixed on refresh, might just re-fetch tasks on every decrease
 
           if (updatedPomodoros === 0) {
             updatedTask.completed = true;
             setCurrentTaskId(null);
 
             // Find the next task in the tasks array and start it
-            const nextTaskIndex = (index + 1) % tasks.length;
-            const nextTask = tasks[nextTaskIndex];
-            setCurrentTaskId(nextTask.id as string | null);
+            if (tasks.length > 1) {
+              // have to check or it's bugged
+              const nextTaskIndex = (index + 1) % tasks.length;
+              const nextTask = tasks[nextTaskIndex];
+              setCurrentTaskId(nextTask.id as string | null);
+            }
           }
           return updatedTask;
         }
@@ -78,7 +79,6 @@ export default function MainScreen() {
     );
     if (startedTask) {
       console.log("pomodoros: " + startedTask.pomodoros);
-      // might be null, check later
     }
   }
 

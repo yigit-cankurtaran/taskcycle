@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#333",
     padding: 10,
+    zIndex: 1000,
+    // makes it so the footer is always on top
+    // doesnt fix the bug with the tasks moving down
   },
   text: {
     textAlign: "center",
