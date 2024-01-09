@@ -121,20 +121,40 @@ function Task({
         />
         <Text style={task.completed ? styles.completedTask : styles.normalTask}>
           {task.title} - {task.pomodoros} {pomodoroText}
-          {/* TODO: display finished task name strike through */}
         </Text>
       </View>
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.button} onPress={() => onTaskEdit(task.id)}>
-          <Text style={styles.buttonText}>Edit</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={() => onTaskStart(task.id)}>
-          <Text style={styles.buttonText}>{isStarted ? "Stop" : "Start"}</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={() => onTaskDelete(task.id)}>
-          <Text style={styles.buttonText}>Delete</Text>
-        </Pressable>
-        {/* TODO: display only delete button on finished tasks */}
+        {task.completed ? (
+          <Pressable
+            style={styles.button}
+            onPress={() => onTaskDelete(task.id)}
+          >
+            <Text style={styles.buttonText}>Delete</Text>
+          </Pressable>
+        ) : (
+          <>
+            <Pressable
+              style={styles.button}
+              onPress={() => onTaskEdit(task.id)}
+            >
+              <Text style={styles.buttonText}>Edit</Text>
+            </Pressable>
+            <Pressable
+              style={styles.button}
+              onPress={() => onTaskStart(task.id)}
+            >
+              <Text style={styles.buttonText}>
+                {isStarted ? "Stop" : "Start"}
+              </Text>
+            </Pressable>
+            <Pressable
+              style={styles.button}
+              onPress={() => onTaskDelete(task.id)}
+            >
+              <Text style={styles.buttonText}>Delete</Text>
+            </Pressable>
+          </>
+        )}
       </View>
     </View>
   );
