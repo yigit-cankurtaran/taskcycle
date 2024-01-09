@@ -1,6 +1,5 @@
 import TimerView from "./TimerView";
 import TaskLogic from "./TaskLogic";
-import "./index.css";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet } from "react-native";
