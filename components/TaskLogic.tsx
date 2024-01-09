@@ -17,6 +17,7 @@ interface TaskLogicProps {
   tasks: Task[];
   currentTaskId: string | null;
   TasksFetched: boolean;
+  CurrentTaskIdFetched: boolean;
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
   setCurrentTaskId: React.Dispatch<React.SetStateAction<string | null>>;
 }
@@ -27,6 +28,7 @@ export default function TaskLogic({
   setTasks,
   setCurrentTaskId,
   TasksFetched,
+  CurrentTaskIdFetched,
 }: TaskLogicProps) {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
@@ -47,7 +49,7 @@ export default function TaskLogic({
       return;
     }
     setCurrentTaskId(id);
-    console.log("Task started: " + id);
+    console.log("Task started: " + currentTaskId);
     // BUG: started status doesn't save
   }
 
@@ -107,7 +109,6 @@ export default function TaskLogic({
       try {
         if (TasksFetched) {
           await AsyncStorage.setItem("tasks", JSON.stringify(tasks));
-          console.log("Tasks saved.", tasks);
         }
       } catch (error) {
         console.error(error);
@@ -120,10 +121,13 @@ export default function TaskLogic({
   useEffect(() => {
     const saveCurrentTaskId = async () => {
       try {
-        await AsyncStorage.setItem(
-          "currentTaskId",
-          JSON.stringify(currentTaskId)
-        );
+        if (CurrentTaskIdFetched) {
+          await AsyncStorage.setItem(
+            "currentTaskId",
+            JSON.stringify(currentTaskId)
+          );
+          console.log("Current task id saved to storage:", currentTaskId);
+        }
       } catch (error) {
         console.error(error);
       }

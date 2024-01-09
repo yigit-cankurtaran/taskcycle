@@ -15,15 +15,14 @@ export default function MainScreen() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);
   const [tasksFetched, setTasksFetched] = useState(false);
+  const [currentTaskIdFetched, setCurrentTaskIdFetched] = useState(false);
 
   useEffect(() => {
-    console.log("MainScreen rendered.");
     const fetchTasks = async () => {
       try {
         const storedTasks = await AsyncStorage.getItem("tasks");
         if (storedTasks !== null) {
           setTasks(JSON.parse(storedTasks));
-          console.log("Tasks fetched.", tasks);
         }
         setTasksFetched(true);
       } catch (e) {
@@ -36,7 +35,9 @@ export default function MainScreen() {
       const storedCurrentTaskId = await AsyncStorage.getItem("currentTaskId");
       if (storedCurrentTaskId !== null) {
         setCurrentTaskId(JSON.parse(storedCurrentTaskId));
+        console.log("Current task id fetched:", currentTaskId);
       }
+      setCurrentTaskIdFetched(true);
     };
 
     fetchTasks();
@@ -95,6 +96,7 @@ export default function MainScreen() {
           }
           currentTaskId={currentTaskId}
           TasksFetched={tasksFetched}
+          CurrentTaskIdFetched={currentTaskIdFetched}
         />
       </View>
     </View>
