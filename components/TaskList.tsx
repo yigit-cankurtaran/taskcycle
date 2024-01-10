@@ -120,13 +120,11 @@ function Task({
   const isStarted = task.id === currentTaskId;
 
   return (
-    // might need to display this with ScrollView
     <View style={styles.container}>
       <View style={styles.listContainer}>
         <BouncyCheckbox
           isChecked={task.completed}
           onPress={() => onTaskComplete(task.id)}
-          // might be problematic, test and see later
         />
         <Text style={task.completed ? styles.completedTask : styles.normalTask}>
           {task.title} - {task.pomodoros} {pomodoroText}
@@ -171,8 +169,8 @@ function Task({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "space-between",
+    flex: 1,
     // the buttons change their position according to the longest task, look into this
     alignItems: "center",
     padding: 10,
