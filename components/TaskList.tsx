@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
-// TODO: implement scrollview to fix footer bug
+import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 // TODO: make buttons next to the task instead of below it
