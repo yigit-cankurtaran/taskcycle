@@ -1,7 +1,7 @@
 import TimerView from "./TimerView";
 import TaskLogic from "./TaskLogic";
 import { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import storage from "./Storage";
 import { View, StyleSheet } from "react-native";
 
 interface Task {
@@ -18,10 +18,10 @@ export default function MainScreen() {
   const [currentTaskIdFetched, setCurrentTaskIdFetched] = useState(false);
 
   useEffect(() => {
-    const fetchTasks = async () => {
+    const fetchTasks = () => {
       try {
-        const storedTasks = await AsyncStorage.getItem("tasks");
-        if (storedTasks !== null) {
+        const storedTasks = storage.getString("tasks");
+        if (storedTasks !== null && storedTasks !== undefined) {
           setTasks(JSON.parse(storedTasks));
         }
         setTasksFetched(true);
@@ -29,20 +29,24 @@ export default function MainScreen() {
         console.log(e);
       }
     };
-    // tasks are fetched here
 
-    const fetchCurrentTaskId = async () => {
-      const storedCurrentTaskId = await AsyncStorage.getItem("currentTaskId");
-      if (storedCurrentTaskId !== null) {
-        setCurrentTaskId(JSON.parse(storedCurrentTaskId));
-        console.log("Current task id fetched:", currentTaskId);
+    const fetchCurrentTaskId = () => {
+      try {
+        const storedCurrentTaskId = storage.getString("currentTaskId");
+        if (storedCurrentTaskId !== null && storedCurrentTaskId !== undefined) {
+          setCurrentTaskId(JSON.parse(storedCurrentTaskId));
+          console.log("Current task id fetched:", currentTaskId);
+        }
+        setCurrentTaskIdFetched(true);
+      } catch (e) {
+        console.log(e);
       }
-      setCurrentTaskIdFetched(true);
     };
 
     fetchTasks();
     fetchCurrentTaskId();
   }, []);
+
   const startedTask = tasks.find((task) => task.id === currentTaskId);
   // handling state here and passing it down to TimerView and TaskLogic
   // solved pretty much all of the issues I was having with the app

@@ -3,12 +3,9 @@ import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-// might change this to MMKV later, that's apparently synchronous and faster
+import storage from "./Storage";
+// using storage from a central location
 import { View, StyleSheet } from "react-native";
-
-// BUG: tasks are only added to the bottom, might be cutting off footer.
-// see if you can change this.
 
 interface Task {
   id: string;
@@ -112,13 +109,9 @@ export default function TaskLogic({
   }
 
   useEffect(() => {
-    const saveTasks = async () => {
-      try {
-        if (TasksFetched) {
-          await AsyncStorage.setItem("tasks", JSON.stringify(tasks));
-        }
-      } catch (error) {
-        console.error(error);
+    const saveTasks = () => {
+      if (TasksFetched) {
+        storage.set("tasks", JSON.stringify(tasks));
       }
     };
 
@@ -126,24 +119,15 @@ export default function TaskLogic({
   }, [tasks]);
 
   useEffect(() => {
-    const saveCurrentTaskId = async () => {
-      try {
-        if (CurrentTaskIdFetched) {
-          await AsyncStorage.setItem(
-            "currentTaskId",
-            JSON.stringify(currentTaskId)
-          );
-          console.log("Current task id saved to storage:", currentTaskId);
-        }
-      } catch (error) {
-        console.error(error);
+    const saveCurrentTaskId = () => {
+      if (CurrentTaskIdFetched) {
+        storage.set("currentTaskId", JSON.stringify(currentTaskId));
+        console.log("Current task id saved to storage:", currentTaskId);
       }
     };
 
     saveCurrentTaskId();
   }, [currentTaskId]);
-  // converted from localStorage to AsyncStorage
-  // test after finishing the other components
 
   return (
     <View style={styles.container}>
