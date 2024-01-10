@@ -1,4 +1,12 @@
-import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
+// TODO: implement scrollview to fix footer bug
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 // TODO: make buttons next to the task instead of below it
@@ -112,6 +120,7 @@ function Task({
   const isStarted = task.id === currentTaskId;
 
   return (
+    // might need to display this with ScrollView
     <View style={styles.container}>
       <View style={styles.listContainer}>
         <BouncyCheckbox
