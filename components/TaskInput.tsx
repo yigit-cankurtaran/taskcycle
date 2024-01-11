@@ -41,6 +41,10 @@ export default function TaskInput({
       // the trim() method removes whitespace from both ends of a string
       // pomodoro(s) update failed due to integer/string issues, this is the fix
       const numPomodoros = Number(pomodoros);
+      if (isNaN(numPomodoros) || numPomodoros < 1) {
+        alert("Please enter a valid number of pomodoros");
+        return;
+      }
       if (editingTask) {
         onTaskUpdate(editingTask.id, task, numPomodoros);
         setEditingTask(null);
@@ -52,20 +56,18 @@ export default function TaskInput({
     } else alert("Please enter a task");
   }
 
-  // function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-  //   if (e.key === "Enter") {
-  //     handleTaskAdd();
-  //   }
-  // }
-  // this may be unnecessary in native, let's see
-
   function handlePomoChange(text: string) {
     if (text === "") {
       setPomodoros("");
       // this might be an issue later on, keep an eye on it
-    } else setPomodoros(parseInt(text, 10));
+    } else {
+      const parsedPomodoros = parseInt(text, 10);
+      if (parsedPomodoros >= 1) {
+        setPomodoros(parsedPomodoros);
+      }
+    }
   }
-  // pomodoros being string might be problematic, we'll see
+
   return (
     <View>
       <TextInput
@@ -78,17 +80,10 @@ export default function TaskInput({
         inputMode="numeric"
         value={String(pomodoros)}
         onChange={(e) => handlePomoChange(e.nativeEvent.text)}
-        // pomodoros being string might be problematic, we'll see
         placeholder="Enter pomodoros"
         style={styles.input}
       />
-      <Pressable
-        onPress={handleTaskAdd}
-        // style={({ pressed }) => [
-        //   { backgroundColor: pressed ? "#005580" : "#0077AA" },
-        // ]}
-        style={styles.button}
-      >
+      <Pressable onPress={handleTaskAdd} style={styles.button}>
         <Text style={styles.buttonText}>Add</Text>
       </Pressable>
     </View>

@@ -21,6 +21,10 @@ import {
 // TODO: the button distance gets too much if task title is too long
 // might be fixed by the above TODO
 
+// TODO: remove delete button
+
+// TODO: it's absolutely messed up after converting to APK, look into it
+
 interface Task {
   id: string;
   title: string;
