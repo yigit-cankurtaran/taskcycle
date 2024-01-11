@@ -12,6 +12,7 @@ interface Task {
   completed: boolean;
 }
 
+// TODO: CENTER THE VIEWS WITHOUT MESSING EVERYTHING UP AGAIN! check on phone
 // TODO: implement a dark mode
 
 export default function MainScreen() {
