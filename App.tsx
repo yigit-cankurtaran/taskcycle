@@ -11,7 +11,6 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      {/* the pomodoro decrease function might be an issue for the timerview call, check and fix */}
       <MainScreen />
       <Footer />
     </SafeAreaView>
