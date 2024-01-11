@@ -132,8 +132,6 @@ export default function TaskLogic({
   return (
     <View style={styles.container}>
       <View style={styles.centeredView}>
-        {/* this view needs to be fixed */}
-        {/* takes up too much of the screen */}
         <TaskInput
           onTaskAdd={handleTaskAdd}
           onTaskUpdate={handleTaskUpdate}
@@ -147,8 +145,6 @@ export default function TaskLogic({
           onTaskEdit={handleTaskEdit}
           onTaskStart={handleTaskStart}
           currentTaskId={currentTaskId || ""}
-          // this might be problematic
-          // it was, fixed with its own styles
         />
       </View>
     </View>

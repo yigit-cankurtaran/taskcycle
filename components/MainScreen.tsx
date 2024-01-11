@@ -11,6 +11,9 @@ interface Task {
   completed: boolean;
 }
 
+// TODO: implement a dark mode
+// TODO: implement a switch to turn off the timer
+
 export default function MainScreen() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);

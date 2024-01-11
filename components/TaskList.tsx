@@ -4,6 +4,11 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 // TODO: make buttons next to the task instead of below it
 // conflicted on this, look into it after testing on phone.
 
+// TODO: the button distance gets too much if task title is too long
+// might be fixed by the above TODO
+
+// TODO: can move the delete to a swipe and the edit to a long press
+// look into this
 interface Task {
   id: string;
   title: string;
