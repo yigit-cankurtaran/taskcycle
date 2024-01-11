@@ -12,6 +12,7 @@ import {
   LongPressGestureHandler,
   State,
   GestureHandlerStateChangeEvent,
+  Swipeable,
 } from "react-native-gesture-handler";
 
 // TODO: make buttons next to the task instead of below it
@@ -130,6 +131,7 @@ function Task({
   const isStarted = task.id === currentTaskId;
   const [scaleValue] = useState(new Animated.Value(1));
 
+  // what to do when the task is long pressed
   const onLongPress = ({ nativeEvent }: GestureHandlerStateChangeEvent) => {
     if (nativeEvent.state === State.BEGAN) {
       Animated.spring(scaleValue, {
@@ -148,56 +150,95 @@ function Task({
     }
   };
 
-  return (
-    <LongPressGestureHandler
-      onHandlerStateChange={onLongPress}
-      minDurationMs={800}
-    >
-      <Animated.View
-        style={[styles.container, { transform: [{ scale: scaleValue }] }]}
+  const renderAction = (
+    progress: Animated.AnimatedInterpolation<number>,
+    dragX: Animated.AnimatedInterpolation<number>,
+    direction: "left" | "right"
+  ) => {
+    const trans = dragX.interpolate({
+      inputRange:
+        direction === "right" ? [0, 50, 100, 101] : [-101, -100, -50, 0],
+      outputRange: direction === "right" ? [-20, 0, 0, 1] : [1, 0, 0, -20],
+    });
+    return (
+      <Pressable
+        onPress={() => {
+          Animated.timing(trans as Animated.Value, {
+            toValue: direction === "right" ? 500 : -500,
+            duration: 500,
+            useNativeDriver: true,
+          }).start(() => onTaskDelete(task.id));
+        }}
       >
-        <View style={styles.container}>
-          <View style={styles.listContainer}>
-            <BouncyCheckbox
-              isChecked={task.completed}
-              onPress={() => onTaskComplete(task.id)}
-            />
-            <Text
-              style={task.completed ? styles.completedTask : styles.normalTask}
-            >
-              {task.title} - {task.pomodoros} {pomodoroText}
-            </Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            {task.completed ? (
-              <Pressable
-                style={styles.button}
-                onPress={() => onTaskDelete(task.id)}
+        <Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
+          <Text style={styles.buttonText}>Delete</Text>
+        </Animated.View>
+      </Pressable>
+    );
+  };
+
+  return (
+    <Swipeable
+      onSwipeableOpen={() => onTaskDelete(task.id)}
+      renderRightActions={(progress, dragX) =>
+        renderAction(progress, dragX, "right")
+      }
+      renderLeftActions={(progress, dragX) =>
+        renderAction(progress, dragX, "left")
+      }
+    >
+      <LongPressGestureHandler
+        onHandlerStateChange={onLongPress}
+        minDurationMs={800}
+      >
+        <Animated.View
+          style={[styles.container, { transform: [{ scale: scaleValue }] }]}
+        >
+          <View style={styles.container}>
+            <View style={styles.listContainer}>
+              <BouncyCheckbox
+                isChecked={task.completed}
+                onPress={() => onTaskComplete(task.id)}
+              />
+              <Text
+                style={
+                  task.completed ? styles.completedTask : styles.normalTask
+                }
               >
-                <Text style={styles.buttonText}>Delete</Text>
-              </Pressable>
-            ) : (
-              <>
-                <Pressable
-                  style={styles.button}
-                  onPress={() => onTaskStart(task.id)}
-                >
-                  <Text style={styles.buttonText}>
-                    {isStarted ? "Stop" : "Start"}
-                  </Text>
-                </Pressable>
+                {task.title} - {task.pomodoros} {pomodoroText}
+              </Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              {task.completed ? (
                 <Pressable
                   style={styles.button}
                   onPress={() => onTaskDelete(task.id)}
                 >
                   <Text style={styles.buttonText}>Delete</Text>
                 </Pressable>
-              </>
-            )}
+              ) : (
+                <>
+                  <Pressable
+                    style={styles.button}
+                    onPress={() => onTaskStart(task.id)}
+                  >
+                    <Text style={styles.buttonText}>
+                      {isStarted ? "Stop" : "Start"}
+                    </Text>
+                  </Pressable>
+                  <Pressable
+                    style={styles.button}
+                    onPress={() => onTaskDelete(task.id)}
+                  >
+                    <Text style={styles.buttonText}>Delete</Text>
+                  </Pressable>
+                </>
+              )}
+            </View>
           </View>
-        </View>
-      </Animated.View>
-    </LongPressGestureHandler>
+        </Animated.View>
+      </LongPressGestureHandler>
+    </Swipeable>
   );
 }
 
