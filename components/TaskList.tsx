@@ -236,7 +236,6 @@ const styles = StyleSheet.create({
   },
   container: {
     justifyContent: "space-between",
-    flex: 1,
     alignItems: "center",
     padding: 10,
   },
