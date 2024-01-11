@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   footer: {
     position: "absolute",
     bottom: 0,
-    width: "100%",
     backgroundColor: "#333",
     padding: 10,
     flex: 1,
