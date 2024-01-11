@@ -85,6 +85,7 @@ export default function TaskLogic({
     setEditingTask((currentTask: Task | null) => currentTask || null);
     // TODO: trigger this with a long press instead of a button
     // BUG: this isn't doing anything currently.
+    console.log("editing task: " + id);
   }
 
   function handleTaskUpdate(
