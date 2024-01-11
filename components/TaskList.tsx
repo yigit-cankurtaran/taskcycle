@@ -237,7 +237,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-between",
     flex: 1,
-    // the buttons change their position according to the longest task, look into this
     alignItems: "center",
     padding: 10,
   },

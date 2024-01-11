@@ -2,7 +2,7 @@
 // just import react from "react" here
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, View } from "react-native";
 import MainScreen from "./components/MainScreen";
 import Footer from "./components/Footer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -11,11 +11,11 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <StatusBar style="auto" />
         <MainScreen />
         <Footer />
-      </SafeAreaView>
+      </View>
     </GestureHandlerRootView>
   );
 }
@@ -24,7 +24,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

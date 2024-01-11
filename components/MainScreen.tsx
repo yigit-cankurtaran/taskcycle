@@ -119,19 +119,23 @@ export default function MainScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.centeredView}>
-        <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
-        <TaskLogic
-          tasks={tasks}
-          setTasks={setTasks}
-          setCurrentTaskId={
-            setCurrentTaskId as React.Dispatch<
-              React.SetStateAction<string | null>
-            >
-          }
-          currentTaskId={currentTaskId}
-          TasksFetched={tasksFetched}
-          CurrentTaskIdFetched={currentTaskIdFetched}
-        />
+        <View style={{ backgroundColor: "red" }}>
+          <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
+        </View>
+        <View style={{ backgroundColor: "blue" }}>
+          <TaskLogic
+            tasks={tasks}
+            setTasks={setTasks}
+            setCurrentTaskId={
+              setCurrentTaskId as React.Dispatch<
+                React.SetStateAction<string | null>
+              >
+            }
+            currentTaskId={currentTaskId}
+            TasksFetched={tasksFetched}
+            CurrentTaskIdFetched={currentTaskIdFetched}
+          />
+        </View>
       </View>
     </View>
   );
@@ -140,14 +144,13 @@ export default function MainScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     padding: 16,
-    width: "100%",
-    height: "100%",
   },
   centeredView: {
-    justifyContent: "center",
+    flex: 1,
+    justifyContent: "flex-start",
     alignItems: "center",
   },
 });

@@ -122,13 +122,13 @@ export default function TimerView({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    // makes the view take the entire length of the screen, ruins everything
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
   },
   listContainer: {
-    width: "100%",
     marginBottom: 10,
     flexDirection: "row",
     alignItems: "center",
@@ -137,14 +137,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    width: "100%",
   },
   button: {
     backgroundColor: "#0077AA",
     padding: 10,
     margin: 5,
     borderRadius: 10,
-    // they're different sizes, fix later
   },
   buttonText: {
     color: "white",

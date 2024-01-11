@@ -191,7 +191,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
-    width: "100%",
   },
   centeredView: {
     justifyContent: "center",
