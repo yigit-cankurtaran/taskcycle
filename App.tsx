@@ -5,15 +5,18 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView } from "react-native";
 import MainScreen from "./components/MainScreen";
 import Footer from "./components/Footer";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 // TODO: it's absolutely messed up after converting to APK, look into it
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
-      <MainScreen />
-      <Footer />
-    </SafeAreaView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="auto" />
+        <MainScreen />
+        <Footer />
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 

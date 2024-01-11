@@ -3,10 +3,11 @@ import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-import storage from "./Storage";
+// import storage from "./Storage";
 // using storage from a central location
 // TODO: MMKV doesn't work with expo go???
 // put the asyncstorage solution back in, comment it when building APK
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet } from "react-native";
 
 interface Task {
@@ -110,10 +111,35 @@ export default function TaskLogic({
     console.log("Task edited: " + id);
   }
 
+  // useEffect(() => {
+  //   const saveTasks = () => {
+  //     if (TasksFetched) {
+  //       storage.set("tasks", JSON.stringify(tasks));
+  //     }
+  //   };
+
+  //   saveTasks();
+  // }, [tasks]);
+
+  // useEffect(() => {
+  //   const saveCurrentTaskId = () => {
+  //     if (CurrentTaskIdFetched) {
+  //       storage.set("currentTaskId", JSON.stringify(currentTaskId));
+  //       console.log("Current task id saved to storage:", currentTaskId);
+  //     }
+  //   };
+
+  //   saveCurrentTaskId();
+  // }, [currentTaskId]);
+
   useEffect(() => {
-    const saveTasks = () => {
-      if (TasksFetched) {
-        storage.set("tasks", JSON.stringify(tasks));
+    const saveTasks = async () => {
+      try {
+        if (TasksFetched) {
+          await AsyncStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
 
@@ -121,10 +147,17 @@ export default function TaskLogic({
   }, [tasks]);
 
   useEffect(() => {
-    const saveCurrentTaskId = () => {
-      if (CurrentTaskIdFetched) {
-        storage.set("currentTaskId", JSON.stringify(currentTaskId));
-        console.log("Current task id saved to storage:", currentTaskId);
+    const saveCurrentTaskId = async () => {
+      try {
+        if (CurrentTaskIdFetched) {
+          await AsyncStorage.setItem(
+            "currentTaskId",
+            JSON.stringify(currentTaskId)
+          );
+          console.log("Current task id saved to storage:", currentTaskId);
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
 

@@ -1,7 +1,8 @@
 import TimerView from "./TimerView";
 import TaskLogic from "./TaskLogic";
 import { useState, useEffect } from "react";
-import storage from "./Storage";
+// import storage from "./Storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet } from "react-native";
 
 interface Task {
@@ -19,11 +20,41 @@ export default function MainScreen() {
   const [tasksFetched, setTasksFetched] = useState(false);
   const [currentTaskIdFetched, setCurrentTaskIdFetched] = useState(false);
 
+  // useEffect(() => {
+  //   const fetchTasks = () => {
+  //     try {
+  //       const storedTasks = storage.getString("tasks");
+  //       if (storedTasks !== null && storedTasks !== undefined) {
+  //         setTasks(JSON.parse(storedTasks));
+  //       }
+  //       setTasksFetched(true);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   };
+
+  //   const fetchCurrentTaskId = () => {
+  //     try {
+  //       const storedCurrentTaskId = storage.getString("currentTaskId");
+  //       if (storedCurrentTaskId !== null && storedCurrentTaskId !== undefined) {
+  //         setCurrentTaskId(JSON.parse(storedCurrentTaskId));
+  //         console.log("Current task id fetched:", currentTaskId);
+  //       }
+  //       setCurrentTaskIdFetched(true);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   };
+
+  //   fetchTasks();
+  //   fetchCurrentTaskId();
+  // }, []);
+
   useEffect(() => {
-    const fetchTasks = () => {
+    const fetchTasks = async () => {
       try {
-        const storedTasks = storage.getString("tasks");
-        if (storedTasks !== null && storedTasks !== undefined) {
+        const storedTasks = await AsyncStorage.getItem("tasks");
+        if (storedTasks !== null) {
           setTasks(JSON.parse(storedTasks));
         }
         setTasksFetched(true);
@@ -31,18 +62,15 @@ export default function MainScreen() {
         console.log(e);
       }
     };
+    // tasks are fetched here
 
-    const fetchCurrentTaskId = () => {
-      try {
-        const storedCurrentTaskId = storage.getString("currentTaskId");
-        if (storedCurrentTaskId !== null && storedCurrentTaskId !== undefined) {
-          setCurrentTaskId(JSON.parse(storedCurrentTaskId));
-          console.log("Current task id fetched:", currentTaskId);
-        }
-        setCurrentTaskIdFetched(true);
-      } catch (e) {
-        console.log(e);
+    const fetchCurrentTaskId = async () => {
+      const storedCurrentTaskId = await AsyncStorage.getItem("currentTaskId");
+      if (storedCurrentTaskId !== null) {
+        setCurrentTaskId(JSON.parse(storedCurrentTaskId));
+        console.log("Current task id fetched:", currentTaskId);
       }
+      setCurrentTaskIdFetched(true);
     };
 
     fetchTasks();

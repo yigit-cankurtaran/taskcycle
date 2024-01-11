@@ -160,6 +160,7 @@ function Task({
     dragX: Animated.AnimatedInterpolation<number>,
     direction: "left" | "right"
   ) => {
+    dragX.removeAllListeners();
     dragX.addListener(({ value }) => setDragXValue(value));
 
     const trans = dragX.interpolate({
@@ -232,7 +233,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     padding: 10,
-    width: "100%",
   },
   container: {
     justifyContent: "space-between",
@@ -242,7 +242,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   listContainer: {
-    width: "80%",
     marginBottom: 10,
     flexDirection: "row",
     alignItems: "center",
