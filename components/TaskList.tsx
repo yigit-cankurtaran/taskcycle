@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -21,8 +21,6 @@ import {
 // TODO: the button distance gets too much if task title is too long
 // might be fixed by the above TODO
 
-// TODO: can move the delete to a swipe and the edit to a long press
-// look into this
 interface Task {
   id: string;
   title: string;
@@ -130,6 +128,7 @@ function Task({
   const pomodoroText = task.pomodoros === 1 ? "pomodoro" : "pomodoros";
   const isStarted = task.id === currentTaskId;
   const [scaleValue] = useState(new Animated.Value(1));
+  const [dragXValue, setDragXValue] = useState(0);
 
   // what to do when the task is long pressed
   const onLongPress = ({ nativeEvent }: GestureHandlerStateChangeEvent) => {
@@ -150,36 +149,36 @@ function Task({
     }
   };
 
+  // what to do when the task is swiped
+  // weird code but it works and it works well
+  useEffect(() => {
+    if (Math.abs(dragXValue) > 100) {
+      // Change 100 to the threshold you want
+      onTaskDelete(task.id);
+    }
+  }, [dragXValue]);
+
   const renderAction = (
     progress: Animated.AnimatedInterpolation<number>,
     dragX: Animated.AnimatedInterpolation<number>,
     direction: "left" | "right"
   ) => {
+    dragX.addListener(({ value }) => setDragXValue(value));
+
     const trans = dragX.interpolate({
       inputRange:
         direction === "right" ? [0, 50, 100, 101] : [-101, -100, -50, 0],
       outputRange: direction === "right" ? [-20, 0, 0, 1] : [1, 0, 0, -20],
     });
     return (
-      <Pressable
-        onPress={() => {
-          Animated.timing(trans as Animated.Value, {
-            toValue: direction === "right" ? 500 : -500,
-            duration: 500,
-            useNativeDriver: true,
-          }).start(() => onTaskDelete(task.id));
-        }}
-      >
-        <Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
-          <Text style={styles.buttonText}>Delete</Text>
-        </Animated.View>
-      </Pressable>
+      <Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
+        <Text style={styles.buttonText}>Delete</Text>
+      </Animated.View>
     );
   };
 
   return (
     <Swipeable
-      onSwipeableOpen={() => onTaskDelete(task.id)}
       renderRightActions={(progress, dragX) =>
         renderAction(progress, dragX, "right")
       }
