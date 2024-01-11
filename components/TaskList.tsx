@@ -15,15 +15,8 @@ import {
   Swipeable,
 } from "react-native-gesture-handler";
 
-// TODO: make buttons next to the task instead of below it
-// conflicted on this, look into it after testing on phone.
-
-// TODO: the button distance gets too much if task title is too long
-// might be fixed by the above TODO
-
-// TODO: remove delete button
-
-// TODO: it's absolutely messed up after converting to APK, look into it
+// TODO: check on phone screen with long tasks
+// to see if button gets cut off
 
 interface Task {
   id: string;
@@ -197,11 +190,12 @@ function Task({
         <Animated.View
           style={[styles.container, { transform: [{ scale: scaleValue }] }]}
         >
-          <View style={styles.container}>
+          <View style={styles.taskContainer}>
             <View style={styles.listContainer}>
               <BouncyCheckbox
                 isChecked={task.completed}
                 onPress={() => onTaskComplete(task.id)}
+                bounceEffect={3}
               />
               <Text
                 style={
@@ -212,14 +206,7 @@ function Task({
               </Text>
             </View>
             <View style={styles.buttonContainer}>
-              {task.completed ? (
-                <Pressable
-                  style={styles.button}
-                  onPress={() => onTaskDelete(task.id)}
-                >
-                  <Text style={styles.buttonText}>Delete</Text>
-                </Pressable>
-              ) : (
+              {task.completed ? null : (
                 <>
                   <Pressable
                     style={styles.button}
@@ -228,12 +215,6 @@ function Task({
                     <Text style={styles.buttonText}>
                       {isStarted ? "Stop" : "Start"}
                     </Text>
-                  </Pressable>
-                  <Pressable
-                    style={styles.button}
-                    onPress={() => onTaskDelete(task.id)}
-                  >
-                    <Text style={styles.buttonText}>Delete</Text>
                   </Pressable>
                 </>
               )}
@@ -246,6 +227,13 @@ function Task({
 }
 
 const styles = StyleSheet.create({
+  taskContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
+    width: "100%",
+  },
   container: {
     justifyContent: "space-between",
     flex: 1,
@@ -254,16 +242,14 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   listContainer: {
-    width: "100%",
+    width: "80%",
     marginBottom: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
   buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
+    justifyContent: "center",
   },
   button: {
     backgroundColor: "#0077AA",
