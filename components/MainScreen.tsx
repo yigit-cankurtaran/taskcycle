@@ -139,6 +139,8 @@ export default function MainScreen() {
         </View>
       </View>
     </View>
+    // TODO: currently the background colors are just for testing
+    // they also overlap with the top bar so i need to fix that
   );
 }
 
