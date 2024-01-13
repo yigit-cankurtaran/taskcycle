@@ -102,6 +102,8 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
     borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonText: {
     color: "white",
