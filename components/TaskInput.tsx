@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { Text, View, TextInput, Pressable, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 
 interface Task {
   id: string;
@@ -14,6 +21,9 @@ interface TaskInputProps {
   editingTask: Task | null;
   setEditingTask: (task: Task | null) => void;
 }
+
+const screenWidth = Dimensions.get("window").width;
+const em = screenWidth / 375;
 
 export default function TaskInput({
   onTaskAdd,
@@ -92,12 +102,15 @@ export default function TaskInput({
 
 const styles = StyleSheet.create({
   input: {
+    width: 150 * em,
+    // em normally not supported, i created it on top
     padding: 10,
     margin: 5,
     backgroundColor: "#F3F3F3",
     borderRadius: 10,
   },
   button: {
+    width: 150 * em,
     backgroundColor: "#0077AA",
     padding: 10,
     margin: 5,

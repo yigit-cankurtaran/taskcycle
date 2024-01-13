@@ -12,7 +12,6 @@ interface Task {
   completed: boolean;
 }
 
-// TODO: CENTER THE VIEWS WITHOUT MESSING EVERYTHING UP AGAIN! check on phone
 // TODO: implement a dark mode
 
 export default function MainScreen() {
@@ -50,6 +49,9 @@ export default function MainScreen() {
   //   fetchTasks();
   //   fetchCurrentTaskId();
   // }, []);
+
+  // ^^ MMKV storage, not supported in expo go
+  // will uncomment if i make a dev client
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -120,10 +122,16 @@ export default function MainScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.centeredView}>
-        <View style={{ backgroundColor: "red" }}>
+        <View
+        // style={{ backgroundColor: "red" }}
+        >
           <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
         </View>
-        <View style={{ backgroundColor: "blue" }}>
+        <View
+        // style={{ backgroundColor: "blue" }}
+        // in case you need to troubleshoot
+        // uncomment these
+        >
           <TaskLogic
             tasks={tasks}
             setTasks={setTasks}
@@ -139,8 +147,6 @@ export default function MainScreen() {
         </View>
       </View>
     </View>
-    // TODO: currently the background colors are just for testing
-    // they also overlap with the top bar so i need to fix that
   );
 }
 

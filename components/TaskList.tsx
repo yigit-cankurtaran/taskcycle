@@ -18,6 +18,10 @@ import {
 // TODO: check on phone screen with long tasks
 // to see if button gets cut off
 
+// TODO: too many tasks and the top part moves up, becomes unuseable
+
+// TODO: white string with "delete" when i swipe, look into it
+
 interface Task {
   id: string;
   title: string;
