@@ -76,44 +76,52 @@ export default function TaskList({
           />
         </View>
       )}
-      <Text id="header">
-        {futureTasks.length === 1 ? "Future Task:" : "Future Tasks:"}
-      </Text>
-      <View style={styles.listContainer}>
-        <FlatList
-          data={futureTasks}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <Task
-              task={item}
-              onTaskDelete={onTaskDelete}
-              onTaskComplete={onTaskComplete}
-              onTaskEdit={onTaskEdit}
-              onTaskStart={onTaskStart}
-              currentTaskId={currentTaskId}
+      {futureTasks.length > 0 && (
+        <>
+          <Text id="header">
+            {futureTasks.length === 1 ? "Future Task:" : "Future Tasks:"}
+          </Text>
+          <View style={styles.listContainer}>
+            <FlatList
+              data={futureTasks}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <Task
+                  task={item}
+                  onTaskDelete={onTaskDelete}
+                  onTaskComplete={onTaskComplete}
+                  onTaskEdit={onTaskEdit}
+                  onTaskStart={onTaskStart}
+                  currentTaskId={currentTaskId}
+                />
+              )}
             />
-          )}
-        />
-      </View>
-      <Text id="header">
-        {finishedTasks.length === 1 ? "Finished Task:" : "Finished Tasks:"}
-      </Text>
-      <View style={styles.listContainer}>
-        <FlatList
-          data={finishedTasks}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <Task
-              task={item}
-              onTaskDelete={onTaskDelete}
-              onTaskComplete={onTaskComplete}
-              onTaskEdit={onTaskEdit}
-              onTaskStart={onTaskStart}
-              currentTaskId={currentTaskId}
+          </View>
+        </>
+      )}
+      {finishedTasks.length > 0 && (
+        <>
+          <Text id="header">
+            {finishedTasks.length === 1 ? "Finished Task:" : "Finished Tasks:"}
+          </Text>
+          <View style={styles.listContainer}>
+            <FlatList
+              data={finishedTasks}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <Task
+                  task={item}
+                  onTaskDelete={onTaskDelete}
+                  onTaskComplete={onTaskComplete}
+                  onTaskEdit={onTaskEdit}
+                  onTaskStart={onTaskStart}
+                  currentTaskId={currentTaskId}
+                />
+              )}
             />
-          )}
-        />
-      </View>
+          </View>
+        </>
+      )}
     </View>
   );
 }
