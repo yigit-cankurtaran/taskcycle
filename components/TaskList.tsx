@@ -15,12 +15,9 @@ import {
   Swipeable,
 } from "react-native-gesture-handler";
 
-// TODO: check on phone screen with long tasks
-// to see if button gets cut off
-
 // TODO: too many tasks and the top part moves up, becomes unuseable
 
-// TODO: white string with "delete" when i swipe, look into it
+// TODO: white string with "delete" on top of the task title when i swipe, look into it
 
 interface Task {
   id: string;
@@ -214,6 +211,7 @@ function Task({
                 style={
                   task.completed ? styles.completedTask : styles.normalTask
                 }
+                ellipsizeMode="tail"
               >
                 {task.title} - {task.pomodoros} {pomodoroText}
               </Text>
@@ -256,6 +254,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    maxWidth: "90%",
   },
   buttonContainer: {
     justifyContent: "center",
@@ -272,6 +271,9 @@ const styles = StyleSheet.create({
   },
   completedTask: {
     textDecorationLine: "line-through",
+    flexShrink: 1,
   },
-  normalTask: {},
+  normalTask: {
+    flexShrink: 1,
+  },
 });
