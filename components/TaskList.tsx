@@ -1,9 +1,9 @@
 import { Text, FlatList, StyleSheet } from "react-native";
 import Task from "./Task";
 
-// TODO: too many tasks and the top part moves up, becomes unuseable
-
 // TODO: white string with "delete" on top of the task title when i swipe, look into it
+
+// TODO: fix TimerView being cut off by the camera
 
 interface Task {
   id: string;
@@ -82,10 +82,6 @@ export default function TaskList({
     />
   );
 }
-// needs some fixes
-// the top button is still cut off smh
-// check on bing for it
-// wrapping only works on finished tasks
 
 const styles = StyleSheet.create({
   taskContainer: {

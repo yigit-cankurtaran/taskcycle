@@ -122,8 +122,6 @@ export default function TimerView({
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // makes the view take the entire length of the screen, ruins everything
     justifyContent: "center",
     alignItems: "center",
     padding: 10,

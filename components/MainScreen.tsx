@@ -85,6 +85,8 @@ export default function MainScreen() {
   // solved pretty much all of the issues I was having with the app
   // now i can avoid state issues and the pomodoros properly decrease
 
+  // TODO: make this actually display
+
   function decreaseCurrentTaskPomodoros() {
     if (!currentTaskId) {
       console.log("No task is selected.");
