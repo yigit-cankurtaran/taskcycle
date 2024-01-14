@@ -1,4 +1,4 @@
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { Text, FlatList, StyleSheet } from "react-native";
 import Task from "./Task";
 
 // TODO: too many tasks and the top part moves up, becomes unuseable
@@ -35,70 +35,57 @@ export default function TaskList({
     (task) => task.id !== currentTaskId && !task.completed
   );
 
+  const data = [
+    { header: "Started Task:", tasks: startedTask ? [startedTask] : [] },
+    {
+      header: futureTasks.length === 1 ? "Future Task:" : "Future Tasks:",
+      tasks: futureTasks,
+    },
+    {
+      header: finishedTasks.length === 1 ? "Finished Task:" : "Finished Tasks:",
+      tasks: finishedTasks,
+    },
+  ];
+
   return (
-    <View style={styles.container}>
-      {startedTask && (
-        <View id="started-task" style={styles.container}>
-          <Text id="header">Started Task:</Text>
-          <Task
-            task={startedTask}
-            onTaskDelete={onTaskDelete}
-            onTaskComplete={onTaskComplete}
-            onTaskEdit={onTaskEdit}
-            onTaskStart={onTaskStart}
-            currentTaskId={currentTaskId}
+    <FlatList
+      contentContainerStyle={styles.container}
+      data={data}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => (
+        <>
+          {item.header && item.tasks.length > 0 && (
+            <Text
+              id="header"
+              style={[styles.normalTask, styles.centeredHeader]}
+            >
+              {item.header}
+            </Text>
+          )}
+          <FlatList
+            contentContainerStyle={styles.listContainer}
+            data={item.tasks}
+            keyExtractor={(task) => task.id}
+            renderItem={({ item }) => (
+              <Task
+                task={item}
+                onTaskDelete={onTaskDelete}
+                onTaskComplete={onTaskComplete}
+                onTaskEdit={onTaskEdit}
+                onTaskStart={onTaskStart}
+                currentTaskId={currentTaskId}
+              />
+            )}
           />
-        </View>
-      )}
-      {futureTasks.length > 0 && (
-        <>
-          <Text id="header">
-            {futureTasks.length === 1 ? "Future Task:" : "Future Tasks:"}
-          </Text>
-          <View style={styles.listContainer}>
-            <FlatList
-              data={futureTasks}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <Task
-                  task={item}
-                  onTaskDelete={onTaskDelete}
-                  onTaskComplete={onTaskComplete}
-                  onTaskEdit={onTaskEdit}
-                  onTaskStart={onTaskStart}
-                  currentTaskId={currentTaskId}
-                />
-              )}
-            />
-          </View>
         </>
       )}
-      {finishedTasks.length > 0 && (
-        <>
-          <Text id="header">
-            {finishedTasks.length === 1 ? "Finished Task:" : "Finished Tasks:"}
-          </Text>
-          <View style={styles.listContainer}>
-            <FlatList
-              data={finishedTasks}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <Task
-                  task={item}
-                  onTaskDelete={onTaskDelete}
-                  onTaskComplete={onTaskComplete}
-                  onTaskEdit={onTaskEdit}
-                  onTaskStart={onTaskStart}
-                  currentTaskId={currentTaskId}
-                />
-              )}
-            />
-          </View>
-        </>
-      )}
-    </View>
+    />
   );
 }
+// needs some fixes
+// the top button is still cut off smh
+// check on bing for it
+// wrapping only works on finished tasks
 
 const styles = StyleSheet.create({
   taskContainer: {
@@ -117,7 +104,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    maxWidth: "90%",
+    maxWidth: "100%",
+    backgroundColor: "red",
   },
   buttonContainer: {
     justifyContent: "center",
@@ -138,5 +126,8 @@ const styles = StyleSheet.create({
   },
   normalTask: {
     flexShrink: 1,
+  },
+  centeredHeader: {
+    textAlign: "center",
   },
 });

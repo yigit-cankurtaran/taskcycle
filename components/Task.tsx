@@ -100,21 +100,19 @@ export default function Task({
           style={[styles.container, { transform: [{ scale: scaleValue }] }]}
         >
           <View style={styles.taskContainer}>
-            <View style={styles.listContainer}>
-              <BouncyCheckbox
-                isChecked={task.completed}
-                onPress={() => onTaskComplete(task.id)}
-                bounceEffect={3}
-              />
-              <Text
-                style={
-                  task.completed ? styles.completedTask : styles.normalTask
-                }
-                ellipsizeMode="tail"
-              >
-                {task.title} - {task.pomodoros} {pomodoroText}
-              </Text>
-            </View>
+            {/* <View style={styles.listContainer}> */}
+            <BouncyCheckbox
+              isChecked={task.completed}
+              onPress={() => onTaskComplete(task.id)}
+              bounceEffect={3}
+            />
+            <Text
+              style={task.completed ? styles.completedTask : styles.normalTask}
+              ellipsizeMode="tail"
+            >
+              {task.title} - {task.pomodoros} {pomodoroText}
+            </Text>
+            {/* </View> */}
             <View style={styles.buttonContainer}>
               {task.completed ? null : (
                 <>
@@ -142,6 +140,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     padding: 10,
+    maxWidth: "100%",
   },
   container: {
     justifyContent: "space-between",
