@@ -5,8 +5,6 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 // import storage from "./Storage";
 // using storage from a central location
-// TODO: MMKV doesn't work with expo go???
-// put the asyncstorage solution back in, comment it when building APK
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet, ScrollView } from "react-native";
 

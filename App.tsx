@@ -6,7 +6,6 @@ import { StyleSheet, View } from "react-native";
 import MainScreen from "./components/MainScreen";
 import Footer from "./components/Footer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-// TODO: it's absolutely messed up after converting to APK, look into it
 
 export default function App() {
   return (
