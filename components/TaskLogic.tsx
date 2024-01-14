@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 // TODO: MMKV doesn't work with expo go???
 // put the asyncstorage solution back in, comment it when building APK
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 
 interface Task {
   id: string;
