@@ -20,39 +20,6 @@ export default function MainScreen() {
   const [tasksFetched, setTasksFetched] = useState(false);
   const [currentTaskIdFetched, setCurrentTaskIdFetched] = useState(false);
 
-  // useEffect(() => {
-  //   const fetchTasks = () => {
-  //     try {
-  //       const storedTasks = storage.getString("tasks");
-  //       if (storedTasks !== null && storedTasks !== undefined) {
-  //         setTasks(JSON.parse(storedTasks));
-  //       }
-  //       setTasksFetched(true);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-
-  //   const fetchCurrentTaskId = () => {
-  //     try {
-  //       const storedCurrentTaskId = storage.getString("currentTaskId");
-  //       if (storedCurrentTaskId !== null && storedCurrentTaskId !== undefined) {
-  //         setCurrentTaskId(JSON.parse(storedCurrentTaskId));
-  //         console.log("Current task id fetched:", currentTaskId);
-  //       }
-  //       setCurrentTaskIdFetched(true);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-
-  //   fetchTasks();
-  //   fetchCurrentTaskId();
-  // }, []);
-
-  // ^^ MMKV storage, not supported in expo go
-  // will uncomment if i make a dev client
-
   useEffect(() => {
     const fetchTasks = async () => {
       try {
@@ -84,8 +51,6 @@ export default function MainScreen() {
   // handling state here and passing it down to TimerView and TaskLogic
   // solved pretty much all of the issues I was having with the app
   // now i can avoid state issues and the pomodoros properly decrease
-
-  // TODO: make this actually display
 
   function decreaseCurrentTaskPomodoros() {
     if (!currentTaskId) {
