@@ -1,9 +1,9 @@
 import TimerView from "./TimerView";
 import TaskLogic from "./TaskLogic";
 import { useState, useEffect } from "react";
-// import storage from "./Storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View, StyleSheet } from "react-native";
+import { SafeAreaView, View, StyleSheet } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface Task {
   id: string;
@@ -19,6 +19,7 @@ export default function MainScreen() {
   const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);
   const [tasksFetched, setTasksFetched] = useState(false);
   const [currentTaskIdFetched, setCurrentTaskIdFetched] = useState(false);
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -87,46 +88,51 @@ export default function MainScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.centeredView}>
-        <View
-        // style={{ backgroundColor: "red" }}
-        >
-          <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
-        </View>
-        <View
-        // style={{ backgroundColor: "blue" }}
-        // in case you need to troubleshoot
-        // uncomment these
-        >
-          <TaskLogic
-            tasks={tasks}
-            setTasks={setTasks}
-            setCurrentTaskId={
-              setCurrentTaskId as React.Dispatch<
-                React.SetStateAction<string | null>
-              >
-            }
-            currentTaskId={currentTaskId}
-            TasksFetched={tasksFetched}
-            CurrentTaskIdFetched={currentTaskIdFetched}
-          />
+    <SafeAreaView style={{ flex: 1 }}>
+      <View
+        style={[
+          styles.container,
+          { paddingTop: insets.top, paddingBottom: insets.bottom },
+        ]}
+      >
+        <View style={styles.centeredView}>
+          <View
+          // style={{ backgroundColor: "red" }}
+          >
+            <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
+          </View>
+          <View
+          // style={{ backgroundColor: "blue" }}
+          // in case you need to troubleshoot
+          // uncomment these
+          >
+            <TaskLogic
+              tasks={tasks}
+              setTasks={setTasks}
+              setCurrentTaskId={
+                setCurrentTaskId as React.Dispatch<
+                  React.SetStateAction<string | null>
+                >
+              }
+              currentTaskId={currentTaskId}
+              TasksFetched={tasksFetched}
+              CurrentTaskIdFetched={currentTaskIdFetched}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
     padding: 16,
   },
   centeredView: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
   },
 });

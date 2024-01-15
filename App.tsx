@@ -6,16 +6,19 @@ import { StyleSheet, View } from "react-native";
 import MainScreen from "./components/MainScreen";
 import Footer from "./components/Footer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-        <MainScreen />
-        <Footer />
-      </View>
-    </GestureHandlerRootView>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <StatusBar style="auto" />
+          <MainScreen />
+          <Footer />
+        </View>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 }
 

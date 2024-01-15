@@ -2,9 +2,6 @@ import { Text, FlatList, StyleSheet } from "react-native";
 import Task from "./Task";
 
 // TODO: white string with "delete" on top of the task title when i swipe, look into it
-
-// TODO: fix TimerView being cut off by the camera
-
 interface Task {
   id: string;
   title: string;
@@ -126,4 +123,5 @@ const styles = StyleSheet.create({
   centeredHeader: {
     textAlign: "center",
   },
+  // check if long tasks are displayed weirdly in the finished tasks section
 });
