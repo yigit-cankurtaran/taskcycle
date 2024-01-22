@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 // import storage from "./Storage";
 // using storage from a central location
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, Pressable, Text } from "react-native";
 
 interface Task {
   id: string;
@@ -33,6 +33,13 @@ export default function TaskLogic({
   CurrentTaskIdFetched,
 }: TaskLogicProps) {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [addingTask, setAddingTask] = useState<boolean>(false);
+  const [taskBeingEdited, setTaskBeingEdited] = useState<boolean>(false);
+
+  function changeTaskAddState() {
+    setAddingTask((prev) => !prev);
+    // to set the input fields open or closed
+  }
 
   function handleTaskAdd(task: string, pomodoros: number) {
     const newTask = {
@@ -43,6 +50,7 @@ export default function TaskLogic({
     };
     setTasks((prevTasks) => [...prevTasks, newTask]);
     console.log("Task added: " + newTask.id);
+    changeTaskAddState();
   }
 
   function handleTaskStart(id: string) {
@@ -83,9 +91,9 @@ export default function TaskLogic({
 
   function handleTaskEdit(id: string) {
     const currentTask = tasks.find((task) => task.id === id);
-    setEditingTask((currentTask: Task | null) => currentTask || null);
-    // TODO: make this actually work
-    console.log("editing task: " + id);
+    setEditingTask(currentTask || null);
+    changeTaskAddState();
+    console.log("Editing task: " + id);
   }
 
   function handleTaskUpdate(
@@ -106,29 +114,10 @@ export default function TaskLogic({
         return task;
       })
     );
+    setEditingTask(null); // Clear the editing state after updating
+    changeTaskAddState();
     console.log("Task edited: " + id);
   }
-
-  // useEffect(() => {
-  //   const saveTasks = () => {
-  //     if (TasksFetched) {
-  //       storage.set("tasks", JSON.stringify(tasks));
-  //     }
-  //   };
-
-  //   saveTasks();
-  // }, [tasks]);
-
-  // useEffect(() => {
-  //   const saveCurrentTaskId = () => {
-  //     if (CurrentTaskIdFetched) {
-  //       storage.set("currentTaskId", JSON.stringify(currentTaskId));
-  //       console.log("Current task id saved to storage:", currentTaskId);
-  //     }
-  //   };
-
-  //   saveCurrentTaskId();
-  // }, [currentTaskId]);
 
   useEffect(() => {
     const saveTasks = async () => {
@@ -165,12 +154,20 @@ export default function TaskLogic({
   return (
     <View style={styles.container}>
       <View style={styles.centeredView}>
-        <TaskInput
-          onTaskAdd={handleTaskAdd}
-          onTaskUpdate={handleTaskUpdate}
-          editingTask={editingTask}
-          setEditingTask={setEditingTask}
-        />
+        {addingTask ? (
+          <TaskInput
+            onTaskAdd={handleTaskAdd}
+            onTaskUpdate={handleTaskUpdate}
+            editingTask={editingTask}
+            setEditingTask={setEditingTask}
+          />
+        ) : (
+          <Pressable onPress={changeTaskAddState} style={styles.button}>
+            <Text style={styles.buttonText}>Add Tasks</Text>
+          </Pressable>
+          // making input get called when the button is pressed
+          // might change input's place and such
+        )}
         <TaskList
           tasks={tasks}
           onTaskDelete={handleTaskDelete}
@@ -193,5 +190,16 @@ const styles = StyleSheet.create({
   centeredView: {
     justifyContent: "center",
     alignItems: "center",
+  },
+  button: {
+    backgroundColor: "#0077AA",
+    padding: 10,
+    margin: 5,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
   },
 });
