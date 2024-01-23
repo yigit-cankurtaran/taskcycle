@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView, View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { colors, spacing } from "./StylingStuff";
 
 interface Task {
   id: string;
@@ -88,7 +89,7 @@ export default function MainScreen() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       <View
         style={[
           styles.container,
@@ -123,7 +124,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 16,
+    padding: spacing.medium,
+    backgroundColor: colors.background,
   },
   centeredView: {
     flex: 1,

@@ -3,6 +3,7 @@ import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
 import { View, Pressable, StyleSheet, Text } from "react-native";
+import { colors } from "./StylingStuff";
 
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
@@ -37,6 +38,9 @@ export default function TimerView({
     // might remove if i want it to be strict
     if (workRunning) setWorkRunning(false);
     if (restRunning) setRestRunning(false);
+    // set all sessions to 0
+    setWorkSession(0);
+    setShortRestSession(0);
   }
 
   function handleWorkTimerComplete() {
@@ -85,6 +89,7 @@ export default function TimerView({
           onComplete={handleWorkTimerComplete}
           size={240}
           strokeWidth={20}
+          trailColor="#151932"
         >
           {RenderTime}
         </CountdownCircleTimer>

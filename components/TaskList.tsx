@@ -123,5 +123,4 @@ const styles = StyleSheet.create({
   centeredHeader: {
     textAlign: "center",
   },
-  // check if long tasks are displayed weirdly in the finished tasks section
 });

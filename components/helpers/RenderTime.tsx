@@ -1,5 +1,6 @@
 import formatTime from "./formatTime";
 import { View, Text } from "react-native";
+import { colors } from "../StylingStuff";
 
 export default function RenderTime({
   remainingTime,
@@ -7,13 +8,13 @@ export default function RenderTime({
   remainingTime: number;
 }) {
   if (remainingTime === 0) {
-    return <Text>You're done!</Text>;
+    return <Text style={{ color: colors.text }}>You're done!</Text>;
   }
   return (
     <View>
-      <Text>Remaining</Text>
-      <Text>{formatTime(remainingTime)}</Text>
-      <Text>seconds</Text>
+      <Text style={{ color: colors.text }}>Remaining</Text>
+      <Text style={{ color: colors.text }}>{formatTime(remainingTime)}</Text>
+      <Text style={{ color: colors.text }}>seconds</Text>
     </View>
   );
 }
