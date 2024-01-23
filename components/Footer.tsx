@@ -21,7 +21,6 @@ export default function Footer() {
 const styles = StyleSheet.create({
   footer: {
     width: "100%",
-    // percentage value, might lead to a crash, will test later
     position: "absolute",
     bottom: 0,
     backgroundColor: "#333",

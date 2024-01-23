@@ -51,6 +51,10 @@ export default function Task({
     }
     if (nativeEvent.state === State.ACTIVE) {
       onTaskEdit(task.id);
+      Animated.spring(scaleValue, {
+        toValue: 1,
+        useNativeDriver: true,
+      }).start();
     }
   };
 

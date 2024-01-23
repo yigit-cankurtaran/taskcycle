@@ -96,16 +96,10 @@ export default function MainScreen() {
         ]}
       >
         <View style={styles.centeredView}>
-          <View
-          // style={{ backgroundColor: "red" }}
-          >
+          <View>
             <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
           </View>
-          <View
-          // style={{ backgroundColor: "blue" }}
-          // in case you need to troubleshoot
-          // uncomment these
-          >
+          <View>
             <TaskLogic
               tasks={tasks}
               setTasks={setTasks}
