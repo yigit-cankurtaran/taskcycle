@@ -19,6 +19,8 @@ interface TaskInputProps {
 const screenWidth = Dimensions.get("window").width;
 const em = screenWidth / 375;
 
+// TODO: implement a cancel button for editing
+
 export default function TaskInput({
   onTaskAdd,
   onTaskUpdate,

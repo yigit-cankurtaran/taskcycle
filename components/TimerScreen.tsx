@@ -25,12 +25,15 @@ export default function TimerScreen() {
             updatedTask.completed = true;
             setCurrentTaskId(null);
 
-            // Find the next task in the tasks array and start it
+            // Find the next uncompleted task in the tasks array and start it
             if (tasks.length > 1) {
-              // have to check or it's bugged
-              const nextTaskIndex = (index + 1) % tasks.length;
-              const nextTask = tasks[nextTaskIndex];
-              setCurrentTaskId(nextTask.id as string | null);
+              const nextTaskIndex = tasks.findIndex(
+                (task, i) => i > index && !task.completed
+              );
+              if (nextTaskIndex !== -1) {
+                const nextTask = tasks[nextTaskIndex];
+                setCurrentTaskId(nextTask.id as string | null);
+              }
             }
           }
           return updatedTask;

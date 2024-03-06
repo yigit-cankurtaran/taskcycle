@@ -28,7 +28,6 @@ export default function TaskLogic({
 }: TaskLogicProps) {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [addingTask, setAddingTask] = useState<boolean>(false);
-  const [taskBeingEdited, setTaskBeingEdited] = useState<boolean>(false);
 
   function changeTaskAddState() {
     setAddingTask((prev) => !prev);

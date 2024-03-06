@@ -61,7 +61,9 @@ export default function TaskList({
               <TaskComponent
                 task={item}
                 onTaskDelete={onTaskDelete}
-                onTaskComplete={onTaskComplete}
+                onTaskComplete={(id) => {
+                  onTaskComplete(id);
+                }}
                 onTaskEdit={onTaskEdit}
                 onTaskStart={onTaskStart}
                 currentTaskId={currentTaskId}
