@@ -29,9 +29,11 @@ export default function TimerScreen() {
             if (tasks.length > 1) {
               const nextTaskIndex = tasks.findIndex(
                 (task, i) => i > index && !task.completed
+                // checks if the task is uncompleted and comes after the current task
               );
               if (nextTaskIndex !== -1) {
                 const nextTask = tasks[nextTaskIndex];
+                // checks if there is a next task
                 setCurrentTaskId(nextTask.id as string | null);
               }
             }

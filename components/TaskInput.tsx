@@ -14,18 +14,18 @@ interface TaskInputProps {
   onTaskUpdate: (id: string, title: string, pomodoros: number) => void;
   editingTask: Task | null;
   setEditingTask: (task: Task | null) => void;
+  onCancel: () => void;
 }
 
 const screenWidth = Dimensions.get("window").width;
 const em = screenWidth / 375;
-
-// TODO: implement a cancel button for editing
 
 export default function TaskInput({
   onTaskAdd,
   onTaskUpdate,
   editingTask,
   setEditingTask,
+  onCancel,
 }: TaskInputProps) {
   const [task, setTask] = useState("");
   const [pomodoros, setPomodoros] = useState<number | "">(1);
@@ -91,6 +91,9 @@ export default function TaskInput({
       />
       <Pressable onPress={handleTaskAdd} style={styles.button}>
         <Text style={styles.buttonText}>Add</Text>
+      </Pressable>
+      <Pressable onPress={onCancel} style={styles.button}>
+        <Text style={styles.buttonText}>Cancel</Text>
       </Pressable>
     </View>
   );

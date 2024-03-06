@@ -89,6 +89,11 @@ export default function TaskLogic({
     console.log("Editing task: " + id);
   }
 
+  function handleCancel() {
+    setEditingTask(null);
+    changeTaskAddState();
+  }
+
   function handleTaskUpdate(
     id: string,
     newTitle: string,
@@ -153,6 +158,7 @@ export default function TaskLogic({
             onTaskUpdate={handleTaskUpdate}
             editingTask={editingTask}
             setEditingTask={setEditingTask}
+            onCancel={handleCancel}
           />
         ) : (
           <Pressable onPress={changeTaskAddState} style={styles.button}>
