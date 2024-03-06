@@ -7,14 +7,19 @@ import MainScreen from "./components/MainScreen";
 import Footer from "./components/Footer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import TaskScreen from "./components/TaskScreen";
+import TimerScreen from "./components/TimerScreen";
 
 export default function App() {
   return (
+    // we'll most likely handle screen switching here
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <View style={styles.container}>
           <StatusBar style="auto" />
-          <MainScreen />
+          {/* <MainScreen /> */}
+          <TimerScreen />
+          <TaskScreen />
           <Footer />
         </View>
       </GestureHandlerRootView>

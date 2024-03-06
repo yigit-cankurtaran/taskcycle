@@ -1,4 +1,8 @@
 import { atom } from "jotai";
+import { Task } from "./helpers/task.interface";
 
-// here we will do the atoms
-// we create them here, import them with useAtom and use them in the components
+
+export const tasksAtom = atom<Task[]>([]);
+export const currentTaskIdAtom = atom<string | null>(null);
+export const tasksFetchedAtom = atom(false);
+export const currentTaskIdFetchedAtom = atom(false);
