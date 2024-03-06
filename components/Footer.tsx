@@ -1,39 +1,33 @@
 import { View, Text, Linking, StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+// this will change into a screen switcher, timer-tasks-settings
+// if i do implement a stats screen, it will be under settings
 
 export default function Footer() {
   return (
     <View style={styles.footer}>
-      <Text style={styles.text}>
-        Created by{" "}
-        <Text
-          style={styles.link}
-          onPress={() =>
-            Linking.openURL("https://github.com/yigit-cankurtaran")
-          }
-        >
-          Yiğit Cankurtaran
-        </Text>
-      </Text>
+      <TouchableOpacity onPress={() => Linking.openURL("timer")}>
+        {/* the linking part may be wrong, change this later */}
+        <Text style={styles.footerText}>Timer</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => Linking.openURL("tasks")}>
+        <Text style={styles.footerText}>Tasks</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => Linking.openURL("settings")}>
+        <Text style={styles.footerText}>Settings</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   footer: {
-    width: "100%",
-    position: "absolute",
-    bottom: 0,
-    backgroundColor: "#333",
+    flexDirection: "row",
+    justifyContent: "space-around",
     padding: 10,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#F3F3F3",
   },
-  text: {
-    textAlign: "center",
-    color: "#fff",
-  },
-  link: {
-    color: "lightblue",
+  footerText: {
+    fontSize: 20,
   },
 });

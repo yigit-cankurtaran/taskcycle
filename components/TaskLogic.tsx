@@ -92,7 +92,7 @@ export default function TaskLogic({
   function handleTaskEdit(id: string) {
     const currentTask = tasks.find((task) => task.id === id);
     setEditingTask(currentTask || null);
-    changeTaskAddState();
+    if (!addingTask) changeTaskAddState();
     console.log("Editing task: " + id);
   }
 
