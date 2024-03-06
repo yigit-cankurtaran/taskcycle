@@ -36,6 +36,7 @@ export default function Task({
   const [dragXValue, setDragXValue] = useState(0);
 
   // what to do when the task is long pressed
+  // BUG: if we long press the task while the add task modal is open, it will close the modal
   const onLongPress = ({ nativeEvent }: GestureHandlerStateChangeEvent) => {
     if (nativeEvent.state === State.BEGAN) {
       Animated.spring(scaleValue, {
