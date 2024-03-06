@@ -3,7 +3,7 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import MainScreen from "./components/MainScreen";
+import MainScreen from "./components/helpers/MainScreen";
 import Footer from "./components/Footer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";

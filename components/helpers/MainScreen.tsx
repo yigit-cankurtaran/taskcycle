@@ -1,11 +1,13 @@
-import Timer from "./Timer";
-import TaskLogic from "./TaskLogic";
+import Timer from "../Timer";
+import TaskLogic from "../TaskLogic";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView, View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { colors, spacing } from "./StylingStuff";
-import { Task } from "./helpers/task.interface";
+import { colors, spacing } from "../StylingStuff";
+import { Task } from "./task.interface";
+// phased out, replaced with jotai
+// keeping it around in case i need to refer to it
 
 export default function MainScreen() {
   const [tasks, setTasks] = useState<Task[]>([]);
