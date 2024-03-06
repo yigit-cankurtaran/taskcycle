@@ -7,13 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 // using storage from a central location
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet, Pressable, Text } from "react-native";
-
-interface Task {
-  id: string;
-  title: string;
-  completed: boolean;
-  pomodoros: number;
-}
+import { Task } from "./helpers/task.interface";
 
 interface TaskLogicProps {
   tasks: Task[];

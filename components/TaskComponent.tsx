@@ -7,13 +7,8 @@ import {
 } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
 import { Pressable, Animated, Text, StyleSheet, View } from "react-native";
+import { Task } from "./helpers/task.interface";
 
-interface Task {
-  id: string;
-  title: string;
-  completed: boolean;
-  pomodoros: number;
-}
 interface TaskProps {
   task: Task;
   onTaskDelete: (id: string) => void;
@@ -22,7 +17,7 @@ interface TaskProps {
   onTaskStart: (id: string) => void;
   currentTaskId: string;
 }
-export default function Task({
+export default function TaskComponent({
   task,
   onTaskDelete,
   onTaskComplete,

@@ -7,13 +7,7 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-
-interface Task {
-  id: string;
-  title: string;
-  pomodoros: number;
-  completed: boolean;
-}
+import { Task } from "./helpers/task.interface";
 
 interface TaskInputProps {
   onTaskAdd: (title: string, pomodoros: number) => void;

@@ -10,7 +10,7 @@ import { colors } from "./StylingStuff";
 // import useSound from "use-sound";
 // gonna have to use expo-av for this
 
-export default function TimerView({
+export default function Timer({
   pomodoroDecrease,
 }: {
   pomodoroDecrease: () => void;

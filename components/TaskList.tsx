@@ -1,14 +1,8 @@
 import { Text, FlatList, StyleSheet } from "react-native";
-import Task from "./Task";
+import TaskComponent from "./TaskComponent";
+import { Task } from "./helpers/task.interface";
 
 // TODO: white string with "delete" on top of the task title when i swipe, look into it
-interface Task {
-  id: string;
-  title: string;
-  pomodoros: number;
-  completed: boolean;
-}
-
 interface TaskListProps {
   tasks: Task[];
   onTaskDelete: (id: string) => void;
@@ -64,7 +58,7 @@ export default function TaskList({
             data={item.tasks}
             keyExtractor={(task) => task.id}
             renderItem={({ item }) => (
-              <Task
+              <TaskComponent
                 task={item}
                 onTaskDelete={onTaskDelete}
                 onTaskComplete={onTaskComplete}

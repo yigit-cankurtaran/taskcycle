@@ -1,19 +1,11 @@
-import TimerView from "./TimerView";
+import Timer from "./Timer";
 import TaskLogic from "./TaskLogic";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView, View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { colors, spacing } from "./StylingStuff";
-
-interface Task {
-  id: string;
-  title: string;
-  pomodoros: number;
-  completed: boolean;
-}
-
-// TODO: implement a dark mode
+import { Task } from "./helpers/task.interface";
 
 export default function MainScreen() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -98,7 +90,7 @@ export default function MainScreen() {
       >
         <View style={styles.centeredView}>
           <View>
-            <TimerView pomodoroDecrease={decreaseCurrentTaskPomodoros} />
+            <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
           </View>
           <View>
             <TaskLogic
