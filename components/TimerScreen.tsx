@@ -4,6 +4,8 @@ import { tasksAtom, currentTaskIdAtom } from "./atoms";
 import { View } from "react-native";
 import Timer from "./Timer";
 
+// TODO: view started task here
+
 export default function TimerScreen() {
   const [tasks, setTasks] = useAtom(tasksAtom);
   const [currentTaskId, setCurrentTaskId] = useAtom(currentTaskIdAtom);
