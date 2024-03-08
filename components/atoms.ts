@@ -6,3 +6,4 @@ export const tasksAtom = atom<Task[]>([]);
 export const currentTaskIdAtom = atom<string | null>(null);
 export const tasksFetchedAtom = atom(false);
 export const currentTaskIdFetchedAtom = atom(false);
+export const currentTaskAtom = atom<Task | null>(null);

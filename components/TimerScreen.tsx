@@ -1,14 +1,14 @@
 // TimerScreen.tsx
 import { useAtom } from "jotai";
-import { tasksAtom, currentTaskIdAtom } from "./atoms";
-import { View } from "react-native";
+import { tasksAtom, currentTaskIdAtom, currentTaskAtom } from "./atoms";
+import { View, Text } from "react-native";
 import Timer from "./Timer";
-
-// TODO: view started task here
+import { useEffect } from "react";
 
 export default function TimerScreen() {
   const [tasks, setTasks] = useAtom(tasksAtom);
   const [currentTaskId, setCurrentTaskId] = useAtom(currentTaskIdAtom);
+  const [currentTask, setCurrentTask] = useAtom(currentTaskAtom);
   const startedTask = tasks.find((task) => task.id === currentTaskId);
 
   function decreaseCurrentTaskPomodoros() {
@@ -22,10 +22,10 @@ export default function TimerScreen() {
         if (task.id === currentTaskId) {
           const updatedPomodoros = Math.max(task.pomodoros - 1, 0);
           const updatedTask = { ...task, pomodoros: updatedPomodoros };
-
           if (updatedPomodoros === 0) {
             updatedTask.completed = true;
             setCurrentTaskId(null);
+            setCurrentTask(null);
 
             // Find the next uncompleted task in the tasks array and start it
             if (tasks.length > 1) {
@@ -37,6 +37,7 @@ export default function TimerScreen() {
                 const nextTask = tasks[nextTaskIndex];
                 // checks if there is a next task
                 setCurrentTaskId(nextTask.id as string | null);
+                setCurrentTask(nextTask);
               }
             }
           }
@@ -53,6 +54,13 @@ export default function TimerScreen() {
   return (
     <View>
       <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
+      {currentTask && (
+        <View>
+          <Text>Task: {currentTask.title}</Text>
+          {/* pomodoros were bugged and i didn't wanna display them right now */}
+          {/* might implement it in the future */}
+        </View>
+      )}
     </View>
   );
 }

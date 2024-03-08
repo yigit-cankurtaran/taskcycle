@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from "uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet, Pressable, Text } from "react-native";
 import { Task } from "./helpers/task.interface";
+import { useAtom } from "jotai";
+import { currentTaskAtom } from "./atoms";
 
 interface TaskLogicProps {
   tasks: Task[];
@@ -28,6 +30,7 @@ export default function TaskLogic({
 }: TaskLogicProps) {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [addingTask, setAddingTask] = useState<boolean>(false);
+  const [currentTask, setCurrentTask] = useAtom(currentTaskAtom);
 
   function changeTaskAddState() {
     setAddingTask((prev) => !prev);
@@ -53,8 +56,10 @@ export default function TaskLogic({
     }
     if (currentTaskId === id) {
       setCurrentTaskId(null);
+      setCurrentTask(null);
     } else {
       setCurrentTaskId(id);
+      setCurrentTask(task || null); // Add null check here to fix undefined error
     }
     console.log("Task started: " + currentTaskId);
   }
