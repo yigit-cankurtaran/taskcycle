@@ -1,9 +1,7 @@
-// TimerScreen.tsx
 import { useAtom } from "jotai";
 import { tasksAtom, currentTaskIdAtom, currentTaskAtom } from "./atoms";
-import { View, Text } from "react-native";
 import Timer from "./Timer";
-import { useEffect } from "react";
+import { Card, Text } from "react-native-paper";
 
 export default function TimerScreen() {
   const [tasks, setTasks] = useAtom(tasksAtom);
@@ -52,15 +50,15 @@ export default function TimerScreen() {
   }
 
   return (
-    <View>
+    <Card style={{ alignItems: "center" }}>
       <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
       {currentTask && (
-        <View>
+        <Card>
           <Text>Task: {currentTask.title}</Text>
           {/* pomodoros were bugged and i didn't wanna display them right now */}
           {/* might implement it in the future */}
-        </View>
+        </Card>
       )}
-    </View>
+    </Card>
   );
 }

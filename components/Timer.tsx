@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
-import { View, Pressable, StyleSheet, Text } from "react-native";
+import { View } from "react-native";
+import { Button, Card, Title, Paragraph } from "react-native-paper";
 
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
@@ -72,7 +73,9 @@ export default function Timer({
   }, [workSessionCompleted, restRunning]);
 
   return (
-    <View style={styles.container}>
+    <Card
+      style={{ justifyContent: "center", alignItems: "center", padding: 10 }}
+    >
       {workRunning && (
         <CountdownCircleTimer
           isPlaying
@@ -112,42 +115,13 @@ export default function Timer({
           {RenderTime}
         </CountdownCircleTimer>
       )}
-      <Pressable
+      <Button
+        mode="contained"
         onPress={workRunning || restRunning ? stopTimer : startTimer}
-        style={styles.button}
+        style={{ backgroundColor: "#0077AA", padding: 10, margin: 5 }}
       >
-        <Text style={styles.buttonText}>
-          {workRunning || restRunning ? "Stop" : "Start"}
-        </Text>
-      </Pressable>
-    </View>
+        {workRunning || restRunning ? "Stop" : "Start"}
+      </Button>
+    </Card>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-  },
-  listContainer: {
-    marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  button: {
-    backgroundColor: "#0077AA",
-    padding: 10,
-    margin: 5,
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
-  },
-});
