@@ -3,7 +3,6 @@ import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
 import { View, Pressable, StyleSheet, Text } from "react-native";
-import { colors } from "./StylingStuff";
 
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
@@ -15,7 +14,8 @@ export default function Timer({
 }: {
   pomodoroDecrease: () => void;
 }) {
-  // test values change later
+  // test values
+  // TODO:  implement changing these on SettingsScreen
   const workMins = 0.4;
   const [workRunning, setWorkRunning] = useState(false);
   const [workSession, setWorkSession] = useState(0);
@@ -85,7 +85,6 @@ export default function Timer({
             minutesToSeconds(workMins) * (2 / 5),
             minutesToSeconds(workMins) / 5,
           ]}
-          // weirdly pauses sometimes, look into it
           onComplete={handleWorkTimerComplete}
           size={240}
           strokeWidth={20}
