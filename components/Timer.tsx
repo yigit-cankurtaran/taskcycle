@@ -118,7 +118,7 @@ export default function Timer({
       <Button
         mode="contained"
         onPress={workRunning || restRunning ? stopTimer : startTimer}
-        style={{ backgroundColor: "#0077AA", padding: 10, margin: 5 }}
+        style={{ backgroundColor: "#0077AA", width: 100, alignSelf: "center" }}
       >
         {workRunning || restRunning ? "Stop" : "Start"}
       </Button>
