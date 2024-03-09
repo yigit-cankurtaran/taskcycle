@@ -1,3 +1,4 @@
+import { Button, Card, Text } from "react-native-paper";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {
   LongPressGestureHandler,
@@ -6,9 +7,8 @@ import {
   Swipeable,
 } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
-import { Pressable, Animated, Text, StyleSheet, View } from "react-native";
+import { Animated, StyleSheet, View } from "react-native";
 import { Task } from "./helpers/task.interface";
-
 interface TaskProps {
   task: Task;
   onTaskDelete: (id: string) => void;
@@ -98,33 +98,38 @@ export default function TaskComponent({
         <Animated.View
           style={[styles.container, { transform: [{ scale: scaleValue }] }]}
         >
-          <View style={styles.taskContainer}>
-            <BouncyCheckbox
-              isChecked={task.completed}
-              onPress={() => onTaskComplete(task.id)}
-              bounceEffect={3}
-            />
-            <Text
-              style={task.completed ? styles.completedTask : styles.normalTask}
-              ellipsizeMode="tail"
-            >
-              {task.title} - {task.pomodoros} {pomodoroText}
-            </Text>
-            <View style={styles.buttonContainer}>
-              {task.completed ? null : (
-                <>
-                  <Pressable
-                    style={styles.button}
-                    onPress={() => onTaskStart(task.id)}
-                  >
-                    <Text style={styles.buttonText}>
-                      {isStarted ? "Stop" : "Start"}
-                    </Text>
-                  </Pressable>
-                </>
-              )}
-            </View>
-          </View>
+          <Card style={styles.taskContainer}>
+            <Card.Content>
+              <View style={styles.taskContainer}>
+                <BouncyCheckbox
+                  isChecked={task.completed}
+                  onPress={() => onTaskComplete(task.id)}
+                  bounceEffect={3}
+                />
+                <Text
+                  style={
+                    task.completed ? styles.completedTask : styles.normalTask
+                  }
+                  ellipsizeMode="tail"
+                >
+                  {task.title} - {task.pomodoros} {pomodoroText}
+                </Text>
+                <View style={styles.buttonContainer}>
+                  {task.completed ? null : (
+                    <>
+                      <Button
+                        mode="contained"
+                        style={styles.button}
+                        onPress={() => onTaskStart(task.id)}
+                      >
+                        {isStarted ? "Stop" : "Start"}
+                      </Button>
+                    </>
+                  )}
+                </View>
+              </View>
+            </Card.Content>
+          </Card>
         </Animated.View>
       </LongPressGestureHandler>
     </Swipeable>
@@ -149,9 +154,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#0077AA",
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
+    margin: 15,
   },
   buttonText: {
     color: "white",
