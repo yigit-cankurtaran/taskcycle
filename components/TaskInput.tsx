@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  TextInput,
-  Pressable,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { View, Dimensions } from "react-native";
+import { TextInput, Button } from "react-native-paper";
 import { Task } from "./helpers/task.interface";
 
 interface TaskInputProps {
@@ -77,47 +71,50 @@ export default function TaskInput({
   return (
     <View>
       <TextInput
+        mode="outlined"
         value={task}
         onChangeText={handleTaskChange}
         placeholder="Enter a task"
-        style={styles.input}
+        style={{ margin: 5 }}
+        error={task === ""}
+        activeOutlineColor="#0077AA"
+        outlineStyle={{ borderRadius: 10 * em }}
       />
       <TextInput
+        mode="outlined"
         inputMode="numeric"
         value={String(pomodoros)}
         onChange={(e) => handlePomoChange(e.nativeEvent.text)}
         placeholder="Enter pomodoros"
-        style={styles.input}
+        style={{ margin: 5 }}
+        error={pomodoros === ""}
+        activeOutlineColor="#0077AA"
+        outlineStyle={{ borderRadius: 10 * em }}
       />
-      <Pressable onPress={handleTaskAdd} style={styles.button}>
-        <Text style={styles.buttonText}>Add</Text>
-      </Pressable>
-      <Pressable onPress={onCancel} style={styles.button}>
-        <Text style={styles.buttonText}>Cancel</Text>
-      </Pressable>
+      <Button
+        onPress={handleTaskAdd}
+        style={{
+          backgroundColor: "#0077AA",
+          width: 100,
+          alignSelf: "center",
+          margin: 5,
+        }}
+        textColor="white"
+      >
+        Add
+      </Button>
+      <Button
+        onPress={onCancel}
+        style={{
+          backgroundColor: "#0077AA",
+          width: 100,
+          alignSelf: "center",
+          margin: 5,
+        }}
+        textColor="white"
+      >
+        Cancel
+      </Button>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: 150 * em,
-    // em normally not supported, i created it on top
-    padding: 10,
-    margin: 5,
-    backgroundColor: "#F3F3F3",
-    borderRadius: 10,
-  },
-  button: {
-    width: 150 * em,
-    backgroundColor: "#0077AA",
-    padding: 10,
-    margin: 5,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "white",
-  },
-});
