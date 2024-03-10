@@ -6,10 +6,12 @@ import { v4 as uuidv4 } from "uuid";
 // import storage from "./Storage";
 // using storage from a central location
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View, StyleSheet, Pressable, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Button, PaperProvider } from "react-native-paper";
 import { Task } from "./helpers/task.interface";
 import { useAtom } from "jotai";
 import { currentTaskAtom } from "./atoms";
+import { theme } from "./helpers/theme";
 
 interface TaskLogicProps {
   tasks: Task[];
@@ -166,9 +168,7 @@ export default function TaskLogic({
             onCancel={handleCancel}
           />
         ) : (
-          <Pressable onPress={changeTaskAddState} style={styles.button}>
-            <Text style={styles.buttonText}>Add Tasks</Text>
-          </Pressable>
+          <Button onPress={changeTaskAddState}>Add Tasks</Button>
           // making input get called when the button is pressed
           // might change input's place and such
         )}
@@ -192,14 +192,6 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   centeredView: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    backgroundColor: "#0077AA",
-    padding: 10,
-    margin: 5,
-    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
