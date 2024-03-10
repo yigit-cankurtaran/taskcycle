@@ -74,7 +74,14 @@ export default function Timer({
 
   return (
     <Card
-      style={{ justifyContent: "center", alignItems: "center", padding: 10 }}
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20,
+        margin: 20,
+        // the past 2 might be removed, check later
+      }}
+      mode="contained"
     >
       {workRunning && (
         <CountdownCircleTimer
@@ -118,7 +125,12 @@ export default function Timer({
       <Button
         mode="contained"
         onPress={workRunning || restRunning ? stopTimer : startTimer}
-        style={{ backgroundColor: "#0077AA", width: 100, alignSelf: "center" }}
+        style={{
+          backgroundColor: "#0077AA",
+          width: 100,
+          alignSelf: "center",
+          marginTop: workRunning || restRunning ? 10 : 0,
+        }}
       >
         {workRunning || restRunning ? "Stop" : "Start"}
       </Button>

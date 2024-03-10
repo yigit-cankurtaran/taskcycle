@@ -50,7 +50,7 @@ export default function TimerScreen() {
   }
 
   return (
-    <Card style={{ alignItems: "center" }}>
+    <Card mode="contained" style={{ alignItems: "center" }}>
       <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
       {currentTask && (
         <Card>
