@@ -64,6 +64,7 @@ export default function TaskComponent({
 
   const renderAction = (
     progress: Animated.AnimatedInterpolation<number>,
+    // progress looks like it's unused but it's necessary for the animation to work
     dragX: Animated.AnimatedInterpolation<number>,
     direction: "left" | "right"
   ) => {
@@ -77,7 +78,7 @@ export default function TaskComponent({
     });
     return (
       <Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
-        <Text style={styles.buttonText}>Delete</Text>
+        {/* <Text style={styles.buttonText}>Delete</Text> */}
       </Animated.View>
     );
   };

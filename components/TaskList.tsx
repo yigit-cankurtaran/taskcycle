@@ -1,8 +1,8 @@
-import { Text, FlatList, StyleSheet } from "react-native";
+import { FlatList, View } from "react-native";
 import TaskComponent from "./TaskComponent";
+import { Title } from "react-native-paper";
 import { Task } from "./helpers/task.interface";
 
-// TODO: white string with "delete" on top of the task title when i swipe, look into it
 interface TaskListProps {
   tasks: Task[];
   onTaskDelete: (id: string) => void;
@@ -39,35 +39,33 @@ export default function TaskList({
   ];
 
   return (
+    // FlatList makes it scrollable
     <FlatList
-      contentContainerStyle={styles.container}
       data={data}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({ item }) => (
         <>
           {item.header && item.tasks.length > 0 && (
-            <Text
-              id="header"
-              style={[styles.normalTask, styles.centeredHeader]}
-            >
+            <Title style={{ textAlign: "center", marginTop: 10 }}>
               {item.header}
-            </Text>
+            </Title>
           )}
           <FlatList
-            contentContainerStyle={styles.listContainer}
             data={item.tasks}
             keyExtractor={(task) => task.id}
             renderItem={({ item }) => (
-              <TaskComponent
-                task={item}
-                onTaskDelete={onTaskDelete}
-                onTaskComplete={(id) => {
-                  onTaskComplete(id);
-                }}
-                onTaskEdit={onTaskEdit}
-                onTaskStart={onTaskStart}
-                currentTaskId={currentTaskId}
-              />
+              <View>
+                <TaskComponent
+                  task={item}
+                  onTaskDelete={onTaskDelete}
+                  onTaskComplete={(id) => {
+                    onTaskComplete(id);
+                  }}
+                  onTaskEdit={onTaskEdit}
+                  onTaskStart={onTaskStart}
+                  currentTaskId={currentTaskId}
+                />
+              </View>
             )}
           />
         </>
@@ -75,48 +73,3 @@ export default function TaskList({
     />
   );
 }
-
-const styles = StyleSheet.create({
-  taskContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 10,
-  },
-  container: {
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 10,
-  },
-  listContainer: {
-    marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    maxWidth: "100%",
-    backgroundColor: "red",
-  },
-  buttonContainer: {
-    justifyContent: "center",
-  },
-  button: {
-    backgroundColor: "#0077AA",
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
-  },
-  completedTask: {
-    textDecorationLine: "line-through",
-    flexShrink: 1,
-  },
-  normalTask: {
-    flexShrink: 1,
-  },
-  centeredHeader: {
-    textAlign: "center",
-  },
-});
