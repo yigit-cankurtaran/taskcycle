@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
-import { View } from "react-native";
-import { Button, Card, Title, Paragraph } from "react-native-paper";
+import { Button, Card } from "react-native-paper";
+import { theme } from "./helpers/theme";
 
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
@@ -126,11 +126,12 @@ export default function Timer({
         mode="contained"
         onPress={workRunning || restRunning ? stopTimer : startTimer}
         style={{
-          backgroundColor: "#0077AA",
           width: 100,
           alignSelf: "center",
           marginTop: workRunning || restRunning ? 10 : 0,
         }}
+        labelStyle={{ color: theme.colors.text }}
+        buttonColor={theme.colors.buttonColor}
       >
         {workRunning || restRunning ? "Stop" : "Start"}
       </Button>

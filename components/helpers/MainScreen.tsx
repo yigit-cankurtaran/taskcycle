@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SafeAreaView, View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { colors, spacing } from "../StylingStuff";
 import { Task } from "./task.interface";
+import { theme } from "./theme";
 // phased out, replaced with jotai
 // keeping it around in case i need to refer to it
 
@@ -83,7 +83,7 @@ export default function MainScreen() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <View
         style={[
           styles.container,
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: spacing.medium,
-    backgroundColor: colors.background,
+    padding: theme.spacing.md,
+    backgroundColor: theme.colors.background,
   },
   centeredView: {
     flex: 1,

@@ -3,15 +3,12 @@ import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-// import storage from "./Storage";
-// using storage from a central location
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet } from "react-native";
 import { Button, PaperProvider } from "react-native-paper";
 import { Task } from "./helpers/task.interface";
 import { useAtom } from "jotai";
 import { currentTaskAtom } from "./atoms";
-import { theme } from "./helpers/theme";
 
 interface TaskLogicProps {
   tasks: Task[];
