@@ -4,6 +4,13 @@ import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
 import { Button, Card } from "react-native-paper";
 import { theme } from "./helpers/theme";
+import { useAtom } from "jotai";
+import {
+  workTimeAtom,
+  shortBreakTimeAtom,
+  longBreakTimeAtom,
+  pomodoroCountAtom,
+} from "./atoms";
 
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
@@ -17,13 +24,23 @@ export default function Timer({
 }) {
   // test values
   // TODO:  implement changing these on SettingsScreen
-  const workMins = 0.4;
+  const workMins = useAtom(workTimeAtom)[0];
+  const pomodoroCount = useAtom(pomodoroCountAtom)[0];
+  const [shortBreakTime] = useAtom(shortBreakTimeAtom);
+  const [longBreakTime] = useAtom(longBreakTimeAtom);
+  // we have to use indexes for some reason, will test
   const [workRunning, setWorkRunning] = useState(false);
   const [workSession, setWorkSession] = useState(0);
   const [shortRestSession, setShortRestSession] = useState(0);
   const [restRunning, setRestRunning] = useState(false);
   const restMins =
-    shortRestSession > 0 && shortRestSession % 4 === 0 ? 0.3 : 0.2;
+    shortRestSession > 0 && shortRestSession % pomodoroCount === 0
+      ? shortBreakTime
+      : longBreakTime;
+  // there might be an issue with how this works, check later
+  //  it might be starting out with the long break time, which is not what i want
+  // if shortRestSession is greater than 0 and the remainder of shortRestSession divided by pomodoroCount is 0
+  // then restMins is shortBreakTimeAtom, else it's longBreakTimeAtom
   const [workSessionCompleted, setWorkSessionCompleted] = useState(false);
 
   //   const [playBeep] = useSound(beepSound);
