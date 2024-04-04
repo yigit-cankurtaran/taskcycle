@@ -22,8 +22,6 @@ export default function Timer({
 }: {
   pomodoroDecrease: () => void;
 }) {
-  // test values
-  // TODO:  implement changing these on SettingsScreen
   const workMins = useAtom(workTimeAtom)[0];
   const pomodoroCount = useAtom(pomodoroCountAtom)[0];
   const [shortBreakTime] = useAtom(shortBreakTimeAtom);

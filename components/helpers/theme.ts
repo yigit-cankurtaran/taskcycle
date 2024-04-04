@@ -2,6 +2,7 @@ import { DarkTheme } from "@react-navigation/native";
 
 export const theme = {
   ...DarkTheme,
+  // this doesn't seem to be doing anything??
   colors: {
     ...DarkTheme.colors,
     primary: "#00aaff",
@@ -10,6 +11,7 @@ export const theme = {
     text: "#fff",
     border: "#333",
     buttonColor: "#00aaff",
+    // these colors look horrible
   },
 
   spacing: {

@@ -39,6 +39,7 @@ export default function SettingsScreen() {
         textAlign="center"
         defaultValue="25"
         activeUnderlineColor={theme.colors.border}
+        // if change to outlined change this to OutlineColor
       />
       <TextInput
         label="Short Break Time"

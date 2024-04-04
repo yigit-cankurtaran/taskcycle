@@ -5,7 +5,7 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet } from "react-native";
-import { Button, PaperProvider } from "react-native-paper";
+import MyButton from "./helpers/MyButton";
 import { Task } from "./helpers/task.interface";
 import { useAtom } from "jotai";
 import { currentTaskAtom } from "./atoms";
@@ -165,7 +165,7 @@ export default function TaskLogic({
             onCancel={handleCancel}
           />
         ) : (
-          <Button onPress={changeTaskAddState}>Add Tasks</Button>
+          <MyButton onPress={changeTaskAddState}>Add Tasks</MyButton>
           // making input get called when the button is pressed
           // might change input's place and such
         )}
