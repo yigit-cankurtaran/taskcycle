@@ -1,7 +1,3 @@
-// here i want to create a settings screen for setting time for the pomodoro
-// i later want to separate the timer and the tasks into two different screens
-// timer will only display the current task and the time left
-
 import { Button, Card, Text, TextInput } from "react-native-paper";
 import { useAtom } from "jotai";
 import {
@@ -21,11 +17,13 @@ export default function SettingsScreen() {
   function createChangeHandler(setter: (value: number) => void) {
     return (text: string) => {
       setter(Number(text));
+      // setter updates the atom, which updates the state, which updates the component
+      // when the text input changes it calls this function, this changes the text to a number
     };
   }
 
   function onSubmit() {
-    console.log("submit");
+    console.log("values changed");
   }
 
   return (
@@ -38,25 +36,36 @@ export default function SettingsScreen() {
         value={String(workTime)}
         placeholder={String(workTime)}
         onChangeText={createChangeHandler(setWorkTime)}
+        textAlign="center"
+        defaultValue="25"
+        activeUnderlineColor={theme.colors.border}
       />
       <TextInput
         label="Short Break Time"
         value={String(shortBreakTime)}
         placeholder={String(shortBreakTime)}
         onChangeText={createChangeHandler(setShortBreakTime)}
+        textAlign="center"
+        defaultValue="5"
+        activeUnderlineColor={theme.colors.border}
       />
       <TextInput
         label="Long Break Time"
         value={String(longBreakTime)}
         placeholder={String(longBreakTime)}
         onChangeText={createChangeHandler(setLongBreakTime)}
+        textAlign="center"
+        defaultValue="15"
+        activeUnderlineColor={theme.colors.border}
       />
       <TextInput
         label="Sessions Before Long Break"
-        // this gets wrapped, will look into it
+        // this label gets wrapped, will look into it
         value={String(pomodoroCount)}
         placeholder={String(pomodoroCount)}
         onChangeText={createChangeHandler(setPomodoroCount)}
+        defaultValue="4"
+        activeUnderlineColor={theme.colors.border}
       />
       <Button onPress={onSubmit} mode="contained" style={{ width: 150 }}>
         Submit
