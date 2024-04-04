@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { View, Dimensions } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { Task } from "./helpers/task.interface";
+import { theme } from "./helpers/theme";
 
 interface TaskInputProps {
   onTaskAdd: (title: string, pomodoros: number) => void;
@@ -94,24 +95,24 @@ export default function TaskInput({
       <Button
         onPress={handleTaskAdd}
         style={{
-          backgroundColor: "#0077AA",
           width: 100,
           alignSelf: "center",
           margin: 5,
         }}
         textColor="white"
+        buttonColor={theme.colors.buttonColor}
       >
         Add
       </Button>
       <Button
         onPress={onCancel}
         style={{
-          backgroundColor: "#0077AA",
           width: 100,
           alignSelf: "center",
           margin: 5,
         }}
         textColor="white"
+        buttonColor={theme.colors.buttonColor}
       >
         Cancel
       </Button>
