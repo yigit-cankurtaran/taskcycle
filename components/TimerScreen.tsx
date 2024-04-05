@@ -2,7 +2,6 @@ import { useAtom } from "jotai";
 import { tasksAtom, currentTaskIdAtom, currentTaskAtom } from "./atoms";
 import Timer from "./Timer";
 import { Card, Text } from "react-native-paper";
-import TaskComponent from "./TaskComponent";
 
 export default function TimerScreen() {
   const [tasks, setTasks] = useAtom(tasksAtom);

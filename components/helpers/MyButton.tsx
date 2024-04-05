@@ -8,7 +8,7 @@ interface MyButtonProps extends ButtonProps {
 export default function MyButton({ children, style, ...props }: MyButtonProps) {
   return (
     <Button
-      buttonColor={theme.colors.primary}
+      buttonColor={theme.colors.buttonColor}
       textColor={theme.colors.text}
       style={[{ width: 100, borderRadius: 10 }, style]}
       // style is so that we can pass in custom styles

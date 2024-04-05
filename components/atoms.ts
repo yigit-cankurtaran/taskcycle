@@ -10,6 +10,8 @@ export const currentTaskAtom = atom<Task | null>(null);
 // the commented values are gonna be the actual stuff
 // uncomment when you're ready to implement the settings screen
 // export const workTimeAtom = atom(25);
+// TODO: these would restore back to original when the app is closed
+// make sure to implement a way to save the user's settings
 export const workTimeAtom = atom(0.4);
 // export const shortBreakTimeAtom = atom(5);
 export const shortBreakTimeAtom = atom(0.2);
