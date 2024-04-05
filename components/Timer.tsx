@@ -44,7 +44,7 @@ export default function Timer({
 
   //   const [playBeep] = useSound(beepSound);
   //   const [playDing] = useSound(dingSound);
-  // these are gonna use expo-av
+  // TODO: these are gonna use expo-av
 
   function startTimer() {
     if (workRunning || restRunning) return;
@@ -52,7 +52,6 @@ export default function Timer({
   }
 
   function stopTimer() {
-    // might remove if i want it to be strict
     if (workRunning) setWorkRunning(false);
     if (restRunning) setRestRunning(false);
     // set all sessions to 0
@@ -144,7 +143,6 @@ export default function Timer({
         }}
       >
         {workRunning || restRunning ? "Stop" : "Start"}
-        {/* TODO: this isn't centered, fix */}
       </MyButton>
     </Card>
   );

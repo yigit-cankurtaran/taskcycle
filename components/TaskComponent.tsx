@@ -1,4 +1,5 @@
-import { Button, Card, Text } from "react-native-paper";
+import { Card, Text } from "react-native-paper";
+import MyButton from "./helpers/MyButton";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {
   LongPressGestureHandler,
@@ -118,13 +119,9 @@ export default function TaskComponent({
                 <View style={styles.buttonContainer}>
                   {task.completed ? null : (
                     <>
-                      <Button
-                        mode="contained"
-                        style={styles.button}
-                        onPress={() => onTaskStart(task.id)}
-                      >
+                      <MyButton onPress={() => onTaskStart(task.id)}>
                         {isStarted ? "Stop" : "Start"}
-                      </Button>
+                      </MyButton>
                     </>
                   )}
                 </View>
@@ -152,10 +149,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     justifyContent: "center",
-  },
-  button: {
-    backgroundColor: "#0077AA",
-    marginLeft: 10,
   },
   buttonText: {
     color: "white",

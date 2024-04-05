@@ -2,6 +2,7 @@ import { useAtom } from "jotai";
 import { tasksAtom, currentTaskIdAtom, currentTaskAtom } from "./atoms";
 import Timer from "./Timer";
 import { Card, Text } from "react-native-paper";
+import TaskComponent from "./TaskComponent";
 
 export default function TimerScreen() {
   const [tasks, setTasks] = useAtom(tasksAtom);
@@ -55,7 +56,9 @@ export default function TimerScreen() {
       {currentTask && (
         <Card>
           <Text>Task: {currentTask.title}</Text>
+          <Text>Pomodoros: {currentTask.pomodoros}</Text>
           {/* pomodoros were bugged and i didn't wanna display them right now */}
+          {/* TODO: implement the pomodoro count */}
           {/* might implement it in the future */}
         </Card>
       )}

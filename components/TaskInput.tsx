@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { View, Dimensions } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 import { Task } from "./helpers/task.interface";
+import MyButton from "./helpers/MyButton";
 import { theme } from "./helpers/theme";
 
 interface TaskInputProps {
@@ -92,30 +93,15 @@ export default function TaskInput({
         activeOutlineColor="#0077AA"
         outlineStyle={{ borderRadius: 10 * em }}
       />
-      <Button
+      <MyButton
         onPress={handleTaskAdd}
-        style={{
-          width: 100,
-          alignSelf: "center",
-          margin: 5,
-        }}
-        textColor="white"
-        buttonColor={theme.colors.buttonColor}
+        style={{ alignSelf: "center", margin: theme.spacing.sm }}
       >
         Add
-      </Button>
-      <Button
-        onPress={onCancel}
-        style={{
-          width: 100,
-          alignSelf: "center",
-          margin: 5,
-        }}
-        textColor="white"
-        buttonColor={theme.colors.buttonColor}
-      >
+      </MyButton>
+      <MyButton onPress={onCancel} style={{ alignSelf: "center" }}>
         Cancel
-      </Button>
+      </MyButton>
     </View>
   );
 }
