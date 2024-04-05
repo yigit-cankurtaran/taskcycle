@@ -4,7 +4,11 @@ import { useNavigation } from "@react-navigation/native";
 // this will change into a screen switcher, timer-tasks-settings
 // if i do implement a stats screen, it will be under settings
 
-export default function Footer({ screenNames }: { screenNames: string[] }) {
+interface FooterProps {
+  screenNames: string[];
+}
+
+export default function Footer({ screenNames }: FooterProps) {
   const navigation = useNavigation();
   return (
     <View style={styles.footer}>

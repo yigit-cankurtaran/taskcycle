@@ -1,4 +1,6 @@
-import { Button, Card, Text, TextInput } from "react-native-paper";
+import { View } from "react-native";
+import { Card, TextInput } from "react-native-paper";
+import MyButton from "./helpers/MyButton";
 import { useAtom } from "jotai";
 import {
   longBreakTimeAtom,
@@ -38,7 +40,6 @@ export default function SettingsScreen() {
         placeholder={String(workTime)}
         onChangeText={createChangeHandler(setWorkTime)}
         textAlign="center"
-        defaultValue="25"
         activeUnderlineColor={theme.colors.border}
         // if change to outlined change this to OutlineColor
       />
@@ -48,7 +49,6 @@ export default function SettingsScreen() {
         placeholder={String(shortBreakTime)}
         onChangeText={createChangeHandler(setShortBreakTime)}
         textAlign="center"
-        defaultValue="5"
         activeUnderlineColor={theme.colors.border}
       />
       <TextInput
@@ -57,7 +57,6 @@ export default function SettingsScreen() {
         placeholder={String(longBreakTime)}
         onChangeText={createChangeHandler(setLongBreakTime)}
         textAlign="center"
-        defaultValue="15"
         activeUnderlineColor={theme.colors.border}
       />
       <TextInput
@@ -66,13 +65,12 @@ export default function SettingsScreen() {
         value={String(pomodoroCount)}
         placeholder={String(pomodoroCount)}
         onChangeText={createChangeHandler(setPomodoroCount)}
-        defaultValue="4"
         activeUnderlineColor={theme.colors.border}
         // TODO: test the long break, i haven't tested it yet
       />
-      <Button onPress={onSubmit} mode="contained" style={{ width: 150 }}>
-        Submit
-      </Button>
+      <View style={{ width: "100%", alignItems: "center" }}>
+        <MyButton onPress={onSubmit}>Submit</MyButton>
+      </View>
     </Card>
   );
 }

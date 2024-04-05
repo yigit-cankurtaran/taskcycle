@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
-import { Button, Card } from "react-native-paper";
-import { theme } from "./helpers/theme";
+import { Card } from "react-native-paper";
 import { useAtom } from "jotai";
+import MyButton from "./helpers/MyButton";
 import {
   workTimeAtom,
   shortBreakTimeAtom,
@@ -137,19 +137,15 @@ export default function Timer({
           {RenderTime}
         </CountdownCircleTimer>
       )}
-      <Button
-        mode="contained"
+      <MyButton
         onPress={workRunning || restRunning ? stopTimer : startTimer}
         style={{
-          width: 100,
-          alignSelf: "center",
           marginTop: workRunning || restRunning ? 10 : 0,
         }}
-        labelStyle={{ color: theme.colors.text }}
-        buttonColor={theme.colors.buttonColor}
       >
         {workRunning || restRunning ? "Stop" : "Start"}
-      </Button>
+        {/* TODO: this isn't centered, fix */}
+      </MyButton>
     </Card>
   );
 }

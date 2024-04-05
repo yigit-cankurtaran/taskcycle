@@ -23,7 +23,11 @@ export default function App() {
           {/* we have to use flex:1 here otherwise it's broken */}
           <NavigationContainer>
             <StatusBar style="auto" />
-            <Stack.Navigator initialRouteName="TimerScreen">
+            <Stack.Navigator
+              initialRouteName="TimerScreen"
+              screenOptions={{ headerShown: false }}
+              // TODO: header looks horrible, i'll have to adjust footer to show the current screen
+            >
               <Stack.Screen name="Timer" component={TimerScreen} />
               <Stack.Screen name="Tasks" component={TaskScreen} />
               <Stack.Screen name="Settings" component={SettingsScreen} />
