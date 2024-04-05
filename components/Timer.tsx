@@ -11,6 +11,7 @@ import {
   longBreakTimeAtom,
   pomodoroCountAtom,
 } from "./atoms";
+import { theme } from "./helpers/theme";
 
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
@@ -92,8 +93,7 @@ export default function Timer({
       style={{
         justifyContent: "center",
         alignItems: "center",
-        padding: 20,
-        margin: 20,
+        padding: theme.spacing.md,
         // the past 2 might be removed, check later
       }}
       mode="contained"

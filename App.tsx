@@ -7,21 +7,20 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Footer from "./components/Footer";
 import SettingsScreen from "./components/SettingsScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import TaskScreen from "./components/TaskScreen";
 import TimerScreen from "./components/TimerScreen";
 import { PaperProvider } from "react-native-paper";
-import { theme } from "./components/helpers/theme";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState("Timer");
   return (
-    <PaperProvider theme={theme}>
-      <SafeAreaProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          {/* we have to use flex:1 here otherwise it's broken */}
+    <PaperProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        {/* we have to use flex:1 here otherwise it's broken */}
+        <SafeAreaProvider>
           <NavigationContainer
             onStateChange={(state) => {
               if (!state) return;
@@ -30,22 +29,24 @@ export default function App() {
             }}
           >
             <StatusBar style="auto" />
-            <Stack.Navigator
-              initialRouteName="TimerScreen"
-              screenOptions={{ headerShown: false }}
-              // TODO: header looks horrible, i'll have to adjust footer to show the current screen
-            >
-              <Stack.Screen name="Timer" component={TimerScreen} />
-              <Stack.Screen name="Tasks" component={TaskScreen} />
-              <Stack.Screen name="Settings" component={SettingsScreen} />
-            </Stack.Navigator>
-            <Footer
-              screenNames={["Timer", "Tasks", "Settings"]}
-              currentScreen={currentScreen}
-            />
+            <SafeAreaView style={{ flex: 1 }}>
+              {/* fixes camera overlap */}
+              <Stack.Navigator
+                initialRouteName="TimerScreen"
+                screenOptions={{ headerShown: false }}
+              >
+                <Stack.Screen name="Timer" component={TimerScreen} />
+                <Stack.Screen name="Tasks" component={TaskScreen} />
+                <Stack.Screen name="Settings" component={SettingsScreen} />
+              </Stack.Navigator>
+              <Footer
+                screenNames={["Timer", "Tasks", "Settings"]}
+                currentScreen={currentScreen}
+              />
+            </SafeAreaView>
           </NavigationContainer>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
     </PaperProvider>
   );
 }

@@ -9,6 +9,7 @@ import MyButton from "./helpers/MyButton";
 import { Task } from "./helpers/task.interface";
 import { useAtom } from "jotai";
 import { currentTaskAtom } from "./atoms";
+import { theme } from "./helpers/theme";
 
 interface TaskLogicProps {
   tasks: Task[];
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    padding: 16,
+    padding: theme.spacing.md,
   },
   centeredView: {
     justifyContent: "center",
