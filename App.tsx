@@ -1,6 +1,6 @@
 // if this for some reason has APKs that crash
 // just import react from "react" here
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -16,12 +16,19 @@ import { theme } from "./components/helpers/theme";
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [currentScreen, setCurrentScreen] = useState("Timer");
   return (
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
           {/* we have to use flex:1 here otherwise it's broken */}
-          <NavigationContainer>
+          <NavigationContainer
+            onStateChange={(state) => {
+              if (!state) return;
+              const routeName = state.routes[state.index].name;
+              setCurrentScreen(routeName);
+            }}
+          >
             <StatusBar style="auto" />
             <Stack.Navigator
               initialRouteName="TimerScreen"
@@ -32,7 +39,10 @@ export default function App() {
               <Stack.Screen name="Tasks" component={TaskScreen} />
               <Stack.Screen name="Settings" component={SettingsScreen} />
             </Stack.Navigator>
-            <Footer screenNames={["Timer", "Tasks", "Settings"]} />
+            <Footer
+              screenNames={["Timer", "Tasks", "Settings"]}
+              currentScreen={currentScreen}
+            />
           </NavigationContainer>
         </GestureHandlerRootView>
       </SafeAreaProvider>

@@ -6,9 +6,10 @@ import { useNavigation } from "@react-navigation/native";
 
 interface FooterProps {
   screenNames: string[];
+  currentScreen: string;
 }
 
-export default function Footer({ screenNames }: FooterProps) {
+export default function Footer({ screenNames, currentScreen }: FooterProps) {
   const navigation = useNavigation();
   return (
     <View style={styles.footer}>
@@ -18,7 +19,14 @@ export default function Footer({ screenNames }: FooterProps) {
           onPress={() => navigation.navigate(screenName)}
           // shows an error but it works
         >
-          <Text style={styles.footerText}>{screenName}</Text>
+          <Text
+            style={[
+              styles.footerText,
+              screenName === currentScreen && styles.boldText,
+            ]}
+          >
+            {screenName}
+          </Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -34,5 +42,8 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 20,
+  },
+  boldText: {
+    fontWeight: "bold",
   },
 });
