@@ -4,7 +4,8 @@ export const theme = {
   colors: {
     primary: "#00aaff",
     background: "#222",
-    card: "#333",
+    card: "#ffc0cb",
+    // can this be the reason cards already have bg color?
     text: "#fff",
     border: "#333",
     buttonColor: "#00aaff",

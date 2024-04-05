@@ -1,4 +1,3 @@
-import { View } from "react-native";
 import { Card, TextInput } from "react-native-paper";
 import MyButton from "./helpers/MyButton";
 import { useAtom } from "jotai";
@@ -31,7 +30,10 @@ export default function SettingsScreen() {
 
   return (
     <Card
-      style={{ alignItems: "center", justifyContent: "center" }}
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+      }}
       mode="contained"
     >
       <TextInput
@@ -40,7 +42,7 @@ export default function SettingsScreen() {
         placeholder={String(workTime)}
         onChangeText={createChangeHandler(setWorkTime)}
         textAlign="center"
-        activeUnderlineColor={theme.colors.border}
+        // activeUnderlineColor={theme.colors.border}
         // if change to outlined change this to OutlineColor
       />
       <TextInput
@@ -49,7 +51,7 @@ export default function SettingsScreen() {
         placeholder={String(shortBreakTime)}
         onChangeText={createChangeHandler(setShortBreakTime)}
         textAlign="center"
-        activeUnderlineColor={theme.colors.border}
+        // activeUnderlineColor={theme.colors.border}
       />
       <TextInput
         label="Long Break Time"
@@ -57,7 +59,7 @@ export default function SettingsScreen() {
         placeholder={String(longBreakTime)}
         onChangeText={createChangeHandler(setLongBreakTime)}
         textAlign="center"
-        activeUnderlineColor={theme.colors.border}
+        // activeUnderlineColor={theme.colors.border}
       />
       <TextInput
         label="Sessions Before Long Break"
@@ -65,12 +67,12 @@ export default function SettingsScreen() {
         value={String(pomodoroCount)}
         placeholder={String(pomodoroCount)}
         onChangeText={createChangeHandler(setPomodoroCount)}
-        activeUnderlineColor={theme.colors.border}
+        // activeUnderlineColor={theme.colors.border}
         // TODO: test the long break, i haven't tested it yet
       />
-      <View style={{ width: "100%", alignItems: "center" }}>
-        <MyButton onPress={onSubmit}>Submit</MyButton>
-      </View>
+      <MyButton onPress={onSubmit} style={{ alignSelf: "center" }}>
+        Submit
+      </MyButton>
     </Card>
   );
 }

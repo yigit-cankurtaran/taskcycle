@@ -94,7 +94,6 @@ export default function Timer({
         justifyContent: "center",
         alignItems: "center",
         padding: theme.spacing.md,
-        // the past 2 might be removed, check later
       }}
       mode="contained"
     >
@@ -141,6 +140,7 @@ export default function Timer({
         onPress={workRunning || restRunning ? stopTimer : startTimer}
         style={{
           marginTop: workRunning || restRunning ? 10 : 0,
+          alignSelf: "center", // Add this line to center the button
         }}
       >
         {workRunning || restRunning ? "Stop" : "Start"}

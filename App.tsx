@@ -11,13 +11,14 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import TaskScreen from "./components/TaskScreen";
 import TimerScreen from "./components/TimerScreen";
 import { PaperProvider } from "react-native-paper";
+import { theme } from "./components/helpers/theme";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState("Timer");
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         {/* we have to use flex:1 here otherwise it's broken */}
         <SafeAreaProvider>
