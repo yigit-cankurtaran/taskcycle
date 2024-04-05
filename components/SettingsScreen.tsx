@@ -16,9 +16,10 @@ export default function SettingsScreen() {
 
   function createChangeHandler(setter: (value: number) => void) {
     return (text: string) => {
-      setter(Number(text));
+      const number = Number(text);
+      if (!isNaN(number)) setter(number);
       // setter updates the atom, which updates the state, which updates the component
-      // when the text input changes it calls this function, this changes the text to a number
+      // when the text input changes it calls this function, this changes the text to a number if it's a number
     };
   }
 
@@ -67,6 +68,7 @@ export default function SettingsScreen() {
         onChangeText={createChangeHandler(setPomodoroCount)}
         defaultValue="4"
         activeUnderlineColor={theme.colors.border}
+        // TODO: test the long break, i haven't tested it yet
       />
       <Button onPress={onSubmit} mode="contained" style={{ width: 150 }}>
         Submit
