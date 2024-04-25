@@ -53,12 +53,12 @@ export default function TimerScreen() {
     <Card mode="contained" style={{ alignItems: "center" }}>
       <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
       {currentTask && (
-        <Card>
+        <Card key={currentTask.pomodoros}>
+          {/* the key should make it update everytime this changes */}
           <Text>Task: {currentTask.title}</Text>
           <Text>Pomodoros: {currentTask.pomodoros}</Text>
-          {/* pomodoros were bugged and i didn't wanna display them right now */}
           {/* TODO: implement the pomodoro count */}
-          {/* might implement it in the future */}
+          {/* currently it doesn't update at all */}
         </Card>
       )}
     </Card>

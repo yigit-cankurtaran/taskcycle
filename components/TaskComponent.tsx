@@ -10,6 +10,7 @@ import {
 import { useState, useEffect } from "react";
 import { Animated, StyleSheet, View } from "react-native";
 import { Task } from "./helpers/task.interface";
+import { theme } from "./helpers/theme";
 interface TaskProps {
   task: Task;
   onTaskDelete: (id: string) => void;
@@ -119,7 +120,10 @@ export default function TaskComponent({
                 <View style={styles.buttonContainer}>
                   {task.completed ? null : (
                     <>
-                      <MyButton onPress={() => onTaskStart(task.id)}>
+                      <MyButton
+                        onPress={() => onTaskStart(task.id)}
+                        style={{ marginLeft: theme.spacing.sm }}
+                      >
                         {isStarted ? "Stop" : "Start"}
                       </MyButton>
                     </>

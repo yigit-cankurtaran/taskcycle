@@ -42,7 +42,7 @@ export default function SettingsScreen() {
         placeholder={String(workTime)}
         onChangeText={createChangeHandler(setWorkTime)}
         textAlign="center"
-        // activeUnderlineColor={theme.colors.border}
+        activeUnderlineColor={theme.colors.border}
         // if change to outlined change this to OutlineColor
       />
       <TextInput
@@ -51,7 +51,7 @@ export default function SettingsScreen() {
         placeholder={String(shortBreakTime)}
         onChangeText={createChangeHandler(setShortBreakTime)}
         textAlign="center"
-        // activeUnderlineColor={theme.colors.border}
+        activeUnderlineColor={theme.colors.border}
       />
       <TextInput
         label="Long Break Time"
@@ -59,7 +59,7 @@ export default function SettingsScreen() {
         placeholder={String(longBreakTime)}
         onChangeText={createChangeHandler(setLongBreakTime)}
         textAlign="center"
-        // activeUnderlineColor={theme.colors.border}
+        activeUnderlineColor={theme.colors.border}
       />
       <TextInput
         label="Sessions Before Long Break"
@@ -67,7 +67,7 @@ export default function SettingsScreen() {
         value={String(pomodoroCount)}
         placeholder={String(pomodoroCount)}
         onChangeText={createChangeHandler(setPomodoroCount)}
-        // activeUnderlineColor={theme.colors.border}
+        activeUnderlineColor={theme.colors.border}
         // TODO: test the long break, i haven't tested it yet
       />
       <MyButton onPress={onSubmit} style={{ alignSelf: "center" }}>
