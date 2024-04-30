@@ -1,5 +1,4 @@
 // import storage from "../Storage";
-// change the import in case you end up using this
 
 // useEffect(() => {
 //   const fetchTasks = () => {
@@ -30,6 +29,3 @@
 //   fetchTasks();
 //   fetchCurrentTaskId();
 // }, []);
-
-// ^^ MMKV storage, not supported in expo go
-// will uncomment if i make a dev client

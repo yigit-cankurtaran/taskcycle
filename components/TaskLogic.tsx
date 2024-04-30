@@ -3,7 +3,7 @@ import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import storage from "./helpers/Storage";
 import { View, StyleSheet } from "react-native";
 import MyButton from "./helpers/MyButton";
 import { Task } from "./helpers/task.interface";
@@ -126,7 +126,7 @@ export default function TaskLogic({
     const saveTasks = async () => {
       try {
         if (TasksFetched) {
-          await AsyncStorage.setItem("tasks", JSON.stringify(tasks));
+          storage.set("tasks", JSON.stringify(tasks));
         }
       } catch (error) {
         console.error(error);
@@ -140,10 +140,7 @@ export default function TaskLogic({
     const saveCurrentTaskId = async () => {
       try {
         if (CurrentTaskIdFetched) {
-          await AsyncStorage.setItem(
-            "currentTaskId",
-            JSON.stringify(currentTaskId)
-          );
+          storage.set("currentTaskId", JSON.stringify(currentTaskId));
           console.log("Current task id saved to storage:", currentTaskId);
         }
       } catch (error) {
