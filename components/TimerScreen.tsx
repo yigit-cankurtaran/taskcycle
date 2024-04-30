@@ -59,7 +59,7 @@ export default function TimerScreen() {
           {/* the key should make it update everytime this changes */}
           <Text>Task: {currentTask.title}</Text>
           <Text>Pomodoros: {currentTask.pomodoros}</Text>
-          {/* TODO: implement the pomodoro count */}
+          {/* TODO 3: implement the pomodoro count */}
           {/* currently it doesn't update at all */}
         </Card>
       )}

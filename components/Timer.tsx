@@ -12,6 +12,7 @@ import {
   pomodoroCountAtom,
 } from "./atoms";
 import { theme } from "./helpers/theme";
+import Audios from "./helpers/Audios";
 
 // import beepSound from "./sounds/beep.mp3";
 // import dingSound from "./sounds/ding.mp3";
@@ -38,17 +39,13 @@ export default function Timer({
       : longBreakTime;
   // there might be an issue with how this works, check later
   //  it might be starting out with the long break time, which is not what i want
-  // if shortRestSession is greater than 0 and the remainder of shortRestSession divided by pomodoroCount is 0
-  // then restMins is shortBreakTimeAtom, else it's longBreakTimeAtom
   const [workSessionCompleted, setWorkSessionCompleted] = useState(false);
-
-  //   const [playBeep] = useSound(beepSound);
-  //   const [playDing] = useSound(dingSound);
-  // TODO: these are gonna use expo-av
+  Audios().loadSounds();
 
   function startTimer() {
     if (workRunning || restRunning) return;
     setWorkRunning(true);
+    Audios().playBeep();
   }
 
   function stopTimer() {
@@ -57,6 +54,8 @@ export default function Timer({
     // set all sessions to 0
     setWorkSession(0);
     setShortRestSession(0);
+    Audios().playDing();
+    Audios().unloadSounds();
   }
 
   function handleWorkTimerComplete() {
@@ -64,11 +63,13 @@ export default function Timer({
     setRestRunning(true);
     pomodoroDecrease();
     setWorkSessionCompleted(true);
+    Audios().playDing();
   }
 
   function handleRestTimerComplete() {
     setRestRunning(false);
     setWorkRunning(true);
+    Audios().playBeep();
   }
 
   useEffect(() => {
