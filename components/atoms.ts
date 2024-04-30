@@ -33,6 +33,7 @@ export const currentTaskAtom = atomWithStorage<Task | null>("currentTask", null,
 // the issue might have been that they were already set
 // by the time the storage was implemented
 // TODO 5: check after building to apk as well
+//   checked after rebuild, they're still null
 export const workTimeAtom = atomWithStorage("workTime", getInitialState("workTime", 0.2), atomStorage);
 export const shortBreakTimeAtom = atomWithStorage("shortBreakTime", getInitialState("shortBreakTime", 0.1), atomStorage);
 export const longBreakTimeAtom = atomWithStorage("longBreakTime", getInitialState("longBreakTime", 0.15), atomStorage);

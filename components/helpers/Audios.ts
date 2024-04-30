@@ -6,8 +6,8 @@ export default function Audios(){
     
     async function loadSounds() {
         try {
-        await beepSound.loadAsync(require("../sounds/beep.mp3"));
-        await dingSound.loadAsync(require("../sounds/ding.mp3"));
+        await beepSound.loadAsync(require("./sounds/beep.mp3"));
+        await dingSound.loadAsync(require("./sounds/ding.mp3"));
         } catch (error) {
         console.log("Error loading sounds: ", error);
         }
@@ -15,7 +15,7 @@ export default function Audios(){
     
     async function playBeep() {
         try {
-        await beepSound.replayAsync();
+        await beepSound.playFromPositionAsync(0);
         } catch (error) {
         console.log("Error playing beep sound: ", error);
         }
@@ -23,7 +23,7 @@ export default function Audios(){
     
     async function playDing() {
         try {
-        await dingSound.replayAsync();
+        await dingSound.playFromPositionAsync(0);
         } catch (error) {
         console.log("Error playing ding sound: ", error);
         }

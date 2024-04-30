@@ -40,22 +40,25 @@ export default function Timer({
   // there might be an issue with how this works, check later
   //  it might be starting out with the long break time, which is not what i want
   const [workSessionCompleted, setWorkSessionCompleted] = useState(false);
-  Audios().loadSounds();
+  const audios = Audios();
 
-  function startTimer() {
+  useEffect(() => {
+    audios.loadSounds();
+  }, []);
+
+  async function startTimer() {
     if (workRunning || restRunning) return;
     setWorkRunning(true);
-    Audios().playBeep();
+    await audios.playBeep();
   }
 
-  function stopTimer() {
+  async function stopTimer() {
     if (workRunning) setWorkRunning(false);
     if (restRunning) setRestRunning(false);
     // set all sessions to 0
     setWorkSession(0);
     setShortRestSession(0);
-    Audios().playDing();
-    Audios().unloadSounds();
+    await audios.playDing();
   }
 
   function handleWorkTimerComplete() {
