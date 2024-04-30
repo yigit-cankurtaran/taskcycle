@@ -1,20 +1,39 @@
-import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
+import storage from "./helpers/Storage";
 import { Task } from "./helpers/task.interface";
 
+const atomStorage = {
+    getItem: (key: string) => {
+        const value = storage.getString(key);
+        return value ? JSON.parse(value) : null;
+    },
+    setItem: (key: string, value: any) => {
+        storage.set(key, JSON.stringify(value));
+    },
+    removeItem: (key: string) => {
+        storage.delete(key);
+    },
+    // had to create this to integrate the storage with the jotai atoms
+}
 
-export const tasksAtom = atom<Task[]>([]);
-export const currentTaskIdAtom = atom<string | null>(null);
-export const tasksFetchedAtom = atom(false);
-export const currentTaskIdFetchedAtom = atom(false);
-export const currentTaskAtom = atom<Task | null>(null);
-// the commented values are gonna be the actual stuff
-// uncomment when you're ready to implement the settings screen
-// export const workTimeAtom = atom(25);
-// TODO: these would restore back to original when the app is closed
-// make sure to implement a way to save the user's settings
-export const workTimeAtom = atom(0.2);
-// export const shortBreakTimeAtom = atom(5);
-export const shortBreakTimeAtom = atom(0.1);
-// export const longBreakTimeAtom = atom(15);
-export const longBreakTimeAtom = atom(0.15);
-export const pomodoroCountAtom = atom(4);
+const getInitialState = (key: string, defaultValue: any) => {
+    const value = atomStorage.getItem(key);
+    return value !== null && value !== undefined ? value : defaultValue;
+  };
+
+
+export const tasksAtom = atomWithStorage<Task[]>("tasks", [], atomStorage);
+export const currentTaskIdAtom = atomWithStorage<string | null>("currentTaskId", null, atomStorage);
+export const tasksFetchedAtom = atomWithStorage("tasksFetched", false, atomStorage);
+export const currentTaskIdFetchedAtom = atomWithStorage("currentTaskIdFetched", false, atomStorage);
+export const currentTaskAtom = atomWithStorage<Task | null>("currentTask", null, atomStorage);
+// problematic atoms start here
+// worktime atom is now the user set value of 2, the rest are null
+// fix this
+// the issue might have been that they were already set
+// by the time the storage was implemented
+// TODO: check after building to apk as well
+export const workTimeAtom = atomWithStorage("workTime", getInitialState("workTime", 0.2), atomStorage);
+export const shortBreakTimeAtom = atomWithStorage("shortBreakTime", getInitialState("shortBreakTime", 0.1), atomStorage);
+export const longBreakTimeAtom = atomWithStorage("longBreakTime", getInitialState("longBreakTime", 0.15), atomStorage);
+export const pomodoroCountAtom = atomWithStorage("pomodoroCount", getInitialState("pomodoroCount", 4), atomStorage);

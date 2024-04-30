@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import TaskInput from "./TaskInput";
 import TaskList from "./TaskList";
 import "react-native-get-random-values";
+// we have to import this for uuid to work
 import { v4 as uuidv4 } from "uuid";
 import storage from "./helpers/Storage";
 import { View, StyleSheet } from "react-native";
@@ -44,13 +45,14 @@ export default function TaskLogic({
       completed: false,
       pomodoros,
     };
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setTasks((prevTasks) => [...(prevTasks || []), newTask]);
     console.log("Task added: " + newTask.id);
     changeTaskAddState();
   }
 
   function handleTaskStart(id: string) {
-    const task = tasks.find((task) => task.id === id);
+    const task = tasks ? tasks.find((task) => task.id === id) : null;
+    // null checked
     if (task && task.completed) {
       return;
     }

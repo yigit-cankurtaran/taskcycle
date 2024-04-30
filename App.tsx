@@ -13,9 +13,6 @@ import TimerScreen from "./components/TimerScreen";
 import { PaperProvider } from "react-native-paper";
 import { theme } from "./components/helpers/theme";
 
-// TODO: add the MMKV back in instead of AsyncStorage
-// we now have dev clients instead of Expo Go
-
 const Stack = createStackNavigator();
 
 export default function App() {

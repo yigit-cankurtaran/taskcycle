@@ -7,7 +7,9 @@ export default function TimerScreen() {
   const [tasks, setTasks] = useAtom(tasksAtom);
   const [currentTaskId, setCurrentTaskId] = useAtom(currentTaskIdAtom);
   const [currentTask, setCurrentTask] = useAtom(currentTaskAtom);
-  const startedTask = tasks.find((task) => task.id === currentTaskId);
+  const startedTask = currentTaskId
+    ? tasks.find((task) => task.id === currentTaskId)
+    : null;
 
   function decreaseCurrentTaskPomodoros() {
     if (!currentTaskId) {

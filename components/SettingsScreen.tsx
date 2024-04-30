@@ -9,6 +9,11 @@ import {
 } from "./atoms";
 import { theme } from "./helpers/theme";
 
+const DEFAULT_WORK_TIME = 25;
+const DEFAULT_SHORT_BREAK_TIME = 5;
+const DEFAULT_LONG_BREAK_TIME = 15;
+const DEFAULT_POMODORO_COUNT = 4;
+
 export default function SettingsScreen() {
   const [workTime, setWorkTime] = useAtom(workTimeAtom);
   const [shortBreakTime, setShortBreakTime] = useAtom(shortBreakTimeAtom);
@@ -26,6 +31,13 @@ export default function SettingsScreen() {
 
   function onSubmit() {
     console.log("values changed");
+  }
+
+  function defaultValues() {
+    setWorkTime(DEFAULT_WORK_TIME);
+    setShortBreakTime(DEFAULT_SHORT_BREAK_TIME);
+    setLongBreakTime(DEFAULT_LONG_BREAK_TIME);
+    setPomodoroCount(DEFAULT_POMODORO_COUNT);
   }
 
   return (
@@ -72,6 +84,9 @@ export default function SettingsScreen() {
       />
       <MyButton onPress={onSubmit} style={{ alignSelf: "center" }}>
         Submit
+      </MyButton>
+      <MyButton onPress={defaultValues} style={{ alignSelf: "center" }}>
+        Return to default
       </MyButton>
     </Card>
   );

@@ -6,6 +6,8 @@ export const theme = {
     border: "#333",
     buttonColor: "#00aaff",
     // TODO: these colors look horrible, change them
+    // maybe i can use the default colors from react-native-paper
+    // a dark theme would be nice
   },
 
   spacing: {

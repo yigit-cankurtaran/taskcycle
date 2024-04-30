@@ -20,11 +20,13 @@ export default function TaskList({
   onTaskStart,
   currentTaskId,
 }: TaskListProps) {
-  const startedTask = tasks.find((task) => task.id === currentTaskId);
-  const finishedTasks = tasks.filter((task) => task.completed);
-  const futureTasks = tasks.filter(
-    (task) => task.id !== currentTaskId && !task.completed
-  );
+  const startedTask = tasks
+    ? tasks.find((task) => task.id === currentTaskId)
+    : null;
+  const finishedTasks = tasks ? tasks.filter((task) => task.completed) : [];
+  const futureTasks = tasks
+    ? tasks.filter((task) => task.id !== currentTaskId && !task.completed)
+    : [];
 
   const data = [
     { header: "Started Task:", tasks: startedTask ? [startedTask] : [] },
