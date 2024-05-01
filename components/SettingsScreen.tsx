@@ -80,7 +80,8 @@ export default function SettingsScreen() {
         placeholder={String(pomodoroCount)}
         onChangeText={createChangeHandler(setPomodoroCount)}
         activeUnderlineColor={theme.colors.border}
-        // TODO 4: test the long break, i haven't tested it yet
+        // TODO 2: test the long break, i haven't tested it yet
+        // if it doesn't work properly move to fix it
       />
       <MyButton onPress={onSubmit} style={{ alignSelf: "center" }}>
         Submit

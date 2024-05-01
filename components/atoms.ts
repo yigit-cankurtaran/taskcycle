@@ -37,3 +37,5 @@ export const workTimeAtom = atomWithStorage("workTime", getInitialState("workTim
 export const shortBreakTimeAtom = atomWithStorage("shortBreakTime", getInitialState("shortBreakTime", 0.1), atomStorage);
 export const longBreakTimeAtom = atomWithStorage("longBreakTime", getInitialState("longBreakTime", 0.15), atomStorage);
 export const pomodoroCountAtom = atomWithStorage("pomodoroCount", getInitialState("pomodoroCount", 4), atomStorage);
+// defaults are for testing
+// FINAL TODO: fix before deployment to the app store
