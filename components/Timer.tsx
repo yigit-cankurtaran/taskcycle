@@ -12,12 +12,9 @@ import {
   pomodoroCountAtom,
 } from "./atoms";
 import { theme } from "./helpers/theme";
-import Audios from "./helpers/Audios";
-
-// import beepSound from "./sounds/beep.mp3";
-// import dingSound from "./sounds/ding.mp3";
-// import useSound from "use-sound";
-// gonna have to use expo-av for this
+import { Audio } from "expo-av";
+// this gets called every time a screen is switched
+// might lead to performance issues
 
 export default function Timer({
   pomodoroDecrease,
@@ -40,16 +37,34 @@ export default function Timer({
   // there might be an issue with how this works, check later
   //  it might be starting out with the long break time, which is not what i want
   const [workSessionCompleted, setWorkSessionCompleted] = useState(false);
-  const audios = Audios();
+  const beepSound = require("./helpers/sounds/beep.mp3");
+  const dingSound = require("./helpers/sounds/ding.mp3");
+  const soundObject = new Audio.Sound();
 
-  useEffect(() => {
-    audios.loadSounds();
-  }, []);
+  async function playBeep() {
+    try {
+      await soundObject.unloadAsync();
+      await soundObject.loadAsync(beepSound);
+      await soundObject.playAsync();
+    } catch (error) {
+      console.error("Failed to play sound", error);
+    }
+  }
+
+  async function playDing() {
+    try {
+      await soundObject.unloadAsync();
+      await soundObject.loadAsync(dingSound);
+      await soundObject.playAsync();
+    } catch (error) {
+      console.error("Failed to play sound", error);
+    }
+  }
 
   async function startTimer() {
     if (workRunning || restRunning) return;
     setWorkRunning(true);
-    await audios.playBeep();
+    playBeep();
   }
 
   async function stopTimer() {
@@ -58,7 +73,7 @@ export default function Timer({
     // set all sessions to 0
     setWorkSession(0);
     setShortRestSession(0);
-    await audios.playDing();
+    playDing();
   }
 
   function handleWorkTimerComplete() {
@@ -66,13 +81,13 @@ export default function Timer({
     setRestRunning(true);
     pomodoroDecrease();
     setWorkSessionCompleted(true);
-    Audios().playDing();
+    playDing();
   }
 
   function handleRestTimerComplete() {
     setRestRunning(false);
     setWorkRunning(true);
-    Audios().playBeep();
+    playBeep();
   }
 
   useEffect(() => {

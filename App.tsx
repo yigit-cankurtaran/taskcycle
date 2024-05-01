@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+// might switch this to expo router
 import Footer from "./components/Footer";
 import SettingsScreen from "./components/SettingsScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
