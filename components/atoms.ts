@@ -1,5 +1,6 @@
 import { atomWithStorage } from "jotai/utils";
 import storage from "./helpers/Storage";
+// I use MMKV the storage is not async
 import { Task } from "./helpers/task.interface";
 
 const atomStorage = {
@@ -18,7 +19,7 @@ const atomStorage = {
 
 const getInitialState = (key: string, defaultValue: any) => {
     const value = atomStorage.getItem(key);
-    return value !== null && value !== undefined ? value : defaultValue;
+    return value != null ? value : defaultValue;
   };
 
 
