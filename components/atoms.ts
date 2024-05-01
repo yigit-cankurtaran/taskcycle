@@ -18,23 +18,21 @@ const atomStorage = {
 }
 
 const getInitialState = (key: string, defaultValue: any) => {
-    const value = atomStorage.getItem(key);
-    return value != null ? value : defaultValue;
-  };
-
+    let value = atomStorage.getItem(key);
+    if (value === null || value === undefined) {
+        value = defaultValue;
+        atomStorage.setItem(key, defaultValue);
+        // if the value is not set, set it to the default value
+        // this fixes the null issue
+    }
+    return value;
+};
 
 export const tasksAtom = atomWithStorage<Task[]>("tasks", [], atomStorage);
 export const currentTaskIdAtom = atomWithStorage<string | null>("currentTaskId", null, atomStorage);
 export const tasksFetchedAtom = atomWithStorage("tasksFetched", false, atomStorage);
 export const currentTaskIdFetchedAtom = atomWithStorage("currentTaskIdFetched", false, atomStorage);
 export const currentTaskAtom = atomWithStorage<Task | null>("currentTask", null, atomStorage);
-// problematic atoms start here
-// worktime atom is now the user set value of 2, the rest are null
-// fix this
-// the issue might have been that they were already set
-// by the time the storage was implemented
-// TODO 5: check after building to apk as well
-//   checked after rebuild, they're still null
 export const workTimeAtom = atomWithStorage("workTime", getInitialState("workTime", 0.2), atomStorage);
 export const shortBreakTimeAtom = atomWithStorage("shortBreakTime", getInitialState("shortBreakTime", 0.1), atomStorage);
 export const longBreakTimeAtom = atomWithStorage("longBreakTime", getInitialState("longBreakTime", 0.15), atomStorage);
