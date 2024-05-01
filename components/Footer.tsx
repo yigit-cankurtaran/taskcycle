@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
 interface FooterProps {
   screenNames: string[];
@@ -9,6 +10,7 @@ interface FooterProps {
 
 export default function Footer({ screenNames, currentScreen }: FooterProps) {
   const navigation = useNavigation();
+  const icons = ["timer", "list", "settings"];
   return (
     <View style={styles.footer}>
       {screenNames.map((screenName: string, index: number) => (
@@ -17,7 +19,10 @@ export default function Footer({ screenNames, currentScreen }: FooterProps) {
             <TouchableOpacity
               onPress={() => navigation.navigate(screenName)}
               // shows an error but it works
+              style={styles.iconContainer}
             >
+              <Ionicons name={icons[index] as any} size={24} color="black" />
+              {/* string here gives an error */}
               <Text
                 style={[
                   styles.footerText,
@@ -62,5 +67,10 @@ const styles = StyleSheet.create({
     height: "100%",
     borderLeftWidth: 1,
     borderLeftColor: "black",
+  },
+  iconContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
