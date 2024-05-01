@@ -28,6 +28,8 @@ export default function Footer({ screenNames, currentScreen }: FooterProps) {
             {screenName}
           </Text>
         </TouchableOpacity>
+        // TODO: add a divider between the text
+        // TODO: add icons to the text
       ))}
     </View>
   );
