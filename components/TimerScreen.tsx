@@ -61,8 +61,6 @@ export default function TimerScreen() {
         <Card key={currentTask.pomodoros}>
           <Text>Task: {currentTask.title}</Text>
           <Text>Pomodoros: {currentTask.pomodoros}</Text>
-          {/* TODO 3: implement the pomodoro count */}
-          {/* currently the count doesn't update at all */}
         </Card>
       )}
     </Card>
