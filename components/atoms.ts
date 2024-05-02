@@ -1,6 +1,5 @@
 import { atomWithStorage } from "jotai/utils";
 import storage from "./helpers/Storage";
-// I use MMKV the storage is not async
 import { Task } from "./helpers/task.interface";
 
 const atomStorage = {
@@ -38,4 +37,4 @@ export const shortBreakTimeAtom = atomWithStorage("shortBreakTime", getInitialSt
 export const longBreakTimeAtom = atomWithStorage("longBreakTime", getInitialState("longBreakTime", 0.15), atomStorage);
 export const pomodoroCountAtom = atomWithStorage("pomodoroCount", getInitialState("pomodoroCount", 4), atomStorage);
 // defaults are for testing
-// FINAL TODO: fix before deployment to the app store
+// FINAL TODO: change to the actual values before deployment to the app store

@@ -31,15 +31,18 @@ export default function TimerScreen() {
             if (tasks.length > 1) {
               const nextTaskIndex = tasks.findIndex(
                 (task, i) => i > index && !task.completed
-                // checks if the task is uncompleted and comes after the current task
               );
               if (nextTaskIndex !== -1) {
                 const nextTask = tasks[nextTaskIndex];
-                // checks if there is a next task
                 setCurrentTaskId(nextTask.id as string | null);
                 setCurrentTask(nextTask);
               }
             }
+          } else {
+            // if the task is not completed, update the currentTaskId atom with the updated task
+            setCurrentTask(updatedTask);
+            // the update issue was because we were not updating the currentTask atom
+            // so the TimerScreen component was not re-rendering
           }
           return updatedTask;
         }
@@ -56,11 +59,10 @@ export default function TimerScreen() {
       <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
       {currentTask && (
         <Card key={currentTask.pomodoros}>
-          {/* the key should make it update everytime this changes */}
           <Text>Task: {currentTask.title}</Text>
           <Text>Pomodoros: {currentTask.pomodoros}</Text>
           {/* TODO 3: implement the pomodoro count */}
-          {/* currently it doesn't update at all */}
+          {/* currently the count doesn't update at all */}
         </Card>
       )}
     </Card>
