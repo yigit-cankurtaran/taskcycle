@@ -57,16 +57,24 @@ export default function TimerScreen() {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
-      <Card mode="contained" style={{ alignItems: "center" }}>
-        <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
-        {currentTask && (
-          <Card key={currentTask.pomodoros}>
-            <Text>Task: {currentTask.title}</Text>
-            <Text>Pomodoros: {currentTask.pomodoros}</Text>
-          </Card>
-        )}
-      </Card>
+    <View
+      style={{
+        flex: 1,
+        height: "100%",
+        minHeight: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: theme.spacing.md,
+        backgroundColor: theme.colors.background,
+      }}
+    >
+      <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
+      {currentTask && (
+        <Card key={currentTask.pomodoros}>
+          <Text>Task: {currentTask.title}</Text>
+          <Text>Pomodoros: {currentTask.pomodoros}</Text>
+        </Card>
+      )}
     </View>
   );
 }

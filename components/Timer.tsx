@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import RenderTime from "./helpers/RenderTime";
 import minutesToSeconds from "./helpers/minutesToSeconds";
-import { Card } from "react-native-paper";
+import { View } from "react-native";
 import { useAtom } from "jotai";
 import MyButton from "./helpers/MyButton";
 import {
@@ -109,13 +109,12 @@ export default function Timer({
   }, [workSessionCompleted, restRunning]);
 
   return (
-    <Card
+    <View
       style={{
         justifyContent: "center",
         alignItems: "center",
         padding: theme.spacing.md,
       }}
-      mode="contained"
     >
       {workRunning && (
         <CountdownCircleTimer
@@ -159,12 +158,12 @@ export default function Timer({
       <MyButton
         onPress={workRunning || restRunning ? stopTimer : startTimer}
         style={{
-          marginTop: workRunning || restRunning ? 10 : 0,
-          alignSelf: "center", // Add this line to center the button
+          marginTop: workRunning || restRunning ? theme.spacing.md : 0,
+          alignSelf: "center",
         }}
       >
         {workRunning || restRunning ? "Stop" : "Start"}
       </MyButton>
-    </Card>
+    </View>
   );
 }
