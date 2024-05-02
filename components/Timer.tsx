@@ -31,9 +31,9 @@ export default function Timer({
   const [shortRestSession, setShortRestSession] = useState(0);
   const [restRunning, setRestRunning] = useState(false);
   const restMins =
-    shortRestSession > 0 && shortRestSession % pomodoroCount === 0
-      ? shortBreakTime
-      : longBreakTime;
+    workSession > 0 && workSession % pomodoroCount === 0
+      ? longBreakTime
+      : shortBreakTime;
   // there might be an issue with how this works, check later
   //  it might be starting out with the long break time, which is not what i want
   const [workSessionCompleted, setWorkSessionCompleted] = useState(false);
@@ -46,6 +46,7 @@ export default function Timer({
       await soundObject.unloadAsync();
       await soundObject.loadAsync(beepSound);
       await soundObject.playAsync();
+      console.log("beep");
     } catch (error) {
       console.error("Failed to play sound", error);
     }
@@ -56,6 +57,7 @@ export default function Timer({
       await soundObject.unloadAsync();
       await soundObject.loadAsync(dingSound);
       await soundObject.playAsync();
+      console.log("ding");
     } catch (error) {
       console.error("Failed to play sound", error);
     }
