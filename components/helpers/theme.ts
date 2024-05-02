@@ -1,10 +1,8 @@
+import { MD3DarkTheme } from "react-native-paper";
+
 export const theme = {
   colors: {
-    primary: "#00aaff",
-    background: "#222",
-    text: "#fff",
-    border: "#333",
-    buttonColor: "#00aaff",
+    ...MD3DarkTheme.colors,
     // TODO 4: design update is NEEDED.
   },
 

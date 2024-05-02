@@ -12,6 +12,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import TaskScreen from "./components/TaskScreen";
 import TimerScreen from "./components/TimerScreen";
 import { PaperProvider } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 import { theme } from "./components/helpers/theme";
 
 const Stack = createStackNavigator();
@@ -20,35 +21,48 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState("Timer");
   return (
     <PaperProvider theme={theme}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView
+        style={{ flex: 1, backgroundColor: theme.colors.background }}
+      >
         {/* we have to use flex:1 here otherwise it's broken */}
         <SafeAreaProvider>
-          <NavigationContainer
-            onStateChange={(state) => {
-              if (!state) return;
-              const routeName = state.routes[state.index].name;
-              setCurrentScreen(routeName);
-            }}
-          >
-            <StatusBar style="auto" />
-            <SafeAreaView style={{ flex: 1 }}>
-              {/* fixes camera overlap */}
-              <Stack.Navigator
-                initialRouteName="TimerScreen"
-                screenOptions={{ headerShown: false }}
+          <View style={styles.container}>
+            <NavigationContainer
+              onStateChange={(state) => {
+                if (!state) return;
+                const routeName = state.routes[state.index].name;
+                setCurrentScreen(routeName);
+              }}
+            >
+              <StatusBar style="auto" />
+              <SafeAreaView
+                style={{ flex: 1, backgroundColor: theme.colors.background }}
               >
-                <Stack.Screen name="Timer" component={TimerScreen} />
-                <Stack.Screen name="Tasks" component={TaskScreen} />
-                <Stack.Screen name="Settings" component={SettingsScreen} />
-              </Stack.Navigator>
-              <Footer
-                screenNames={["Timer", "Tasks", "Settings"]}
-                currentScreen={currentScreen}
-              />
-            </SafeAreaView>
-          </NavigationContainer>
+                {/* fixes camera overlap */}
+                <Stack.Navigator
+                  initialRouteName="TimerScreen"
+                  screenOptions={{ headerShown: false }}
+                >
+                  <Stack.Screen name="Timer" component={TimerScreen} />
+                  <Stack.Screen name="Tasks" component={TaskScreen} />
+                  <Stack.Screen name="Settings" component={SettingsScreen} />
+                </Stack.Navigator>
+                <Footer
+                  screenNames={["Timer", "Tasks", "Settings"]}
+                  currentScreen={currentScreen}
+                />
+              </SafeAreaView>
+            </NavigationContainer>
+          </View>
         </SafeAreaProvider>
       </GestureHandlerRootView>
     </PaperProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+});

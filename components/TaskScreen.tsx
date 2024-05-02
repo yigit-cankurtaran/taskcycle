@@ -7,6 +7,7 @@ import {
 } from "./atoms";
 import TaskLogic from "./TaskLogic";
 import { View } from "react-native";
+import { theme } from "./helpers/theme";
 
 export default function TaskScreen() {
   const [tasks, setTasks] = useAtom(tasksAtom);
@@ -17,7 +18,7 @@ export default function TaskScreen() {
   );
 
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <TaskLogic
         tasks={tasks}
         setTasks={setTasks}

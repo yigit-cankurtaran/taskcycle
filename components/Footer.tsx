@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { theme } from "./helpers/theme";
 
 interface FooterProps {
   screenNames: string[];
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
-    backgroundColor: "#F3F3F3",
+    backgroundColor: theme.colors.primary,
   },
   footerItem: {
     flexDirection: "row",

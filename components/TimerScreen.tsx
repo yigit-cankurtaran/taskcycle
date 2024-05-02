@@ -2,6 +2,8 @@ import { useAtom } from "jotai";
 import { tasksAtom, currentTaskIdAtom, currentTaskAtom } from "./atoms";
 import Timer from "./Timer";
 import { Card, Text } from "react-native-paper";
+import { View } from "react-native";
+import { theme } from "./helpers/theme";
 
 export default function TimerScreen() {
   const [tasks, setTasks] = useAtom(tasksAtom);
@@ -55,14 +57,16 @@ export default function TimerScreen() {
   }
 
   return (
-    <Card mode="contained" style={{ alignItems: "center" }}>
-      <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
-      {currentTask && (
-        <Card key={currentTask.pomodoros}>
-          <Text>Task: {currentTask.title}</Text>
-          <Text>Pomodoros: {currentTask.pomodoros}</Text>
-        </Card>
-      )}
-    </Card>
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+      <Card mode="contained" style={{ alignItems: "center" }}>
+        <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
+        {currentTask && (
+          <Card key={currentTask.pomodoros}>
+            <Text>Task: {currentTask.title}</Text>
+            <Text>Pomodoros: {currentTask.pomodoros}</Text>
+          </Card>
+        )}
+      </Card>
+    </View>
   );
 }
