@@ -14,8 +14,6 @@ import {
 import { theme } from "./helpers/theme";
 import { Audio } from "expo-av";
 import Toast from "react-native-toast-message";
-// this gets called every time a screen is switched
-// might lead to performance issues
 
 export default function Timer({
   pomodoroDecrease,
