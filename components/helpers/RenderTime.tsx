@@ -1,6 +1,6 @@
 import formatTime from "./formatTime";
 import { View } from "react-native";
-import { Text } from "react-native-paper";
+import { Title, Text } from "react-native-paper";
 
 export default function RenderTime({
   remainingTime,
@@ -12,9 +12,8 @@ export default function RenderTime({
   }
   return (
     <View>
-      <Text>Remaining</Text>
-      <Text>{formatTime(remainingTime)}</Text>
-      <Text>seconds</Text>
+      <Title>{formatTime(remainingTime)}</Title>
+      {/* doesn't seem to work?? will check out */}
     </View>
   );
 }

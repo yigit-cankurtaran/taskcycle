@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import { tasksAtom, currentTaskIdAtom, currentTaskAtom } from "./atoms";
 import Timer from "./Timer";
 import { Card, Text } from "react-native-paper";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { theme } from "./helpers/theme";
 import { useEffect } from "react";
 
@@ -66,13 +66,43 @@ export default function TimerScreen() {
         backgroundColor: theme.colors.background,
       }}
     >
+      {/* i want to show the timer all the time instead of just when we start */}
       <Timer pomodoroDecrease={decreaseCurrentTaskPomodoros} />
       {currentTask && (
         <Card key={currentTask.id}>
-          <Text>Task: {currentTask.title}</Text>
-          <Text>Pomodoros: {currentTask.pomodoros}</Text>
+          {/* this needs styling */}
+          <View style={styles.taskContainer}>
+            <Text style={styles.title}>Task</Text>
+            <Text>{currentTask.title}</Text>
+            <Text style={styles.title}>Sessions</Text>
+            <Text>{currentTask.pomodoros}</Text>
+          </View>
         </Card>
       )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  topContainer: {
+    flex: 1,
+    height: "100%",
+    minHeight: "100%",
+    alignItems: "center",
+    alignContent: "center",
+    alignSelf: "center",
+    justifyContent: "center",
+    padding: theme.spacing.md,
+    backgroundColor: theme.colors.background,
+  },
+  taskContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: theme.spacing.md,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    alignSelf: "center",
+  },
+});
