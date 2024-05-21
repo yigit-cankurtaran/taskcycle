@@ -14,6 +14,34 @@ import TimerScreen from "./components/TimerScreen";
 import { PaperProvider } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
 import { theme } from "./components/helpers/theme";
+import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
+
+const toastConfig = {
+  success: (props: any) => (
+    <BaseToast
+      {...props}
+      style={{
+        borderLeftColor: theme.colors.primary,
+        backgroundColor: theme.colors.background,
+      }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{ fontSize: 15, color: "white" }}
+      text2Style={{ fontSize: 12 }}
+    />
+  ),
+  error: (props: any) => (
+    <ErrorToast
+      {...props}
+      style={{
+        borderLeftColor: theme.colors.error,
+        backgroundColor: theme.colors.background,
+      }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{ fontSize: 15, color: "white" }}
+      text2Style={{ fontSize: 12 }}
+    />
+  ),
+};
 
 const Stack = createStackNavigator();
 
@@ -51,6 +79,7 @@ export default function App() {
                   screenNames={["Timer", "Tasks", "Settings"]}
                   currentScreen={currentScreen}
                 />
+                <Toast config={toastConfig} />
               </SafeAreaView>
             </NavigationContainer>
           </View>

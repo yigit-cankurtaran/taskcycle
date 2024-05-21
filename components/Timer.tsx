@@ -114,6 +114,7 @@ export default function Timer({
         justifyContent: "center",
         alignItems: "center",
         padding: theme.spacing.md,
+        width: "100%",
       }}
     >
       {workRunning && (
@@ -160,6 +161,7 @@ export default function Timer({
         style={{
           marginTop: workRunning || restRunning ? theme.spacing.md : 0,
           alignSelf: "center",
+          width: "40%",
         }}
       >
         {workRunning || restRunning ? "Stop" : "Start"}

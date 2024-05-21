@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { View, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import { TextInput } from "react-native-paper";
 import { Task } from "./helpers/task.interface";
 import MyButton from "./helpers/MyButton";
 import { theme } from "./helpers/theme";
+import Toast from "react-native-toast-message";
 
 interface TaskInputProps {
   onTaskAdd: (title: string, pomodoros: number) => void;
@@ -13,8 +14,15 @@ interface TaskInputProps {
   onCancel: () => void;
 }
 
-const screenWidth = Dimensions.get("window").width;
-const em = screenWidth / 375;
+function showToast(message: string) {
+  Toast.show({
+    type: "error",
+    text1: message,
+    position: "bottom",
+    visibilityTime: 3000,
+    autoHide: true,
+  });
+}
 
 export default function TaskInput({
   onTaskAdd,
@@ -55,7 +63,8 @@ export default function TaskInput({
       }
       setTask("");
       setPomodoros(1);
-    } else alert("Please enter a task");
+    } else showToast("Please enter a task");
+    // later on we can change this to a toast message
   }
 
   function handlePomoChange(text: string) {
@@ -71,40 +80,51 @@ export default function TaskInput({
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         mode="outlined"
+        label="Task"
         value={task}
         onChangeText={handleTaskChange}
-        placeholder="Enter a task"
-        style={{ margin: 5 }}
         error={task === ""}
+        style={styles.input}
         activeOutlineColor={theme.colors.primary}
-        outlineStyle={{ borderRadius: 10 * em }}
       />
       <TextInput
         mode="outlined"
+        label="Pomodoros"
         inputMode="numeric"
         value={String(pomodoros)}
         onChange={(e) => handlePomoChange(e.nativeEvent.text)}
         placeholder="Enter pomodoros"
-        style={{ margin: 5 }}
         error={pomodoros === ""}
         activeOutlineColor={theme.colors.primary}
-        outlineStyle={{ borderRadius: 10 * em }}
+        style={styles.input}
       />
-      <MyButton
-        onPress={handleTaskAdd}
-        style={{
-          alignSelf: "center",
-          margin: theme.spacing.sm,
-        }}
-      >
+      <MyButton onPress={handleTaskAdd} style={styles.button}>
         Add
       </MyButton>
-      <MyButton onPress={onCancel} style={{ alignSelf: "center" }}>
+      <MyButton onPress={onCancel} style={styles.button}>
         Cancel
       </MyButton>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    margin: theme.spacing.md,
+    width: "70%",
+  },
+  button: {
+    margin: theme.spacing.sm,
+    alignSelf: "center",
+    width: "40%",
+  },
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: Dimensions.get("window").width,
+    padding: theme.spacing.md,
+  },
+});

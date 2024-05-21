@@ -73,9 +73,9 @@ export default function TimerScreen() {
           {/* this needs styling */}
           <View style={styles.taskContainer}>
             <Text style={styles.title}>Task</Text>
-            <Text>{currentTask.title}</Text>
+            <Text style={styles.text}>{currentTask.title}</Text>
             <Text style={styles.title}>Sessions</Text>
-            <Text>{currentTask.pomodoros}</Text>
+            <Text style={styles.text}>{currentTask.pomodoros}</Text>
           </View>
         </Card>
       )}
@@ -101,8 +101,11 @@ const styles = StyleSheet.create({
     padding: theme.spacing.md,
   },
   title: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
     alignSelf: "center",
+  },
+  text: {
+    textAlign: "center",
   },
 });

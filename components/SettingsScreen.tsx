@@ -9,6 +9,7 @@ import {
 } from "./atoms";
 import { theme } from "./helpers/theme";
 import { View, StyleSheet } from "react-native";
+import Toast from "react-native-toast-message";
 
 const DEFAULT_WORK_TIME = 25;
 const DEFAULT_SHORT_BREAK_TIME = 5;
@@ -40,6 +41,13 @@ export default function SettingsScreen() {
     setShortBreakTime(DEFAULT_SHORT_BREAK_TIME);
     setLongBreakTime(DEFAULT_LONG_BREAK_TIME);
     setPomodoroCount(DEFAULT_POMODORO_COUNT);
+    Toast.show({
+      type: "success",
+      text1: "Values have been reset",
+      position: "bottom",
+      visibilityTime: 3000,
+      autoHide: true,
+    });
   }
 
   return (
@@ -98,7 +106,7 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   input: {
     margin: theme.spacing.md,
-    width: "70%",
+    width: "75%",
   },
   button: {
     margin: theme.spacing.sm,
