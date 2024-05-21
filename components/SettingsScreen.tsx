@@ -33,7 +33,14 @@ export default function SettingsScreen() {
   }
 
   function onSubmit() {
-    console.log("values changed");
+    // console.log("values changed");
+    Toast.show({
+      type: "success",
+      text1: "Values submitted",
+      position: "bottom",
+      visibilityTime: 3000,
+      autoHide: true,
+    });
   }
 
   function defaultValues() {

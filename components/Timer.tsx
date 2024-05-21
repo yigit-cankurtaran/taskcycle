@@ -13,6 +13,7 @@ import {
 } from "./atoms";
 import { theme } from "./helpers/theme";
 import { Audio } from "expo-av";
+import Toast from "react-native-toast-message";
 // this gets called every time a screen is switched
 // might lead to performance issues
 
@@ -142,6 +143,7 @@ export default function Timer({
           isPlaying
           duration={minutesToSeconds(restMins)}
           colors={["#F7B801", "#F8C613", "#F9D725", "#FADD37", "#FBE049"]}
+          // TODO: look at these colors
           colorsTime={[
             minutesToSeconds(restMins),
             minutesToSeconds(restMins) * (4 / 5),
@@ -157,7 +159,21 @@ export default function Timer({
         </CountdownCircleTimer>
       )}
       <MyButton
-        onPress={workRunning || restRunning ? stopTimer : startTimer}
+        onPress={() => {
+          if (workMins > 0 && shortBreakTime > 0 && longBreakTime > 0) {
+            workRunning || restRunning ? stopTimer() : startTimer();
+          } else {
+            Toast.show({
+              type: "error",
+              text1: "Please set correct time settings",
+              position: "bottom",
+              autoHide: true,
+              visibilityTime: 3000,
+            });
+          }
+          // more of a bandaid than a fix
+          // TODO: look into this later
+        }}
         style={{
           marginTop: workRunning || restRunning ? theme.spacing.md : 0,
           alignSelf: "center",
