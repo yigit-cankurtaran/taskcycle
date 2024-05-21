@@ -122,18 +122,18 @@ export default function Timer({
         <CountdownCircleTimer
           isPlaying
           duration={minutesToSeconds(workMins)}
-          colors={["#004777", "#005588", "#006699", "#0077AA", "#0088BB"]}
+          colors={["#003366", "#004488", "#006699", "#0077AA", "#0088BB"]}
           colorsTime={[
             minutesToSeconds(workMins),
-            minutesToSeconds(workMins) * (4 / 5),
-            minutesToSeconds(workMins) * (3 / 5),
-            minutesToSeconds(workMins) * (2 / 5),
-            minutesToSeconds(workMins) / 5,
+            minutesToSeconds(workMins) * 0.8,
+            minutesToSeconds(workMins) * 0.6,
+            minutesToSeconds(workMins) * 0.4,
+            0,
           ]}
           onComplete={handleWorkTimerComplete}
           size={240}
           strokeWidth={20}
-          trailColor="#151932"
+          trailColor="#303030"
         >
           {RenderTime}
         </CountdownCircleTimer>
@@ -142,18 +142,18 @@ export default function Timer({
         <CountdownCircleTimer
           isPlaying
           duration={minutesToSeconds(restMins)}
-          colors={["#F7B801", "#F8C613", "#F9D725", "#FADD37", "#FBE049"]}
-          // TODO: look at these colors
+          colors={["#D4A017", "#D4B218", "#D4C319", "#D4D41A", "#D4E51B"]}
           colorsTime={[
             minutesToSeconds(restMins),
-            minutesToSeconds(restMins) * (4 / 5),
-            minutesToSeconds(restMins) * (3 / 5),
-            minutesToSeconds(restMins) * (2 / 5),
-            minutesToSeconds(restMins) / 5,
+            minutesToSeconds(restMins) * 0.8,
+            minutesToSeconds(restMins) * 0.6,
+            minutesToSeconds(restMins) * 0.4,
+            0,
           ]}
           onComplete={handleRestTimerComplete}
           size={240}
           strokeWidth={20}
+          trailColor="#303030"
         >
           {RenderTime}
         </CountdownCircleTimer>
@@ -173,6 +173,7 @@ export default function Timer({
           }
           // more of a bandaid than a fix
           // TODO: look into this later
+          // the 0 setting issue
         }}
         style={{
           marginTop: workRunning || restRunning ? theme.spacing.md : 0,
