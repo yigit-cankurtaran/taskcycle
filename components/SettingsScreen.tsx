@@ -25,6 +25,7 @@ export default function SettingsScreen() {
     return (text: string) => {
       const number = Number(text);
       if (!isNaN(number)) setter(number);
+      // TODO: this is kind of problematic for the user, implement this in a better way
       // setter updates the atom, which updates the state, which updates the component
       // when the text input changes it calls this function, this changes the text to a number if it's a number
     };

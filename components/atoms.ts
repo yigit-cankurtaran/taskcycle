@@ -32,9 +32,12 @@ export const currentTaskIdAtom = atomWithStorage<string | null>("currentTaskId",
 export const tasksFetchedAtom = atomWithStorage("tasksFetched", false, atomStorage);
 export const currentTaskIdFetchedAtom = atomWithStorage("currentTaskIdFetched", false, atomStorage);
 export const currentTaskAtom = atomWithStorage<Task | null>("currentTask", null, atomStorage);
-export const workTimeAtom = atomWithStorage("workTime", getInitialState("workTime", 0.2), atomStorage);
-export const shortBreakTimeAtom = atomWithStorage("shortBreakTime", getInitialState("shortBreakTime", 0.1), atomStorage);
-export const longBreakTimeAtom = atomWithStorage("longBreakTime", getInitialState("longBreakTime", 0.15), atomStorage);
+// export const workTimeAtom = atomWithStorage("workTime", getInitialState("workTime", 0.2), atomStorage);
+// export const shortBreakTimeAtom = atomWithStorage("shortBreakTime", getInitialState("shortBreakTime", 0.1), atomStorage);
+// export const longBreakTimeAtom = atomWithStorage("longBreakTime", getInitialState("longBreakTime", 0.15), atomStorage);
+// export const pomodoroCountAtom = atomWithStorage("pomodoroCount", getInitialState("pomodoroCount", 4), atomStorage);
+// comments are for testing
+export const workTimeAtom = atomWithStorage("workTime", getInitialState("workTime", 25), atomStorage);
+export const shortBreakTimeAtom = atomWithStorage("shortBreakTime", getInitialState("shortBreakTime", 5), atomStorage);
+export const longBreakTimeAtom = atomWithStorage("longBreakTime", getInitialState("longBreakTime", 15), atomStorage);
 export const pomodoroCountAtom = atomWithStorage("pomodoroCount", getInitialState("pomodoroCount", 4), atomStorage);
-// defaults are for testing
-// FINAL TODO: change to the actual values before deployment to the app store

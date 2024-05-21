@@ -12,6 +12,8 @@ interface TaskListProps {
   currentTaskId: string;
 }
 
+// TODO: create a basic tasks group that showcases the app's functionality
+
 export default function TaskList({
   tasks,
   onTaskDelete,
