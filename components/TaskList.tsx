@@ -1,6 +1,6 @@
 import { FlatList, View } from "react-native";
 import TaskComponent from "./TaskComponent";
-import { Title } from "react-native-paper";
+import { Text, Title } from "react-native-paper";
 import { Task } from "./helpers/task.interface";
 
 interface TaskListProps {
@@ -40,8 +40,9 @@ export default function TaskList({
     },
   ];
 
-  return (
-    // FlatList makes it scrollable
+  const hasTasks = data.some((item) => item.tasks.length > 0);
+
+  return hasTasks ? (
     <FlatList
       data={data}
       keyExtractor={(item, index) => index.toString()}
@@ -73,5 +74,11 @@ export default function TaskList({
         </>
       )}
     />
+  ) : (
+    <View style={{ flex: 1, justifyContent: "center" }}>
+      <Text style={{ textAlign: "center", fontSize: 16 }}>
+        No tasks. Add some to get started.
+      </Text>
+    </View>
   );
 }

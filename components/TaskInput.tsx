@@ -79,7 +79,7 @@ export default function TaskInput({
         placeholder="Enter a task"
         style={{ margin: 5 }}
         error={task === ""}
-        activeOutlineColor="#0077AA"
+        activeOutlineColor={theme.colors.primary}
         outlineStyle={{ borderRadius: 10 * em }}
       />
       <TextInput
@@ -90,12 +90,15 @@ export default function TaskInput({
         placeholder="Enter pomodoros"
         style={{ margin: 5 }}
         error={pomodoros === ""}
-        activeOutlineColor="#0077AA"
+        activeOutlineColor={theme.colors.primary}
         outlineStyle={{ borderRadius: 10 * em }}
       />
       <MyButton
         onPress={handleTaskAdd}
-        style={{ alignSelf: "center", margin: theme.spacing.sm }}
+        style={{
+          alignSelf: "center",
+          margin: theme.spacing.sm,
+        }}
       >
         Add
       </MyButton>

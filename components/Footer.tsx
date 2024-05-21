@@ -13,30 +13,35 @@ export default function Footer({ screenNames, currentScreen }: FooterProps) {
   const navigation = useNavigation();
   const icons = ["timer", "list", "settings"];
   return (
-    <View style={styles.footer}>
-      {screenNames.map((screenName: string, index: number) => (
-        <View style={styles.footerItem} key={screenName}>
-          <View style={styles.itemContainer}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate(screenName)}
-              // shows an error but it works
-              style={styles.iconContainer}
-            >
-              <Ionicons name={icons[index] as any} size={24} color="black" />
-              {/* string here gives an error */}
-              <Text
-                style={[
-                  styles.footerText,
-                  screenName === currentScreen && styles.boldText,
-                ]}
+    <View>
+      {/* <Text style={{ color: "white" }}>Swipe to delete tasks</Text>
+      <Text>Long press to edit tasks</Text> */}
+      {/* implement these if the screen is Tasks */}
+      <View style={styles.footer}>
+        {screenNames.map((screenName: string, index: number) => (
+          <View style={styles.footerItem} key={screenName}>
+            <View style={styles.itemContainer}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate(screenName)}
+                // shows an error but it works
+                style={styles.iconContainer}
               >
-                {screenName}
-              </Text>
-            </TouchableOpacity>
+                <Ionicons name={icons[index] as any} size={24} color="black" />
+                {/* string here gives an error */}
+                <Text
+                  style={[
+                    styles.footerText,
+                    screenName === currentScreen && styles.boldText,
+                  ]}
+                >
+                  {screenName}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            {index < screenNames.length - 1 && <View style={styles.divider} />}
           </View>
-          {index < screenNames.length - 1 && <View style={styles.divider} />}
-        </View>
-      ))}
+        ))}
+      </View>
     </View>
   );
 }
