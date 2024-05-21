@@ -8,7 +8,7 @@ import {
   workTimeAtom,
 } from "./atoms";
 import { theme } from "./helpers/theme";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 const DEFAULT_WORK_TIME = 25;
 const DEFAULT_SHORT_BREAK_TIME = 5;
@@ -43,21 +43,16 @@ export default function SettingsScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
-      <Card
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        mode="contained"
-      >
+      <View style={styles.container}>
         <TextInput
           label="Work Time"
           value={String(workTime)}
           placeholder={String(workTime)}
           onChangeText={createChangeHandler(setWorkTime)}
           textAlign="center"
-          activeUnderlineColor={theme.colors.shadow}
-          // if change to outlined change this to OutlineColor
+          activeOutlineColor={theme.colors.primary}
+          mode="outlined"
+          style={styles.input}
         />
         <TextInput
           label="Short Break Time"
@@ -65,7 +60,9 @@ export default function SettingsScreen() {
           placeholder={String(shortBreakTime)}
           onChangeText={createChangeHandler(setShortBreakTime)}
           textAlign="center"
-          activeUnderlineColor={theme.colors.shadow}
+          activeOutlineColor={theme.colors.primary}
+          mode="outlined"
+          style={styles.input}
         />
         <TextInput
           label="Long Break Time"
@@ -73,23 +70,44 @@ export default function SettingsScreen() {
           placeholder={String(longBreakTime)}
           onChangeText={createChangeHandler(setLongBreakTime)}
           textAlign="center"
-          activeUnderlineColor={theme.colors.shadow}
+          activeOutlineColor={theme.colors.primary}
+          mode="outlined"
+          style={styles.input}
         />
         <TextInput
           label="Sessions Before Long Break"
-          // this label gets wrapped, will look into it
           value={String(pomodoroCount)}
           placeholder={String(pomodoroCount)}
           onChangeText={createChangeHandler(setPomodoroCount)}
-          activeUnderlineColor={theme.colors.shadow}
+          activeOutlineColor={theme.colors.primary}
+          mode="outlined"
+          style={styles.input}
         />
-        <MyButton onPress={onSubmit} style={{ alignSelf: "center" }}>
+        <MyButton onPress={onSubmit} style={styles.button}>
           Submit
         </MyButton>
-        <MyButton onPress={defaultValues} style={{ alignSelf: "center" }}>
+        <MyButton onPress={defaultValues} style={styles.button}>
           Return to default
         </MyButton>
-      </Card>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    margin: theme.spacing.md,
+    width: "70%",
+  },
+  button: {
+    margin: theme.spacing.sm,
+    alignSelf: "center",
+    width: "40%",
+  },
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    padding: theme.spacing.md,
+  },
+});

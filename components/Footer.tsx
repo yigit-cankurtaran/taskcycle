@@ -3,6 +3,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { theme } from "./helpers/theme";
+// if we used a bottom navigation bar this would be p much obsolete
+// check it out later
 
 interface FooterProps {
   screenNames: string[];
