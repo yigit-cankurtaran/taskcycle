@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     padding: 10,
     backgroundColor: theme.colors.primary,
+    borderTopEndRadius: 20,
+    borderTopStartRadius: 20,
   },
   footerItem: {
     flexDirection: "row",
@@ -59,7 +61,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   footerText: {
-    fontSize: 20,
+    fontSize: 16,
+    color: theme.colors.surface,
   },
   boldText: {
     fontWeight: "bold",

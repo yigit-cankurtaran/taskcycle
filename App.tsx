@@ -34,7 +34,7 @@ export default function App() {
                 setCurrentScreen(routeName);
               }}
             >
-              <StatusBar style="auto" />
+              <StatusBar style="light" />
               <SafeAreaView
                 style={{ flex: 1, backgroundColor: theme.colors.background }}
               >
