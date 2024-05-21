@@ -27,7 +27,34 @@ const getInitialState = (key: string, defaultValue: any) => {
     return value;
 };
 
-export const tasksAtom = atomWithStorage<Task[]>("tasks", [], atomStorage);
+const defaultTasks = [
+    {
+      id: '1',
+      title: 'Start a task',
+      pomodoros: 1,
+      completed: false,
+    },
+    {
+      id: '2',
+      title: 'Swipe to delete',
+      pomodoros: 1,
+      completed: false,
+    },
+    {
+      id: '3',
+      title: 'Long press to edit',
+      pomodoros: 3,
+      completed: false,
+    },
+    {
+      id: '4',
+      title: 'Press the circle to complete',
+      pomodoros: 1,
+      completed: true,
+    },
+  ];
+
+export const tasksAtom = atomWithStorage<Task[]>("tasks", defaultTasks, atomStorage);
 export const currentTaskIdAtom = atomWithStorage<string | null>("currentTaskId", null, atomStorage);
 export const tasksFetchedAtom = atomWithStorage("tasksFetched", false, atomStorage);
 export const currentTaskIdFetchedAtom = atomWithStorage("currentTaskIdFetched", false, atomStorage);
