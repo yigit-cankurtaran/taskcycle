@@ -8,6 +8,8 @@ interface MyButtonProps extends ButtonProps {
 export default function MyButton({ children, style, ...props }: MyButtonProps) {
   return (
     <Button
+      // the button currently has the same color as the task container
+      // look into some colors and change it
       buttonColor={theme.colors.backdrop}
       textColor={theme.colors.primary}
       style={[{ width: 100, borderRadius: 10 }, style]}
