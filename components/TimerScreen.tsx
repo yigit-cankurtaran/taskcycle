@@ -17,6 +17,7 @@ export default function TimerScreen() {
       // i was getting a
       // TypeError: Cannot read property 'some' of null
       // if there's an issue check the other one too
+      // NOTE: fixed crash. I was getting the error because tasks was null
       const currentTaskExists = tasks.some((task) => task.id === currentTaskId);
       if (!currentTaskExists) {
         setCurrentTaskId(null);

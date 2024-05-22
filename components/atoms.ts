@@ -54,7 +54,7 @@ const defaultTasks = [
     },
   ];
 
-export const tasksAtom = atomWithStorage<Task[]>("tasks", defaultTasks, atomStorage);
+export const tasksAtom = atomWithStorage<Task[]>("tasks", getInitialState("tasks", defaultTasks), atomStorage);
 export const currentTaskIdAtom = atomWithStorage<string | null>("currentTaskId", null, atomStorage);
 export const tasksFetchedAtom = atomWithStorage("tasksFetched", false, atomStorage);
 export const currentTaskIdFetchedAtom = atomWithStorage("currentTaskIdFetched", false, atomStorage);
