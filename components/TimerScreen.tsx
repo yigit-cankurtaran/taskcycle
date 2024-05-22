@@ -12,10 +12,16 @@ export default function TimerScreen() {
   const [currentTask, setCurrentTask] = useAtom(currentTaskAtom);
 
   useEffect(() => {
-    const currentTaskExists = tasks.some((task) => task.id === currentTaskId);
-    if (!currentTaskExists) {
-      setCurrentTaskId(null);
-      setCurrentTask(null);
+    if (tasks) {
+      // added to fix the crash
+      // i was getting a
+      // TypeError: Cannot read property 'some' of null
+      // if there's an issue check the other one too
+      const currentTaskExists = tasks.some((task) => task.id === currentTaskId);
+      if (!currentTaskExists) {
+        setCurrentTaskId(null);
+        setCurrentTask(null);
+      }
     }
   }, [tasks, currentTaskId, setCurrentTaskId, setCurrentTask]);
 
