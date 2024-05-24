@@ -10,7 +10,7 @@ export default function MyButton({ children, style, ...props }: MyButtonProps) {
     <Button
       // the button currently has the same color as the task container
       // look into some colors and change it
-      buttonColor={theme.colors.backdrop}
+      buttonColor={theme.colors.surfaceVariant}
       textColor={theme.colors.primary}
       style={[{ width: 100, borderRadius: 10 }, style]}
       // style is so that we can pass in custom styles
