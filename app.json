@@ -4,10 +4,10 @@
     "slug": "pomodoro-native",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/pomodoroapplogo.png",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/pomodoro-app-splash-screen.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
