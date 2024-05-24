@@ -95,3 +95,5 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
 });
+
+// change app icon and splash screen
